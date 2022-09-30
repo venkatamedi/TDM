@@ -1,0 +1,39 @@
+{
+    "type": "CheckAndStopLoop",
+    "tags": [
+        "tdm"
+    ],
+    "parentType": "JavaScript",
+    "inputs": [
+        {
+            "name": "script",
+            "const": {
+                "userCode": "flowArgs.loadedRecCnt += recordLoaded;\r\nif (flowArgs.loadedRecCnt == noOfEntities) {\r\n    contextLoop.stop();\r\n}\r\n",
+                "script": "flowArgs.loadedRecCnt += recordLoaded;\n\nif (flowArgs.loadedRecCnt == noOfEntities) {\n  contextLoop.stop();\n}"
+            },
+            "hidden": true
+        },
+        {
+            "name": "recordLoaded",
+            "schema": {
+                "type": "integer"
+            },
+            "mandatory": false
+        },
+        {
+            "name": "noOfEntities",
+            "schema": {
+                "type": "integer"
+            },
+            "mandatory": false
+        }
+    ],
+    "outputs": [
+        {
+            "name": "result",
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    ]
+}

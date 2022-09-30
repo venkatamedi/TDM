@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_TAR_contract</ID>
+  <PopulationObjectName>query_TAR_contract</PopulationObjectName>
+  <TableName>TAR_contract</TableName>
+  <RootItemID>query_query_TAR_contract</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>true</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="customer_id" id="queryCol_0" dataType="Integer" index="0" />
+    <Arg name="contract_id" id="queryCol_1" dataType="Integer" index="1" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="DBQueryDataSave" id="query_query_TAR_contract" name="query_TAR_contract" nodeOrder="0" module="DBQuery" mapObjectModule="DBQuery" connName="CRM_DB">
+      <OutputsList>
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_0" name="customer_id" dataType="Integer" index="0" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_1" name="contract_id" dataType="Integer" index="1" />
+      </OutputsList>
+      <SQL><![CDATA[Select public.contract.customer_id,
+  public.contract.contract_id
+From public.contract]]></SQL>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="20" fromNodeOrder="0" fromItemID="query_query_TAR_contract" fromColID="queryCol_0" toItemID="TAR_contract" toColID="customer_id" />
+    <Link partId="21" fromNodeOrder="0" fromItemID="query_query_TAR_contract" fromColID="queryCol_1" toItemID="TAR_contract" toColID="contract_id" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="TAR_contract.query_TAR_contract.k2tablePop.xml" lastPartID="59">
+      <TableNode partID="0" name="TAR_contract" pos="383 5.67189026" width="253" />
+      <DBQueryNode partID="11" name="CRM_DB" pos="10 0.7083435" size="253 84.14583" isRoot="true">
+        <DBQuery>{"Name":"query_TAR_contract","ID":"query_query_TAR_contract","ConnName":"CRM_DB","SQL":"Select public.contract.customer_id,\r\n  public.contract.contract_id\r\nFrom public.contract","ColumnsList":[{"ID":"queryCol_0","Name":"customer_id","DataType":"Integer","Index":0,"IsInputArgument":true},{"ID":"queryCol_1","Name":"contract_id","DataType":"Integer","Index":1,"IsInputArgument":true}]}</DBQuery>
+      </DBQueryNode>
+      <Link partID="20" from="0" to="1" pointsArr="263 36.7448044 273 36.7448044 313 37 333 37 373 36.7083473 383 36.7083473" fromNodePartID="11" fromNodeColumnName="customer_id" toNodePartID="0" toNodeColumnName="customer_id" />
+      <Link partID="21" from="2" to="3" pointsArr="263 48.81772 273 48.81772 313 49 333 49 373 48.7812653 383 48.7812653" fromNodePartID="11" fromNodeColumnName="contract_id" toNodePartID="0" toNodeColumnName="contract_id" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

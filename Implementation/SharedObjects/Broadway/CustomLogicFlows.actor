@@ -1,0 +1,32 @@
+{
+    "type": "CustomLogicFlows",
+    "badge": "Cu",
+    "tags": [
+        "basic"
+    ],
+    "inputs": [
+        {
+            "name": "table",
+            "const": [],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "LU_NAME": {
+                            "type": "string"
+                        },
+                        "FLOW_NAME": {
+                            "type": "string"
+                        },
+                        "DESCRIPTION": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": [],
+    "parentType": "ConstTable"
+}

@@ -1,0 +1,51 @@
+{
+    "type": "CheckIfFlowExists",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "FLOW_FILE_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.innerFlow"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "CheckIfFlowExists",
+            "hidden": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "SKIP_TABLE",
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "SKIP_TABLE",
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

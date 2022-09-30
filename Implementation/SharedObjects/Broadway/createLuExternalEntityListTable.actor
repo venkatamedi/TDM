@@ -1,0 +1,36 @@
+{
+    "type": "createLuExternalEntityListTable",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "createLuExternalEntityListTable",
+            "mandatory": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "ENTITY_LIST_TABLE",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>collection</Name>
+  <ID>tbl_collection</ID>
+  <Columns>
+    <Column name="customer_id" id="customer_id" index="0" datatype="Integer" />
+    <Column name="collection_id" id="collection_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="last_update" id="last_update" index="2" datatype="Text" />
+    <Column name="collection_status" id="collection_status" index="3" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="collection_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

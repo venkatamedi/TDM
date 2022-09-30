@@ -1,0 +1,19 @@
+{
+    "type": "ReleaseReservedEntity",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "ReleaseReservedEntity",
+            "mandatory": true
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

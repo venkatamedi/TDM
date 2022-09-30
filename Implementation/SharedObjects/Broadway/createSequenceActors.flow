@@ -1,0 +1,556 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 6",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "flow folder",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "file://../Implementation/SharedObjects/Broadway"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "TDMSeqList1",
+                            "actorType": {
+                                "parentType": "TDMSeqList",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "table",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "SEQUENCE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "CACHE_DB_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "SEQUENCE_REDIS_OR_DB": {
+                                                        "type": "string"
+                                                    },
+                                                    "INITIATE_VALUE_OR_FLOW": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 7",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "FlowTemplate",
+                            "actorType": {
+                                "parentType": "FileRead",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "path",
+                                        "const": "../../SharedObjects/Templates/tdmSequence_Actor.actor.template"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "flowName",
+                            "minHeight": 334,
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${0}_Actor.actor"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 8",
+                    "dependsOnList": [
+                        "Stage 7"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Check If Sequence Flow Exists",
+                            "actorType": {
+                                "parentType": "CheckIfSequenceFlowExists",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 9",
+                    "dependsOnList": [
+                        "Stage 7"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "Const1",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals2",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "LuFunction2",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "functionName",
+                                        "const": "buildSeqTemplateData"
+                                    },
+                                    {
+                                        "const": "TDM",
+                                        "name": "luType",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "seqName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "cacheDBName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "redisOrDBName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "initiationScriptOrValue",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "res",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "LU_TABLE": {
+                                                    "type": "string"
+                                                },
+                                                "LU_TABLE_COLUMNS": {},
+                                                "TARGET_INTERFACE": {
+                                                    "type": "string"
+                                                },
+                                                "TARGET_SCHEMA": {
+                                                    "type": "string"
+                                                },
+                                                "TARGET_TABLE": {
+                                                    "type": "string"
+                                                },
+                                                "TARGET_TABLE_COLUMNS": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "TARGET_TABLE_PKS": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 5",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "ApplyTemplate",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "functionName",
+                                        "const": "transform"
+                                    },
+                                    {
+                                        "const": "TDM",
+                                        "name": "luType",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "templateContent",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "actors": [
+                        {
+                            "name": "FileWrite1",
+                            "actorType": {
+                                "parentType": "FileWrite",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "flow folder",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "FileWrite1",
+                "name": "interface"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flow folder",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "FlowTemplate",
+                "name": "interface"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "TDMSeqList1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "flowName",
+                "name": "params"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "SEQUENCE_NAME"
+            ],
+            "arrayPosition": 0
+        },
+        {
+            "leftPort": {
+                "actor": "TDMSeqList1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "LuFunction2",
+                "name": "seqName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "SEQUENCE_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "TDMSeqList1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "LuFunction2",
+                "name": "cacheDBName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "CACHE_DB_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "TDMSeqList1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "LuFunction2",
+                "name": "redisOrDBName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "SEQUENCE_REDIS_OR_DB"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "TDMSeqList1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "LuFunction2",
+                "name": "initiationScriptOrValue"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "INITIATE_VALUE_OR_FLOW"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "FlowTemplate",
+                "name": "stream"
+            },
+            "rightPort": {
+                "actor": "ApplyTemplate",
+                "name": "templateContent"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowName",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "FileWrite1",
+                "name": "path"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowName",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Check If Sequence Flow Exists",
+                "name": "FLOW_FILE_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Check If Sequence Flow Exists",
+                "name": "SKIP_TABLE"
+            },
+            "rightPort": {
+                "actor": "Equals2",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Const1",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "Equals2",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "LuFunction2",
+                "name": "res"
+            },
+            "rightPort": {
+                "actor": "ApplyTemplate",
+                "name": "data"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ApplyTemplate",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "FileWrite1",
+                "name": "stream"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            },
+            "rightPort": {
+                "actor": "Equals1",
+                "name": "a"
+            }
+        }
+    ]
+}

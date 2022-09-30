@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>orders</Name>
+  <ID>tbl_orders</ID>
+  <Columns>
+    <Column name="contract_id" id="contract_id" index="0" datatype="Integer" />
+    <Column name="order_id" id="order_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="order_type" id="order_type" index="2" datatype="Text" />
+    <Column name="order_date" id="order_date" index="3" datatype="Text" />
+    <Column name="order_status" id="order_status" index="4" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="order_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

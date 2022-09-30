@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>tdm_lu_type_relation_eid</Name>
+  <ID>tdm_lu_type_relation_eid</ID>
+  <Version>4.0.4.2</Version>
+  <SerializationName />
+  <Columns>
+    <Column name="source_env" id="tblCol_138a91e4923e49d99824e9757729653d" index="0" datatype="Text" serializationName="source_env" />
+    <Column name="lu_type_1" id="tblCol_ceeaf8ef1b0549d681f4104e24a18bf7" index="1" datatype="Text" serializationName="lu_type_1" />
+    <Column name="lu_type_2" id="tblCol_f4600a73bad5454a91d6f51585d82922" index="2" datatype="Text" serializationName="lu_type_2" />
+    <Column name="lu_type1_eid" id="tblCol_6bb62cf6291249519f90ea7668e923c3" index="3" datatype="Text" serializationName="lu_type1_eid" />
+    <Column name="lu_type2_eid" id="tblCol_d2c5e24315784a668191fcd9b18c154c" index="4" datatype="Text" serializationName="lu_type2_eid" />
+    <Column name="creation_date" id="tblCol_421f5a38ac49411784a7e83843ec0434" index="5" datatype="Text" serializationName="creation_date" />
+    <Column name="version_name" id="tblCol_88dd973fff0b41be917ce049102332de" index="6" datatype="text" />
+    <Column name="version_datetime" id="tblCol_4b254b2c051a4bb8bc31b9c323662a52" index="7" datatype="text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" instanceOnly="true" columnsIdsList="tblCol_ceeaf8ef1b0549d681f4104e24a18bf7,tblCol_6bb62cf6291249519f90ea7668e923c3" />
+    <Index id="2" instanceOnly="true" columnsIdsList="tblCol_f4600a73bad5454a91d6f51585d82922,tblCol_d2c5e24315784a668191fcd9b18c154c" />
+  </IndexesList>
+  <EnrichmentList>
+    <Enrichment>
+      <Name>fnEnrParentChildLink</Name>
+      <Type>Function</Type>
+      <TableName>tdm_lu_type_relation_eid</TableName>
+    </Enrichment>
+  </EnrichmentList>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+</TableObject>

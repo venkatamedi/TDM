@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>offer</Name>
+  <ID>tbl_offer</ID>
+  <Columns>
+    <Column name="subscriber_id" id="subscriber_id" index="0" datatype="Integer" />
+    <Column name="offer_id" id="offer_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="offer_ref_id" id="offer_ref_id" index="2" datatype="Integer" />
+    <Column name="offer_description" id="offer_description" index="3" datatype="Text" />
+    <Column name="from_date" id="from_date" index="4" datatype="Text" />
+    <Column name="to_date" id="to_date" index="5" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="offer_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

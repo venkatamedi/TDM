@@ -1,0 +1,24 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "TDMSeqSrc2TrgMapping",
+                            "actorType": {
+                                "parentType": "TDMSeqSrc2TrgMapping",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": []
+}

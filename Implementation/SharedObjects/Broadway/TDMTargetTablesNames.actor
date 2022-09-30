@@ -1,0 +1,43 @@
+{
+    "type": "TDMTargetTablesNames",
+    "badge": "TD",
+    "tags": [
+        "basic"
+    ],
+    "inputs": [
+        {
+            "name": "table",
+            "const": [
+                {
+                    "LU_NAME": "CU",
+                    "FABRIC_TABLE_NAME": "Customer",
+                    "TARGET_TABLE_NAME": "Customer_2"
+                },
+                {
+                    "LU_NAME": "CU",
+                    "FABRIC_TABLE_NAME": "Activity",
+                    "TARGET_TABLE_NAME": "ACT"
+                }
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "LU_NAME": {
+                            "type": "string"
+                        },
+                        "FABRIC_TABLE_NAME": {
+                            "type": "string"
+                        },
+                        "TARGET_TABLE_NAME": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": [],
+    "parentType": "ConstTable"
+}

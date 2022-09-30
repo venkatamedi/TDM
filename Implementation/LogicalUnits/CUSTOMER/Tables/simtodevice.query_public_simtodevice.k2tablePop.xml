@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_public_simtodevice</ID>
+  <PopulationObjectName>query_public_simtodevice</PopulationObjectName>
+  <TableName>simtodevice</TableName>
+  <RootItemID>query_query_public_simtodevice</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>true</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="msisdn" id="queryCol_0" dataType="Text" index="0" />
+    <Arg name="imei1" id="queryCol_1" dataType="Text" index="1" />
+    <Arg name="tac1" id="queryCol_2" dataType="Text" index="2" />
+    <Arg name="reminder1" id="queryCol_3" dataType="Text" index="3" />
+    <Arg name="imei2" id="queryCol_4" dataType="Text" index="4" />
+    <Arg name="tac2" id="queryCol_5" dataType="Text" index="5" />
+    <Arg name="reminder2" id="queryCol_6" dataType="Text" index="6" />
+    <Arg name="imei3" id="queryCol_7" dataType="Text" index="7" />
+    <Arg name="tac3" id="queryCol_8" dataType="Text" index="8" />
+    <Arg name="reminder3" id="queryCol_9" dataType="Text" index="9" />
+    <Arg name="imei4" id="queryCol_10" dataType="Text" index="10" />
+    <Arg name="tac4" id="queryCol_11" dataType="Text" index="11" />
+    <Arg name="reminder4" id="queryCol_12" dataType="Text" index="12" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="DBQueryDataSave" id="query_query_public_simtodevice" name="query_public_simtodevice" nodeOrder="0" module="DBQuery" mapObjectModule="DBQuery" connName="BILLING_DB">
+      <OutputsList>
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_0" name="msisdn" dataType="Text" index="0" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_1" name="imei1" dataType="Text" index="1" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_2" name="tac1" dataType="Text" index="2" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_3" name="reminder1" dataType="Text" index="3" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_4" name="imei2" dataType="Text" index="4" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_5" name="tac2" dataType="Text" index="5" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_6" name="reminder2" dataType="Text" index="6" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_7" name="imei3" dataType="Text" index="7" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_8" name="tac3" dataType="Text" index="8" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_9" name="reminder3" dataType="Text" index="9" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_10" name="imei4" dataType="Text" index="10" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_11" name="tac4" dataType="Text" index="11" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_12" name="reminder4" dataType="Text" index="12" />
+      </OutputsList>
+      <SQL><![CDATA[SELECT * FROM public.simtodevice]]></SQL>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="30" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_0" toItemID="tbl_simtodevice" toColID="msisdn" />
+    <Link partId="31" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_1" toItemID="tbl_simtodevice" toColID="imei1" />
+    <Link partId="32" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_2" toItemID="tbl_simtodevice" toColID="tac1" />
+    <Link partId="33" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_3" toItemID="tbl_simtodevice" toColID="reminder1" />
+    <Link partId="34" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_4" toItemID="tbl_simtodevice" toColID="imei2" />
+    <Link partId="35" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_5" toItemID="tbl_simtodevice" toColID="tac2" />
+    <Link partId="36" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_6" toItemID="tbl_simtodevice" toColID="reminder2" />
+    <Link partId="37" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_7" toItemID="tbl_simtodevice" toColID="imei3" />
+    <Link partId="38" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_8" toItemID="tbl_simtodevice" toColID="tac3" />
+    <Link partId="39" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_9" toItemID="tbl_simtodevice" toColID="reminder3" />
+    <Link partId="40" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_10" toItemID="tbl_simtodevice" toColID="imei4" />
+    <Link partId="41" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_11" toItemID="tbl_simtodevice" toColID="tac4" />
+    <Link partId="42" fromNodeOrder="0" fromItemID="query_query_public_simtodevice" fromColID="queryCol_12" toItemID="tbl_simtodevice" toColID="reminder4" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="simtodevice.query_public_simtodevice.k2tablePop.xml" lastPartID="70">
+      <TableNode partID="0" name="simtodevice" pos="383 5.48959351" width="253" />
+      <DBQueryNode partID="16" name="BILLING_DB" pos="10 0.526046753" size="253 216.9479" isRoot="true">
+        <DBQuery>{"Name":"query_public_simtodevice","ID":"query_query_public_simtodevice","ConnName":"BILLING_DB","SQL":"SELECT * FROM public.simtodevice","ColumnsList":[{"ID":"queryCol_0","Name":"msisdn","DataType":"Text","Index":0,"IsInputArgument":true},{"ID":"queryCol_1","Name":"imei1","DataType":"Text","Index":1,"IsInputArgument":true},{"ID":"queryCol_2","Name":"tac1","DataType":"Text","Index":2,"IsInputArgument":true},{"ID":"queryCol_3","Name":"reminder1","DataType":"Text","Index":3,"IsInputArgument":true},{"ID":"queryCol_4","Name":"imei2","DataType":"Text","Index":4,"IsInputArgument":true},{"ID":"queryCol_5","Name":"tac2","DataType":"Text","Index":5,"IsInputArgument":true},{"ID":"queryCol_6","Name":"reminder2","DataType":"Text","Index":6,"IsInputArgument":true},{"ID":"queryCol_7","Name":"imei3","DataType":"Text","Index":7,"IsInputArgument":true},{"ID":"queryCol_8","Name":"tac3","DataType":"Text","Index":8,"IsInputArgument":true},{"ID":"queryCol_9","Name":"reminder3","DataType":"Text","Index":9,"IsInputArgument":true},{"ID":"queryCol_10","Name":"imei4","DataType":"Text","Index":10,"IsInputArgument":true},{"ID":"queryCol_11","Name":"tac4","DataType":"Text","Index":11,"IsInputArgument":true},{"ID":"queryCol_12","Name":"reminder4","DataType":"Text","Index":12,"IsInputArgument":true}]}</DBQuery>
+      </DBQueryNode>
+      <Link partID="30" from="0" to="1" pointsArr="263 36.5625038 273 36.5625038 313 37 333 37 373 36.52605 383 36.52605" fromNodePartID="16" fromNodeColumnName="msisdn" toNodePartID="0" toNodeColumnName="msisdn" />
+      <Link partID="31" from="2" to="3" pointsArr="263 48.63542 273 48.63542 313 49 333 49 373 48.59897 383 48.59897" fromNodePartID="16" fromNodeColumnName="imei1" toNodePartID="0" toNodeColumnName="imei1" />
+      <Link partID="32" from="4" to="5" pointsArr="263 60.7083359 273 60.7083359 313 61 333 61 373 60.6718826 383 60.6718826" fromNodePartID="16" fromNodeColumnName="tac1" toNodePartID="0" toNodeColumnName="tac1" />
+      <Link partID="33" from="6" to="7" pointsArr="263 72.78125 273 72.78125 313 73 333 73 373 72.7448 383 72.7448" fromNodePartID="16" fromNodeColumnName="reminder1" toNodePartID="0" toNodeColumnName="reminder1" />
+      <Link partID="34" from="8" to="9" pointsArr="263 84.8541641 273 84.8541641 313 85 333 85 373 84.81771 383 84.81771" fromNodePartID="16" fromNodeColumnName="imei2" toNodePartID="0" toNodeColumnName="imei2" />
+      <Link partID="35" from="10" to="11" pointsArr="263 96.92708 273 96.92708 313 97 333 97 373 96.890625 383 96.890625" fromNodePartID="16" fromNodeColumnName="tac2" toNodePartID="0" toNodeColumnName="tac2" />
+      <Link partID="36" from="12" to="13" pointsArr="263 109 273 109 313 109 333 109 373 108.963547 383 108.963547" fromNodePartID="16" fromNodeColumnName="reminder2" toNodePartID="0" toNodeColumnName="reminder2" />
+      <Link partID="37" from="14" to="15" pointsArr="263 121.072922 273 121.072922 313 121 333 121 373 121.036469 383 121.036469" fromNodePartID="16" fromNodeColumnName="imei3" toNodePartID="0" toNodeColumnName="imei3" />
+      <Link partID="38" from="16" to="17" pointsArr="263 133.145844 273 133.145844 313 133 333 133 373 133.10939 383 133.10939" fromNodePartID="16" fromNodeColumnName="tac3" toNodePartID="0" toNodeColumnName="tac3" />
+      <Link partID="39" from="18" to="19" pointsArr="263 145.218765 273 145.218765 313 145 333 145 373 145.182312 383 145.182312" fromNodePartID="16" fromNodeColumnName="reminder3" toNodePartID="0" toNodeColumnName="reminder3" />
+      <Link partID="40" from="20" to="21" pointsArr="263 157.291687 273 157.291687 313 157 333 157 373 157.255234 383 157.255234" fromNodePartID="16" fromNodeColumnName="imei4" toNodePartID="0" toNodeColumnName="imei4" />
+      <Link partID="41" from="22" to="23" pointsArr="263 169.3646 273 169.3646 313 169 333 169 373 169.32814 383 169.32814" fromNodePartID="16" fromNodeColumnName="tac4" toNodePartID="0" toNodeColumnName="tac4" />
+      <Link partID="42" from="24" to="25" pointsArr="263 181.4375 273 181.4375 313 181 333 181 373 181.401047 383 181.401047" fromNodePartID="16" fromNodeColumnName="reminder4" toNodePartID="0" toNodeColumnName="reminder4" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

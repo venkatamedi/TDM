@@ -1,0 +1,47 @@
+{
+  "type": "CUSTOMER_ID_SEQ_Actor",
+  "actorClass": null,
+  "parentType": "InnerFlow",
+  "inputs": [
+    {
+      "name": "tableName",
+      "schema": {
+        "type": "string"
+      },
+      "const": null
+    },
+    {
+      "name": "columName",
+      "schema": {
+        "type": "string"
+      },
+      "const": null
+    },
+    {
+      "name": "OriginalSeqValue",
+      "schema": {
+        "type": "string"
+      },
+      "const": null
+    },
+    {
+      "name": "flowName",
+      "schema": {
+        "type": "string"
+      },
+      "const": "CUSTOMER_ID_SEQ"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "NewSeqValue",
+      "schema": {
+        "type": "string"
+      },
+      "const": null
+    }
+  ],
+  "tags": [
+    "tdm"
+  ]
+}

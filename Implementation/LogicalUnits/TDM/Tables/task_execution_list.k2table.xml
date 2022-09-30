@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_execution_list</Name>
+  <ID>tbl_task_execution_list</ID>
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_516f51bbc0ec4c7eafca8ee74b48578e" index="0" datatype="Integer" mandatory="true" />
+    <Column name="task_id" id="tblCol_2f6a4593ef4142ffa559426939cabdc0" index="1" datatype="Integer" mandatory="true" />
+    <Column name="lu_id" id="tblCol_8266e9c91a8f4631aeb957b787fee2a5" index="2" datatype="Integer" mandatory="true" />
+    <Column name="lu_name" id="tblCol_467695a536584a949f7faba58a8a04b6" index="3" datatype="text" />
+    <Column name="parent_lu_id" id="tblCol_ab0a84f08cd64e00a29511623dade4ec" index="4" datatype="Integer" />
+    <Column name="parent_lu_name" id="tblCol_1d308297170e4869a1f7e8804fba9b8a" index="5" datatype="text" />
+    <Column name="version_ind" id="tblCol_492c34dd37f74608934fd13b69c1c582" index="6" datatype="text" />
+    <Column name="version_name" id="tblCol_d341303424f04c7893407aa65eba8c8a" index="7" datatype="text" />
+    <Column name="version_datetime" id="tblCol_32f01dc476e545119ed87b669376bb95" index="8" datatype="Text" />
+    <Column name="version_expiration_date" id="tblCol_b900c71ec9aa430e8025607d1b3cc5ef" index="9" datatype="Text" />
+    <Column name="execution_status" id="tblCol_27f4156b1ee04cfbb6bbc16389daecbb" index="10" datatype="Text" />
+    <Column name="start_execution_time" id="tblCol_7658f314806649c483857ebfa200f9b9" index="11" datatype="Text" />
+    <Column name="end_execution_time" id="tblCol_a75095f1fd114193b900f2303c44a85e" index="12" datatype="Text" />
+    <Column name="num_of_processed_entities" id="tblCol_d954ad2f382c4610b60bf2bfb71beb19" index="13" datatype="Integer" />
+    <Column name="num_of_copied_entities" id="tblCol_0a8ffa231830461c9556fac153f5ca86" index="14" datatype="Integer" />
+    <Column name="num_of_failed_entities" id="tblCol_82eeb7ad493d4f489a2ea0f20ac43d1f" index="15" datatype="Integer" />
+    <Column name="data_center_name" id="tblCol_055d25bfdd1842158216d61801e7e3a5" index="16" datatype="text" />
+    <Column name="num_of_processed_ref_tables" id="tblCol_1d33f85d6e0d4cfebd394093ee0e651c" index="17" datatype="integer" />
+    <Column name="num_of_copied_ref_tables" id="tblCol_b468e67a8d1045018ce9f3f67f1a043e" index="18" datatype="Integer" />
+    <Column name="num_of_failed_ref_tables" id="tblCol_ac5f24a0ea3f41789e3ca950c185573e" index="19" datatype="Integer" />
+    <Column name="fabric_execution_id" id="tblCol_f21a72fffb6744e78e8d7cb5dab82bc5" index="20" datatype="text" />
+    <Column name="task_executed_by" id="tblCol_baa8c030df354ee59d9ae005a7c5aa0e" index="21" datatype="text" />
+    <Column name="process_id" id="tblCol_29bb00d7855341c68d690ebe4e601ae1" index="22" datatype="integer" mandatory="true" />
+    <Column name="process_name" id="tblCol_a2dd2e6b036c4913a654d08f377ffa45" index="23" datatype="text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="tblCol_2f6a4593ef4142ffa559426939cabdc0,tblCol_516f51bbc0ec4c7eafca8ee74b48578e,tblCol_8266e9c91a8f4631aeb957b787fee2a5,tblCol_29bb00d7855341c68d690ebe4e601ae1" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

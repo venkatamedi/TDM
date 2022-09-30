@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_tdm_lu_type_relation_eid</ID>
+  <PopulationObjectName>query_tdm_lu_type_relation_eid</PopulationObjectName>
+  <TableName>tdm_lu_type_relation_eid</TableName>
+  <RootItemID>f_36</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="LU_NAME" id="fi_36.0" dataType="String" index="0" />
+    <Arg name="LU_EID" id="fi_36.1" dataType="String" index="1" />
+    <Arg name="SOURCE_ENV_NAME" id="fi_36.2" dataType="String" index="2" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="FunctionDiagramItemDataSave" id="f_36" name="fnPop_tdm_lu_type_relation_eid" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnPop_tdm_lu_type_relation_eid.k2function.xml">
+      <InputsList>
+        <Input id="fi_36.0" name="LU_NAME" />
+        <Input id="fi_36.1" name="LU_EID" />
+        <Input id="fi_36.2" name="SOURCE_ENV_NAME" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_36.0" name="source_env" />
+        <Output id="fo_36.1" name="lu_type_1" />
+        <Output id="fo_36.2" name="lu_type_2" />
+        <Output id="fo_36.3" name="lu_type1_eid" />
+        <Output id="fo_36.4" name="lu_type2_eid" />
+        <Output id="fo_36.5" name="creation_date" />
+        <Output id="fo_36.6" name="version_name" />
+        <Output id="fo_36.7" name="version_datetime" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="46" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.0" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_138a91e4923e49d99824e9757729653d" />
+    <Link partId="47" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.1" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_ceeaf8ef1b0549d681f4104e24a18bf7" />
+    <Link partId="48" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.2" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_f4600a73bad5454a91d6f51585d82922" />
+    <Link partId="49" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.3" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_6bb62cf6291249519f90ea7668e923c3" />
+    <Link partId="50" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.4" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_d2c5e24315784a668191fcd9b18c154c" />
+    <Link partId="51" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.5" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_421f5a38ac49411784a7e83843ec0434" />
+    <Link partId="188" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.6" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_88dd973fff0b41be917ce049102332de" />
+    <Link partId="189" fromNodeOrder="0" fromItemID="f_36" fromColID="fo_36.7" toItemID="tdm_lu_type_relation_eid" toColID="tblCol_4b254b2c051a4bb8bc31b9c323662a52" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="tdm_lu_type_relation_eid.query_tdm_lu_type_relation_eid.k2tablePop.xml" lastPartID="231">
+      <TableNode partID="0" name="tdm_lu_type_relation_eid" pos="346.4226 10.7447968" width="306.499268" />
+      <FunctionMapNode id="0" L0="1" L1="2" L2="3" R0="4" R1="5" R2="6" R3="7" R4="8" R5="9" R6="10" R7="11" partID="36" topLabel="fnPop_tdm_lu_type_relation_eid (36)" pos="39.2754135 2.23568058" size="235.403564 121.674461" isRoot="true">
+        <KFunction>{"Name":"fnPop_tdm_lu_type_relation_eid","ID":"f_36","Category":"Root","Version":"6.0.1.0","FunctionLevel":0,"FunctionType2":1,"ReturnType":"void","RegisterAsLuDbFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"FunctionBody":"","IsRootFunction":true,"inputParams":[{"Name":"LU_NAME","ID":"fi_36.0","Index":0,"DataType":"String","Comment":""},{"Name":"LU_EID","ID":"fi_36.1","Index":1,"DataType":"String","Comment":""},{"Name":"SOURCE_ENV_NAME","ID":"fi_36.2","Index":2,"DataType":"String","Comment":""}],"outputParams":[{"Name":"source_env","ID":"fo_36.0","Index":0,"DataType":"String","Comment":""},{"Name":"lu_type_1","ID":"fo_36.1","Index":1,"DataType":"String","Comment":""},{"Name":"lu_type_2","ID":"fo_36.2","Index":2,"DataType":"String","Comment":""},{"Name":"lu_type1_eid","ID":"fo_36.3","Index":3,"DataType":"String","Comment":""},{"Name":"lu_type2_eid","ID":"fo_36.4","Index":4,"DataType":"String","Comment":""},{"Name":"creation_date","ID":"fo_36.5","Index":5,"DataType":"String","Comment":""},{"Name":"version_name","ID":"fo_36.6","Index":6,"DataType":"String"},{"Name":"version_datetime","ID":"fo_36.7","Index":7,"DataType":"String"}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="46" from="4" to="12" pointsArr="274.679 23.3632813 284.679 23.3632813 336.4226 41.78125 346.4226 41.78125" fromNodePartID="36" fromNodeColumnName="source_env" toNodePartID="0" toNodeColumnName="source_env" />
+      <Link partID="47" from="5" to="13" pointsArr="274.679 35.4361954 284.679 35.4361954 336.4226 53.8541641 346.4226 53.8541641" fromNodePartID="36" fromNodeColumnName="lu_type_1" toNodePartID="0" toNodeColumnName="lu_type_1" />
+      <Link partID="48" from="6" to="14" pointsArr="274.679 47.50911 284.679 47.50911 336.4226 65.92708 346.4226 65.92708" fromNodePartID="36" fromNodeColumnName="lu_type_2" toNodePartID="0" toNodeColumnName="lu_type_2" />
+      <Link partID="49" from="7" to="15" pointsArr="274.679 59.5820274 284.679 59.5820274 336.4226 78 346.4226 78" fromNodePartID="36" fromNodeColumnName="lu_type1_eid" toNodePartID="0" toNodeColumnName="lu_type1_eid" />
+      <Link partID="50" from="8" to="16" pointsArr="274.679 71.65494 284.679 71.65494 336.4226 90.07291 346.4226 90.07291" fromNodePartID="36" fromNodeColumnName="lu_type2_eid" toNodePartID="0" toNodeColumnName="lu_type2_eid" />
+      <Link partID="51" from="9" to="17" pointsArr="274.679 83.72786 284.679 83.72786 336.4226 102.145828 346.4226 102.145828" fromNodePartID="36" fromNodeColumnName="creation_date" toNodePartID="0" toNodeColumnName="creation_date" />
+      <Link partID="188" from="10" to="18" pointsArr="274.679 95.80078 284.679 95.80078 336.4226 114.21875 346.4226 114.21875" fromNodePartID="36" fromNodeColumnName="version_name" toNodePartID="0" toNodeColumnName="version_name" />
+      <Link partID="189" from="11" to="19" pointsArr="274.679 107.8737 284.679 107.8737 336.4226 126.291672 346.4226 126.291672" fromNodePartID="36" fromNodeColumnName="version_datetime" toNodePartID="0" toNodeColumnName="version_datetime" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

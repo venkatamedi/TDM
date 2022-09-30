@@ -1,0 +1,84 @@
+{
+    "type": "TDMSeqList",
+    "badge": "TD",
+    "tags": [
+        "basic"
+    ],
+    "inputs": [
+        {
+            "name": "table",
+            "const": [
+                {
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "CustomerIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "ACTIVITY_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "ActivityIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "ADDRESS_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "AddressIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "CASE_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "CaseIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "COLLECTION_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "CollectionIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "CONTRACT_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "ContractIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "NOTE_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "NoteIdInit"
+                },
+                {
+                    "SEQUENCE_NAME": "ORDER_ID_SEQ",
+                    "CACHE_DB_NAME": "DB_CASSANDRA",
+                    "SEQUENCE_REDIS_OR_DB": "FabricRedis",
+                    "INITIATE_VALUE_OR_FLOW": "OrderIdInit"
+                }
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "SEQUENCE_NAME": {
+                            "type": "string"
+                        },
+                        "CACHE_DB_NAME": {
+                            "type": "string"
+                        },
+                        "SEQUENCE_REDIS_OR_DB": {
+                            "type": "string"
+                        },
+                        "INITIATE_VALUE_OR_FLOW": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": [],
+    "parentType": "ConstTable"
+}

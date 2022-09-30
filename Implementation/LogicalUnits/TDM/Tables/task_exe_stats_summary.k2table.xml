@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_exe_stats_summary</Name>
+  <ID>tbl_task_exe_stats_summary</ID>
+  <EntityId>tblCol_61ada4a4d80a451992114103b8ad30e1</EntityId>
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_61ada4a4d80a451992114103b8ad30e1" index="0" datatype="Integer" mandatory="true" />
+    <Column name="lu_name" id="tblCol_823d7e374fd645709b0f68d94388e059" index="1" datatype="Text" mandatory="true" />
+    <Column name="creation_date" id="tblCol_cf841ea16ca64f8c80b5aa8748c51ff9" index="2" datatype="Text" />
+    <Column name="table_name" id="tblCol_faad0ce69eee45d092f5fd32a8b5a40e" index="3" datatype="Text" mandatory="true" />
+    <Column name="source_count" id="tblCol_0d7c9212b50f4596a702cda5c1a0e24b" index="4" datatype="Text" />
+    <Column name="target_count" id="tblCol_ea1b01093ba1480b84f08fbf5a9de26e" index="5" datatype="Text" />
+    <Column name="diff" id="tblCol_71524825c7ff47429e9373409038babf" index="6" datatype="Text" />
+    <Column name="results" id="tblCol_7f4d043f4f2b4a43a329aca67c02d360" index="7" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="tblCol_61ada4a4d80a451992114103b8ad30e1,tblCol_823d7e374fd645709b0f68d94388e059,tblCol_faad0ce69eee45d092f5fd32a8b5a40e" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TAR_activity</Name>
+  <ID>TAR_activity</ID>
+  <Version>6.5.8.10</Version>
+  <SerializationName />
+  <Columns>
+    <Column name="customer_id" id="customer_id" index="0" datatype="Integer" mandatory="true" serializationName="customer_id" />
+    <Column name="activity_id" id="activity_id" index="1" datatype="Integer" mandatory="true" serializationName="activity_id" />
+  </Columns>
+  <IndexesList />
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="DecisionFunction" performEvery="1.00:00:00">
+    <DecisionFunction>fnDecisionDeleteFromTarget</DecisionFunction>
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

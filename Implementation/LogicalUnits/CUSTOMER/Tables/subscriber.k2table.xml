@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>subscriber</Name>
+  <ID>tbl_subscriber</ID>
+  <Columns>
+    <Column name="subscriber_id" id="subscriber_id" index="0" datatype="Integer" mandatory="true" />
+    <Column name="msisdn" id="msisdn" index="1" datatype="Text" />
+    <Column name="imsi" id="imsi" index="2" datatype="Text" />
+    <Column name="sim" id="sim" index="3" datatype="Text" />
+    <Column name="first_name" id="first_name" index="4" datatype="Text" />
+    <Column name="last_name" id="last_name" index="5" datatype="Text" />
+    <Column name="subscriber_type" id="subscriber_type" index="6" datatype="Text" />
+    <Column name="vip_status" id="vip_status" index="7" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="subscriber_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

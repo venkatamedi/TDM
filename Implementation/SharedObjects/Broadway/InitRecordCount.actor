@@ -1,0 +1,19 @@
+{
+    "type": "InitRecordCount",
+    "tags": [
+        "tdm"
+    ],
+    "parentType": "JavaScript",
+    "inputs": [
+        {
+            "name": "script",
+            "const": "flowArgs.loadedRecCnt = 0;"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "result",
+            "hidden": true
+        }
+    ]
+}

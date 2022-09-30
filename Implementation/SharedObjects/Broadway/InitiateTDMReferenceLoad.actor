@@ -1,0 +1,61 @@
+{
+    "type": "InitiateTDMReferenceLoad",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "taskExecutionID",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "refTableName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dbtable"
+            }
+        },
+        {
+            "name": "selectedRefVersionTaskName",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "selectedRefVersionDateTime",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "targetEnvName",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "InitiateTDMReferenceLoad"
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

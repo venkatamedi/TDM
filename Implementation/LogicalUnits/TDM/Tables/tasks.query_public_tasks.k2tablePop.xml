@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_public_tasks</ID>
+  <PopulationObjectName>query_public_tasks</PopulationObjectName>
+  <TableName>tasks</TableName>
+  <RootItemID>query_query_public_tasks</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>true</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="task_execution_id" id="queryCol_0" dataType="Integer" index="0" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="DBQueryDataSave" id="query_query_public_tasks" name="query_public_tasks" nodeOrder="0" module="DBQuery" mapObjectModule="DBQuery" connName="TDM">
+      <OutputsList>
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_0" name="task_execution_id" dataType="Integer" index="0" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_1" name="task_id" dataType="Integer" index="1" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_2" name="selection_method" dataType="Text" index="2" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_3" name="load_entity" dataType="Text" index="3" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_4" name="delete_before_load" dataType="Text" index="4" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_5" name="task_type" dataType="Text" index="5" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_6" name="task_name" dataType="Text" index="6" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_7" name="source_env" dataType="Text" index="7" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_8" name="target_env" dataType="Text" index="8" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_9" name="be_name" dataType="Text" index="9" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_10" name="refresh_reference_data" dataType="Text" index="10" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_11" name="replace_sequences" dataType="Text" index="11" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_12" name="scheduler" dataType="Text" index="12" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_13" name="task_created_by" dataType="Text" index="13" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_14" name="version_ind" dataType="Text" index="14" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_15" name="selected_version_task_name" dataType="Text" index="15" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_16" name="selected_version_datetime" dataType="Text" index="16" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_17" name="selected_ref_version_task_name" dataType="Text" index="17" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_18" name="selected_ref_version_datetime" dataType="Text" index="18" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_19" name="retention_period_type" dataType="Text" index="19" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_20" name="retention_period_value" dataType="Integer" index="20" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_21" name="task_sync_mode" dataType="Text" index="21" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_22" name="env_sync_mode" dataType="Text" index="22" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_23" name="scheduling_end_date" dataType="Text" index="23" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_24" name="operation_mode" dataType="Text" index="24" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_25" name="reserve_ind" dataType="Text" index="25" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_26" name="reserve_retention_period_type" dataType="Text" index="26" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_27" name="reserve_retention_period_value" dataType="Integer" index="27" />
+      </OutputsList>
+      <SQL><![CDATA[Select Distinct te.task_execution_id,
+  t.task_id,
+  t.selection_method,
+  t.load_entity,
+  t.delete_before_load,
+  t.task_type,
+  t.task_title As task_name,
+  t.source_env_name As source_env,
+  e.environment_name As target_env,
+  b.be_name,
+  Case When t.refresh_reference_data = False Then 'false' Else 'true'
+  End As refresh_reference_data,
+  Case When t.replace_sequences = False Then 'false' Else 'true'
+  End As replace_sequences,
+  t.scheduler,
+  t.task_created_by,
+  Case When t.version_ind = False Then 'false' Else 'true' End As version_ind,
+  t.selected_version_task_name,
+  t.selected_version_datetime,
+  t.selected_ref_version_task_name,
+  t.selected_ref_version_datetime,
+  t.retention_period_type,
+  t.retention_period_value,
+  t.sync_mode As task_sync_mode,
+  e.sync_mode As env_sync_mode,
+  t.scheduling_end_date,
+  Case
+    When t.task_type = 'LOAD' And t.load_entity = True And
+    t.delete_before_load = False Then 'Load entity'
+    When t.task_type = 'LOAD' And t.load_entity = True And
+    t.delete_before_load = True Then 'Load and delete entity'
+    When t.task_type = 'LOAD' And t.load_entity = False And
+    t.delete_before_load = True Then 'Delete entity'
+    When t.task_type = 'RESERVE' And t.reserve_ind = True Then 'Reserve entity'
+    Else 'Extract Task' End As operation_mode,
+  Case When t.reserve_ind = False Then 'false' Else 'true' End As reserve_ind,
+  reserve_retention_period_type,
+  reserve_retention_period_value
+From tasks t,
+  task_execution_list te,
+  environments e,
+  business_entities b
+Where t.task_id = te.task_id And e.environment_id = t.environment_id And
+  b.be_id = t.be_id
+Order By te.task_execution_id]]></SQL>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="172" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_0" toItemID="tbl_tasks" toColID="tblCol_fe1c717cdb8443928dfd0b701c836250" />
+    <Link partId="50" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_1" toItemID="tbl_tasks" toColID="tblCol_0c3317c310dc40ad9b7e7ee39ecb04a1" />
+    <Link partId="57" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_2" toItemID="tbl_tasks" toColID="tblCol_932e82a3c9654964b5b60bde8a21edfa" />
+    <Link partId="309" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_3" toItemID="tbl_tasks" toColID="tblCol_3b615090db0a48dfb7a9f8473b7a729b" />
+    <Link partId="310" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_4" toItemID="tbl_tasks" toColID="tblCol_60d4253f32284f95b99335e48ba11d18" />
+    <Link partId="327" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_5" toItemID="tbl_tasks" toColID="tblCol_18418533b8624c00a87441e0a65a1f1d" />
+    <Link partId="408" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_6" toItemID="tbl_tasks" toColID="tblCol_542ca73c04834ebd9464ba016720eeb9" />
+    <Link partId="409" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_7" toItemID="tbl_tasks" toColID="tblCol_883f21ed20c54c0ab10053700b9471e7" />
+    <Link partId="410" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_8" toItemID="tbl_tasks" toColID="tblCol_0bcc709953174f73845b3bd353dd3ca1" />
+    <Link partId="411" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_9" toItemID="tbl_tasks" toColID="tblCol_a0c0a3551b4149f4936c921afa0f4f0c" />
+    <Link partId="412" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_10" toItemID="tbl_tasks" toColID="tblCol_38275745ea8549a9b6f92e645fb5abde" />
+    <Link partId="413" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_11" toItemID="tbl_tasks" toColID="tblCol_c26c6b967f18448c8f0172735ebdd226" />
+    <Link partId="414" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_12" toItemID="tbl_tasks" toColID="tblCol_3a4f6b7480b541b5837e9e6a8c131af4" />
+    <Link partId="415" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_13" toItemID="tbl_tasks" toColID="tblCol_263c10dd63b04633bab1c122396e417e" />
+    <Link partId="416" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_14" toItemID="tbl_tasks" toColID="tblCol_49b49221692844d48c77dbdc4315f504" />
+    <Link partId="417" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_15" toItemID="tbl_tasks" toColID="tblCol_f73950958d9c46b2b6682e8f779ca340" />
+    <Link partId="418" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_16" toItemID="tbl_tasks" toColID="tblCol_98f8b6665af14dada7a71a7d3a64de91" />
+    <Link partId="419" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_17" toItemID="tbl_tasks" toColID="tblCol_87d34423b48849218707c92c04adff18" />
+    <Link partId="420" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_18" toItemID="tbl_tasks" toColID="tblCol_d37a33d3b16c41a7bdcb596dd3612418" />
+    <Link partId="421" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_19" toItemID="tbl_tasks" toColID="tblCol_f43c2676051d4c27a519a5e56b5cae16" />
+    <Link partId="422" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_20" toItemID="tbl_tasks" toColID="tblCol_f0a53a3a8fe84318a61ac0125a3e7d1a" />
+    <Link partId="692" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_21" toItemID="tbl_tasks" toColID="tblCol_fcd1edb6598e4061a4d934990aa8e020" />
+    <Link partId="693" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_22" toItemID="tbl_tasks" toColID="tblCol_a4f5d34f39e4496da456254215b24f2e" />
+    <Link partId="424" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_23" toItemID="tbl_tasks" toColID="tblCol_ab0a72d9610d40f492b97b330818618c" />
+    <Link partId="425" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_24" toItemID="tbl_tasks" toColID="tblCol_c05d6615236a4796abe8fb5ccd49a80b" />
+    <Link partId="748" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_25" toItemID="tbl_tasks" toColID="reserve_ind" />
+    <Link partId="807" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_26" toItemID="tbl_tasks" toColID="reserve_retention_period_type" />
+    <Link partId="808" fromNodeOrder="0" fromItemID="query_query_public_tasks" fromColID="queryCol_27" toItemID="tbl_tasks" toColID="reserve_retention_period_value" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="tasks.query_public_tasks.k2tablePop.xml" lastPartID="808">
+      <TableNode partID="0" name="tasks" pos="632.596436 5.94271851" width="303.94458" />
+      <DBQueryNode partID="26" name="TDM" pos="9.999985 0.979187" size="402.596466 398.041626" isRoot="true">
+        <DBQuery>{"Name":"query_public_tasks","ID":"query_query_public_tasks","ConnName":"TDM","SQL":"Select Distinct te.task_execution_id,\r\n  t.task_id,\r\n  t.selection_method,\r\n  t.load_entity,\r\n  t.delete_before_load,\r\n  t.task_type,\r\n  t.task_title As task_name,\r\n  t.source_env_name As source_env,\r\n  e.environment_name As target_env,\r\n  b.be_name,\r\n  Case When t.refresh_reference_data = False Then 'false' Else 'true'\r\n  End As refresh_reference_data,\r\n  Case When t.replace_sequences = False Then 'false' Else 'true'\r\n  End As replace_sequences,\r\n  t.scheduler,\r\n  t.task_created_by,\r\n  Case When t.version_ind = False Then 'false' Else 'true' End As version_ind,\r\n  t.selected_version_task_name,\r\n  t.selected_version_datetime,\r\n  t.selected_ref_version_task_name,\r\n  t.selected_ref_version_datetime,\r\n  t.retention_period_type,\r\n  t.retention_period_value,\r\n  t.sync_mode As task_sync_mode,\r\n  e.sync_mode As env_sync_mode,\r\n  t.scheduling_end_date,\r\n  Case\r\n    When t.task_type = 'LOAD' And t.load_entity = True And\r\n    t.delete_before_load = False Then 'Load entity'\r\n    When t.task_type = 'LOAD' And t.load_entity = True And\r\n    t.delete_before_load = True Then 'Load and delete entity'\r\n    When t.task_type = 'LOAD' And t.load_entity = False And\r\n    t.delete_before_load = True Then 'Delete entity'\r\n    When t.task_type = 'RESERVE' And t.reserve_ind = True Then 'Reserve entity'\r\n    Else 'Extract Task' End As operation_mode,\r\n  Case When t.reserve_ind = False Then 'false' Else 'true' End As reserve_ind,\r\n  reserve_retention_period_type,\r\n  reserve_retention_period_value\r\nFrom tasks t,\r\n  task_execution_list te,\r\n  environments e,\r\n  business_entities b\r\nWhere t.task_id = te.task_id And e.environment_id = t.environment_id And\r\n  b.be_id = t.be_id\r\nOrder By te.task_execution_id","ColumnsList":[{"ID":"queryCol_0","Name":"task_execution_id","DataType":"Integer","Index":0,"IsInputArgument":true},{"ID":"queryCol_1","Name":"task_id","DataType":"Integer","Index":1,"IsInputArgument":false},{"ID":"queryCol_2","Name":"selection_method","DataType":"Text","Index":2,"IsInputArgument":false},{"ID":"queryCol_3","Name":"load_entity","DataType":"Text","Index":3,"IsInputArgument":false},{"ID":"queryCol_4","Name":"delete_before_load","DataType":"Text","Index":4,"IsInputArgument":false},{"ID":"queryCol_5","Name":"task_type","DataType":"Text","Index":5,"IsInputArgument":false},{"ID":"queryCol_6","Name":"task_name","DataType":"Text","Index":6,"IsInputArgument":false},{"ID":"queryCol_7","Name":"source_env","DataType":"Text","Index":7,"IsInputArgument":false},{"ID":"queryCol_8","Name":"target_env","DataType":"Text","Index":8,"IsInputArgument":false},{"ID":"queryCol_9","Name":"be_name","DataType":"Text","Index":9,"IsInputArgument":false},{"ID":"queryCol_10","Name":"refresh_reference_data","DataType":"Text","Index":10,"IsInputArgument":false},{"ID":"queryCol_11","Name":"replace_sequences","DataType":"Text","Index":11,"IsInputArgument":false},{"ID":"queryCol_12","Name":"scheduler","DataType":"Text","Index":12,"IsInputArgument":false},{"ID":"queryCol_13","Name":"task_created_by","DataType":"Text","Index":13,"IsInputArgument":false},{"ID":"queryCol_14","Name":"version_ind","DataType":"Text","Index":14,"IsInputArgument":false},{"ID":"queryCol_15","Name":"selected_version_task_name","DataType":"Text","Index":15,"IsInputArgument":false},{"ID":"queryCol_16","Name":"selected_version_datetime","DataType":"Text","Index":16,"IsInputArgument":false},{"ID":"queryCol_17","Name":"selected_ref_version_task_name","DataType":"Text","Index":17,"IsInputArgument":false},{"ID":"queryCol_18","Name":"selected_ref_version_datetime","DataType":"Text","Index":18,"IsInputArgument":false},{"ID":"queryCol_19","Name":"retention_period_type","DataType":"Text","Index":19,"IsInputArgument":false},{"ID":"queryCol_20","Name":"retention_period_value","DataType":"Integer","Index":20,"IsInputArgument":false},{"ID":"queryCol_21","Name":"task_sync_mode","DataType":"Text","Index":21,"IsInputArgument":false},{"ID":"queryCol_22","Name":"env_sync_mode","DataType":"Text","Index":22,"IsInputArgument":false},{"ID":"queryCol_23","Name":"scheduling_end_date","DataType":"Text","Index":23,"IsInputArgument":false},{"ID":"queryCol_24","Name":"operation_mode","DataType":"Text","Index":24,"IsInputArgument":false},{"ID":"queryCol_25","Name":"reserve_ind","DataType":"Text","Index":25,"IsInputArgument":false},{"ID":"queryCol_26","Name":"reserve_retention_period_type","DataType":"Text","Index":26,"IsInputArgument":false},{"ID":"queryCol_27","Name":"reserve_retention_period_value","DataType":"Integer","Index":27,"IsInputArgument":false}]}</DBQuery>
+      </DBQueryNode>
+      <Link partID="172" from="0" to="1" pointsArr="412.596436 37.0156441 422.596436 37.0156441 512.596436 37 532.596436 37 622.596436 36.9791756 632.596436 36.9791756" fromNodePartID="26" fromNodeColumnName="task_execution_id" toNodePartID="0" toNodeColumnName="task_execution_id" />
+      <Link partID="50" from="2" to="3" pointsArr="412.596436 49.088562 422.596436 49.088562 512.596436 49 532.596436 49 622.596436 49.0520935 632.596436 49.0520935" fromNodePartID="26" fromNodeColumnName="task_id" toNodePartID="0" toNodeColumnName="task_id" />
+      <Link partID="57" from="4" to="5" pointsArr="412.596436 61.1614761 422.596436 61.1614761 512.596436 61 532.596436 61 622.596436 61.1250076 632.596436 61.1250076" fromNodePartID="26" fromNodeColumnName="selection_method" toNodePartID="0" toNodeColumnName="selection_method" />
+      <Link partID="309" from="6" to="7" pointsArr="412.596436 73.23439 422.596436 73.23439 512.596436 73 532.596436 73 622.596436 73.19792 632.596436 73.19792" fromNodePartID="26" fromNodeColumnName="load_entity" toNodePartID="0" toNodeColumnName="load_entity" />
+      <Link partID="310" from="8" to="9" pointsArr="412.596436 85.3073044 422.596436 85.3073044 512.596436 85 532.596436 85 622.596436 85.2708359 632.596436 85.2708359" fromNodePartID="26" fromNodeColumnName="delete_before_load" toNodePartID="0" toNodeColumnName="delete_before_load" />
+      <Link partID="327" from="10" to="11" pointsArr="412.596436 97.38022 422.596436 97.38022 512.596436 97 532.596436 97 622.596436 97.34375 632.596436 97.34375" fromNodePartID="26" fromNodeColumnName="task_type" toNodePartID="0" toNodeColumnName="task_type" />
+      <Link partID="408" from="12" to="13" pointsArr="412.596436 109.45314 422.596436 109.45314 512.596436 109 532.596436 109 622.596436 109.416672 632.596436 109.416672" fromNodePartID="26" fromNodeColumnName="task_name" toNodePartID="0" toNodeColumnName="task_name" />
+      <Link partID="409" from="14" to="15" pointsArr="412.596436 121.526062 422.596436 121.526062 512.596436 122 532.596436 122 622.596436 121.489594 632.596436 121.489594" fromNodePartID="26" fromNodeColumnName="source_env" toNodePartID="0" toNodeColumnName="source_env" />
+      <Link partID="410" from="16" to="17" pointsArr="412.596436 133.598984 422.596436 133.598984 512.596436 134 532.596436 134 622.596436 133.562515 632.596436 133.562515" fromNodePartID="26" fromNodeColumnName="target_env" toNodePartID="0" toNodeColumnName="target_env" />
+      <Link partID="411" from="18" to="19" pointsArr="412.596436 145.6719 422.596436 145.6719 512.596436 146 532.596436 146 622.596436 145.635437 632.596436 145.635437" fromNodePartID="26" fromNodeColumnName="be_name" toNodePartID="0" toNodeColumnName="be_name" />
+      <Link partID="412" from="20" to="21" pointsArr="412.596436 157.744827 422.596436 157.744827 512.596436 158 532.596436 158 622.596436 157.708359 632.596436 157.708359" fromNodePartID="26" fromNodeColumnName="refresh_reference_data" toNodePartID="0" toNodeColumnName="refresh_reference_data" />
+      <Link partID="413" from="22" to="23" pointsArr="412.596436 169.817734 422.596436 169.817734 512.596436 170 532.596436 170 622.596436 169.781265 632.596436 169.781265" fromNodePartID="26" fromNodeColumnName="replace_sequences" toNodePartID="0" toNodeColumnName="replace_sequences" />
+      <Link partID="414" from="24" to="25" pointsArr="412.596436 181.89064 422.596436 181.89064 512.596436 182 532.596436 182 622.596436 181.854172 632.596436 181.854172" fromNodePartID="26" fromNodeColumnName="scheduler" toNodePartID="0" toNodeColumnName="scheduler" />
+      <Link partID="415" from="26" to="27" pointsArr="412.596436 193.963547 422.596436 193.963547 512.596436 194 532.596436 194 622.596436 193.927078 632.596436 193.927078" fromNodePartID="26" fromNodeColumnName="task_created_by" toNodePartID="0" toNodeColumnName="task_created_by" />
+      <Link partID="416" from="28" to="29" pointsArr="412.596436 206.036453 422.596436 206.036453 512.596436 206 532.596436 206 622.596436 205.999985 632.596436 205.999985" fromNodePartID="26" fromNodeColumnName="version_ind" toNodePartID="0" toNodeColumnName="version_ind" />
+      <Link partID="417" from="30" to="31" pointsArr="412.596436 218.10936 422.596436 218.10936 512.596436 218 532.596436 218 622.596436 218.072891 632.596436 218.072891" fromNodePartID="26" fromNodeColumnName="selected_version_task_name" toNodePartID="0" toNodeColumnName="selected_version_task_name" />
+      <Link partID="418" from="32" to="33" pointsArr="412.596436 230.182266 422.596436 230.182266 512.596436 230 532.596436 230 622.596436 230.1458 632.596436 230.1458" fromNodePartID="26" fromNodeColumnName="selected_version_datetime" toNodePartID="0" toNodeColumnName="selected_version_datetime" />
+      <Link partID="419" from="34" to="35" pointsArr="412.596436 242.255173 422.596436 242.255173 512.596436 242 532.596436 242 622.596436 242.2187 632.596436 242.2187" fromNodePartID="26" fromNodeColumnName="selected_ref_version_task_name" toNodePartID="0" toNodeColumnName="selected_ref_version_task_name" />
+      <Link partID="420" from="36" to="37" pointsArr="412.596436 254.328079 422.596436 254.328079 512.596436 254 532.596436 254 622.596436 254.291611 632.596436 254.291611" fromNodePartID="26" fromNodeColumnName="selected_ref_version_datetime" toNodePartID="0" toNodeColumnName="selected_ref_version_datetime" />
+      <Link partID="421" from="38" to="39" pointsArr="412.596436 266.401 422.596436 266.401 512.596436 266 532.596436 266 622.596436 266.3645 632.596436 266.3645" fromNodePartID="26" fromNodeColumnName="retention_period_type" toNodePartID="0" toNodeColumnName="retention_period_type" />
+      <Link partID="422" from="40" to="41" pointsArr="412.596436 278.473877 422.596436 278.473877 512.596436 278 532.596436 278 622.596436 278.437439 632.596436 278.437439" fromNodePartID="26" fromNodeColumnName="retention_period_value" toNodePartID="0" toNodeColumnName="retention_period_value" />
+      <Link partID="692" from="42" to="43" pointsArr="412.596436 290.5468 422.596436 290.5468 512.596436 291 532.596436 291 622.596436 290.510376 632.596436 290.510376" fromNodePartID="26" fromNodeColumnName="task_sync_mode" toNodePartID="0" toNodeColumnName="task_sync_mode" />
+      <Link partID="693" from="44" to="45" pointsArr="412.596436 302.619751 422.596436 302.619751 512.596436 303 532.596436 303 622.596436 302.5833 632.596436 302.5833" fromNodePartID="26" fromNodeColumnName="env_sync_mode" toNodePartID="0" toNodeColumnName="env_sync_mode" />
+      <Link partID="424" from="46" to="47" pointsArr="412.596436 314.6927 422.596436 314.6927 512.596436 315 532.596436 315 622.596436 314.65625 632.596436 314.65625" fromNodePartID="26" fromNodeColumnName="scheduling_end_date" toNodePartID="0" toNodeColumnName="scheduling_end_date" />
+      <Link partID="425" from="48" to="49" pointsArr="412.596436 326.765625 422.596436 326.765625 512.596436 327 532.596436 327 622.596436 326.7292 632.596436 326.7292" fromNodePartID="26" fromNodeColumnName="operation_mode" toNodePartID="0" toNodeColumnName="operation_mode" />
+      <Link partID="748" from="50" to="51" pointsArr="412.596436 338.838562 422.596436 338.838562 512.596436 339 532.596436 339 622.596436 338.802124 632.596436 338.802124" fromNodePartID="26" fromNodeColumnName="reserve_ind" toNodePartID="0" toNodeColumnName="reserve_ind" />
+      <Link partID="807" from="52" to="53" pointsArr="412.596436 350.9115 422.596436 350.9115 512.596436 351 532.596436 351 622.596436 350.875061 632.596436 350.875061" fromNodePartID="26" fromNodeColumnName="reserve_retention_period_type" toNodePartID="0" toNodeColumnName="reserve_retention_period_type" />
+      <Link partID="808" from="54" to="55" pointsArr="412.596436 362.984436 422.596436 362.984436 512.596436 363 532.596436 363 622.596436 362.948 632.596436 362.948" fromNodePartID="26" fromNodeColumnName="reserve_retention_period_value" toNodePartID="0" toNodeColumnName="reserve_retention_period_value" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

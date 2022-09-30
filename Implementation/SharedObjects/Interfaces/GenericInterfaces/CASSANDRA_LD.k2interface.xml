@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GenericInterface xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CassandraLoader" displayName="Cassandra Loader" enabled="true" version="1.0">
+  <Name>CASSANDRA_LD</Name>
+  <Properties>
+    <Property name="section">
+      <Value>Reference_Upgrade</Value>
+    </Property>
+  </Properties>
+</GenericInterface>

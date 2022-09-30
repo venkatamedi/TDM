@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_execution_entities</Name>
+  <ID>tbl_task_execution_entities</ID>
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_f65095098e244813b9ede85c264c9fcc" index="0" datatype="Text" mandatory="true" />
+    <Column name="lu_name" id="tblCol_459fafe389134000bd83d175fa47e334" index="1" datatype="Text" mandatory="true" />
+    <Column name="entity_id" id="tblCol_212eaafa09144124bb6ef9badf2ae750" index="2" datatype="Text" mandatory="true" />
+    <Column name="target_entity_id" id="tblCol_650a9fadfe0c4467a21b7d92ad4a22b7" index="3" datatype="text" mandatory="true" />
+    <Column name="creation_date" id="tblCol_0dcaec3e19cf4e18b95e07d607835d06" index="4" datatype="Text" />
+    <Column name="entity_end_time" id="tblCol_f6ac43a44d4946f581822e03669c2853" index="5" datatype="Text" />
+    <Column name="entity_start_time" id="tblCol_601d6d0219eb4e9eb0d938aecc6e2f57" index="6" datatype="Text" />
+    <Column name="env_id" id="tblCol_20e4de376a964c72bb1571613f0b2b68" index="7" datatype="Text" />
+    <Column name="execution_status" id="tblCol_213830e16f1248dc9d5fa0394215813e" index="8" datatype="Text" />
+    <Column name="id_type" id="tblCol_3f0f319c4894419288952cfffb9b789c" index="9" datatype="Text" />
+    <Column name="fabric_execution_id" id="tblCol_ea2f9df846b747df90d3a7d7a1b2326f" index="10" datatype="text" />
+    <Column name="iid" id="tblCol_acaae10411ee41d095869a409d3d1a5d" index="11" datatype="text" />
+    <Column name="source_env" id="tblCol_7b83a92ade9c4d07be74e5ef768bb64e" index="12" datatype="text" />
+    <Column name="version_name" id="tblCol_e7023d790d1e45fabd736c3412accc4c" index="13" datatype="text" />
+    <Column name="version_datetime" id="tblCol_6f84b51a627b419aa92be5b344292c92" index="14" datatype="text" />
+    <Column name="fabric_get_time" id="tblCol_5b4ffed884c047b7aa17e074303f0c45" index="15" datatype="integer" />
+    <Column name="total_processing_time" id="tblCol_c460ba21d3c04d999886af1512542d4f" index="16" datatype="integer" />
+    <Column name="clone_no" id="tblCol_b9884a9b672f4ae8a3265d9e53e7bc14" index="17" datatype="text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="tblCol_f65095098e244813b9ede85c264c9fcc,tblCol_459fafe389134000bd83d175fa47e334,tblCol_212eaafa09144124bb6ef9badf2ae750,tblCol_650a9fadfe0c4467a21b7d92ad4a22b7" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

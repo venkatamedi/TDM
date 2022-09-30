@@ -1,0 +1,129 @@
+{
+  "name": "rootNode",
+  "children": [
+    {
+      "name": "result",
+      "children": [
+        {
+          "name": "General Info",
+          "type": "sql",
+          "code": "Select T.TASK_NAME,\n  T.TASK_ID,\n  T.TASK_EXECUTION_ID,\n  T.TASK_CREATED_BY As CREATED_BY,\n  L.TASK_EXECUTED_BY As EXECUTED_BY,\n  MIN(L.START_EXECUTION_TIME) As START_EXECUTION,\n  MAX(L.END_EXECUTION_TIME) As END_EXECUTION,\n  Case When (Exists(Select 1 From task_execution_list\n    Where task_execution_id = L.task_execution_id And execution_status =\n      'failed')) Then 'failed' \n  When (Exists(Select 1 From task_execution_list\n    Where task_execution_id = L.task_execution_id And execution_status =\n      'stopped')) Then 'stopped' \n  Else 'completed' End As EXECUTION_STATUS,\n  T.SOURCE_ENV,\n  T.TARGET_ENV,\n  T.BE_NAME,\n  T.TASK_TYPE,\n  Case When T.selection_method = 'ALL' Then 'ALL'\n    When T.selection_method = 'L' Then 'Entity List'\n    When T.selection_method = 'R' Then 'Randon Selection'\n    When T.selection_method = 'REF' Then 'Reference only'\n    When T.selection_method = 'S' Then 'Synthetic creation' \n    When T.selection_method = 'C' Then 'Custom Logic' Else 'Parameters'\n  End As SELECTION_METHOD,\n  T.TASK_SYNC_MODE,\n  T.ENV_SYNC_MODE,\n  T.OPERATION_MODE,\n  Case When T.selection_method = 'S' Then 'true' Else T.REPLACE_SEQUENCES\n  End As REPLACE_SEQUENCES,\n  T.VERSION_IND,\n  T.SELECTED_VERSION_TASK_NAME,\n  T.SELECTED_VERSION_DATETIME,\n  T.SELECTED_REF_VERSION_TASK_NAME,\n  T.SELECTED_REF_VERSION_DATETIME,\n  T.SCHEDULER As SCHEDULING_PARAMETERS,\n  T.SCHEDULING_END_DATE As SCHEDULE_EXPIRATION_DATE,\n  O.OVERRIDE_PARAMETERS,\n  T.RESERVE_IND,\n  T.RESERVE_RETENTION_PERIOD_TYPE,\n  T.RESERVE_RETENTION_PERIOD_VALUE\nFrom TDM.TASKS T\n  LEFT JOIN TDM.TASK_EXECUTION_LIST L ON T.TASK_EXECUTION_ID = L.TASK_EXECUTION_ID\n  LEFT JOIN TDM.TASK_EXECUTION_OVERRIDE_ATTRS O ON T.TASK_EXECUTION_ID = O.TASK_EXECUTION_ID"
+        },
+        {
+          "name": "Task Execution Summary",
+          "type": "sql",
+          "code": "select lu_id, lu_name, process_id, process_name from task_execution_list",
+          "children": [
+            {
+              "type": "condition",
+              "code": "lu_id > 0",
+              "children": [
+                {
+                  "name": "LUs",
+                  "children": [
+                    {
+                      "name": "LU Load Summary",
+                      "type": "sql",
+                      "code": "Select LU_NAME,\n  FABRIC_EXECUTION_ID,\n  PARENT_LU_NAME,\n  DATA_CENTER_NAME,\n  START_EXECUTION_TIME,\n  END_EXECUTION_TIME,\n  NUM_OF_PROCESSED_ENTITIES,\n  NUM_OF_COPIED_ENTITIES,\n  NUM_OF_FAILED_ENTITIES,\n  NUM_OF_PROCESSED_REF_TABLES,\n  NUM_OF_COPIED_REF_TABLES,\n  NUM_OF_FAILED_REF_TABLES\nFrom TDM.TASK_EXECUTION_LIST\nWhere lu_id = ${lu_id}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Post Execution Processes",
+                  "children": [
+                    {
+                      "name": "Post Execution Processes Summary",
+                      "type": "sql",
+                      "code": "Select PROCESS_NAME,\n  FABRIC_EXECUTION_ID,\n  DATA_CENTER_NAME,\n  EXECUTION_STATUS,\n  START_EXECUTION_TIME,\n  END_EXECUTION_TIME\n From TDM.TASK_EXECUTION_LIST\n Where process_id = ${process_id}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "List of Root Entities",
+          "children": [
+            {
+              "name": "Number of Copied Entities",
+              "type": "sql",
+              "code": "select count(*) as number_of_copied_root_entities from (Select distinct be_root_entity_id, TARGET_ROOT_ENTITY_ID from TDM.TASK_EXECUTION_LINK_ENTITIES where root_entity_status = 'completed' \nEXCEPT Select be_root_entity_id, TARGET_ROOT_ENTITY_ID from TDM.TASK_EXECUTION_LINK_ENTITIES where root_entity_status <> 'completed')"
+            },
+            {
+              "name": "List of Copied Entities",
+              "type": "sql",
+              "code": "Select Distinct ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And EXECUTION_STATUS = 'completed'\nEXCEPT Select ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id \nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And EXECUTION_STATUS <> 'completed'"
+            },
+            {
+              "name": "Number of Failed Entities",
+              "type": "sql",
+              "code": "Select count(Distinct ENTITY_ID) as number_of_failed_root_entities\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' and execution_status <> 'completed'"
+            },
+            {
+              "name": "List of Failed Entities",
+              "type": "sql",
+              "code": "Select Distinct ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And EXECUTION_STATUS <> 'completed'"
+            }
+          ]
+        },
+        {
+          "name": "List of Reference Tables",
+          "children": [
+            {
+              "name": "Number of Copied Reference Tables",
+              "type": "sql",
+              "code": "Select Count(1) as count\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' and execution_status = 'completed'"
+            },
+            {
+              "name": "List of Copied Reference Tables",
+              "type": "sql",
+              "code": "select target_entity_id as table_name, lu_name\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' And execution_status = 'completed'"
+            },
+            {
+              "name": "Number of Failed Reference Tables",
+              "type": "sql",
+              "code": "Select Count(1) as count\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' and execution_status <> 'completed'"
+            },
+            {
+              "name": "List of Failed Reference Tables",
+              "type": "sql",
+              "code": "select target_entity_id as table_name, lu_name\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' And execution_status <> 'completed'"
+            }
+          ]
+        },
+        {
+          "name": "Error Summary",
+          "type": "sql",
+          "code": "Select lu_name, flow_name, stage_name, actor_name, error_category, error_code, error_message, count(distinct nullif(target_entity_id, ' ')) as number_of_entities, count(*) as number_of_records\nFrom task_exe_error_detailed \ngroup by lu_name, flow_name, actor_name, stage_name, error_category, error_code, error_message\norder by error_category, lu_name, entity_id"
+        },
+        {
+          "name": "Error Details",
+          "type": "sql",
+          "code": "Select distinct lu_name, entity_id as source_entity_id, target_entity_id, flow_name, stage_name, actor_name, error_category, error_code, error_message,actor_parameters \nFrom task_exe_error_detailed \norder by error_category, lu_name, entity_id"
+        },
+        {
+          "name": "Statistics Report",
+          "type": "sql",
+          "code": "select lu_name, table_name, target_count, source_count, diff, results \nfrom task_exe_stats_summary"
+        },
+        {
+          "name": "Replace Sequence Summary Report",
+          "type": "sql",
+          "code": "select s.lu_type as lu_name, s.entity_target_id as target_entity_id, e.target_root_entity_id as root_target_entity_id, e.target_parent_id as parent_target_entity_id,\ne.parent_lu_name as parent_lu_name, s.table_name as table_name, s.column_name as column_name, s.source_id as source_id, s.target_id as target_id,s.is_instance_id as is_instance_id\nfrom tdm_seq_mapping s, task_execution_link_entities e, tasks t\nwhere (t.selection_method = 'S' or lower(t.replace_sequences) = 'true')\n and s.lu_type = e.lu_name and s.entity_target_id = e.target_entity_id\norder by lu_type, is_instance_id desc , entity_target_id , table_name , column_name"
+        }
+      ]
+    },
+    {
+      "name": "errorCode",
+      "type": "string",
+      "code": "SUCCESS"
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "code": ""
+    }
+  ],
+  "params": []
+}

@@ -1,0 +1,44 @@
+{
+    "type": "filterOutTDMTables",
+    "actorClass": null,
+    "parentType": "InnerFlow",
+    "inputs": [
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "tableName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dbtable"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "filterOutTDMTables"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "tableNameOut",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

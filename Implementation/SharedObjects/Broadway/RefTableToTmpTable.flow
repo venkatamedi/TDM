@@ -1,0 +1,2094 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Build the tmp table name",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Tmp table name",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${tableName}_tmp"
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get the records and create the tmp table",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "ErrorHandler",
+                            "onError": "result",
+                            "actorType": {
+                                "parentType": "ErrorHandler",
+                                "inputs": [
+                                    {
+                                        "name": "config",
+                                        "const": [
+                                            {
+                                                "exceptionKey": "java.lang.Exception",
+                                                "conditions": {
+                                                    "message": ""
+                                                },
+                                                "actions": {
+                                                    "suppress": true,
+                                                    "log": false,
+                                                    "flowName": ""
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get table records",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "Select *\r\nFrom ${@refKeySpace}.${@tableName}"
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "source_env_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_task_execution_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_rec_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "aac": {
+                                                        "type": "number"
+                                                    },
+                                                    "allocationdate": {
+                                                        "type": "date"
+                                                    },
+                                                    "amr": {
+                                                        "type": "number"
+                                                    },
+                                                    "brandmodel": {
+                                                        "type": "string"
+                                                    },
+                                                    "brandname": {
+                                                        "type": "string"
+                                                    },
+                                                    "browser_me": {
+                                                        "type": "string"
+                                                    },
+                                                    "browser_rendering_engine": {
+                                                        "type": "string"
+                                                    },
+                                                    "browser_version": {
+                                                        "type": "string"
+                                                    },
+                                                    "camera": {
+                                                        "type": "number"
+                                                    },
+                                                    "chipbluetooth": {
+                                                        "type": "string"
+                                                    },
+                                                    "chipnfc": {
+                                                        "type": "string"
+                                                    },
+                                                    "chipset": {
+                                                        "type": "string"
+                                                    },
+                                                    "chipsetmodel": {
+                                                        "type": "string"
+                                                    },
+                                                    "chipsetvendor": {
+                                                        "type": "string"
+                                                    },
+                                                    "chipwlan": {
+                                                        "type": "string"
+                                                    },
+                                                    "cookie": {
+                                                        "type": "number"
+                                                    },
+                                                    "countrycode": {
+                                                        "type": "number"
+                                                    },
+                                                    "cpu": {
+                                                        "type": "string"
+                                                    },
+                                                    "cpu_cores": {
+                                                        "type": "string"
+                                                    },
+                                                    "cpu_maximum_frequency": {
+                                                        "type": "string"
+                                                    },
+                                                    "csd": {
+                                                        "type": "number"
+                                                    },
+                                                    "css_animations": {
+                                                        "type": "number"
+                                                    },
+                                                    "css_columns": {
+                                                        "type": "number"
+                                                    },
+                                                    "css_transforms": {
+                                                        "type": "number"
+                                                    },
+                                                    "css_transitions": {
+                                                        "type": "number"
+                                                    },
+                                                    "deviceatlasid": {
+                                                        "type": "string"
+                                                    },
+                                                    "devicepixelratio": {
+                                                        "type": "number"
+                                                    },
+                                                    "devicetype": {
+                                                        "type": "string"
+                                                    },
+                                                    "diagolscreensize": {
+                                                        "type": "number"
+                                                    },
+                                                    "displayppi": {
+                                                        "type": "number"
+                                                    },
+                                                    "edge": {
+                                                        "type": "number"
+                                                    },
+                                                    "expandable_storage": {
+                                                        "type": "number"
+                                                    },
+                                                    "fixedcode": {
+                                                        "type": "string"
+                                                    },
+                                                    "flash_capable": {
+                                                        "type": "number"
+                                                    },
+                                                    "frequencies_band": {
+                                                        "type": "string"
+                                                    },
+                                                    "gprs": {
+                                                        "type": "number"
+                                                    },
+                                                    "gpu": {
+                                                        "type": "string"
+                                                    },
+                                                    "hardwaretype": {
+                                                        "type": "string"
+                                                    },
+                                                    "hscsd": {
+                                                        "type": "number"
+                                                    },
+                                                    "hsdpa": {
+                                                        "type": "number"
+                                                    },
+                                                    "hspa": {
+                                                        "type": "number"
+                                                    },
+                                                    "html_audio": {
+                                                        "type": "number"
+                                                    },
+                                                    "html_canvas": {
+                                                        "type": "number"
+                                                    },
+                                                    "html_inline_svg": {
+                                                        "type": "number"
+                                                    },
+                                                    "html_svg": {
+                                                        "type": "number"
+                                                    },
+                                                    "html_video": {
+                                                        "type": "number"
+                                                    },
+                                                    "https": {
+                                                        "type": "number"
+                                                    },
+                                                    "image__gif87": {
+                                                        "type": "number"
+                                                    },
+                                                    "image__gif89a": {
+                                                        "type": "number"
+                                                    },
+                                                    "image__jpg": {
+                                                        "type": "number"
+                                                    },
+                                                    "image__png": {
+                                                        "type": "number"
+                                                    },
+                                                    "interl_storage_capacity": {
+                                                        "type": "string"
+                                                    },
+                                                    "interlmodel": {
+                                                        "type": "string"
+                                                    },
+                                                    "isereader": {
+                                                        "type": "number"
+                                                    },
+                                                    "isgamesconsole": {
+                                                        "type": "number"
+                                                    },
+                                                    "ismediaplayer": {
+                                                        "type": "number"
+                                                    },
+                                                    "ismobilephone": {
+                                                        "type": "number"
+                                                    },
+                                                    "issettupbox": {
+                                                        "type": "number"
+                                                    },
+                                                    "istablet": {
+                                                        "type": "number"
+                                                    },
+                                                    "istv": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_application_cache": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_device_motion": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_device_orientation": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_geo_location": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_indexeddb": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_json": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_local_storage": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_modify_css": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_modify_dom": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_query_selector": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_session_storage": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_support_basic_java_script": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_support_console_log": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_support_event_listener": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_support_events": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_touch_events": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_web_gl": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_web_sockets": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_web_sql_database": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_web_workers": {
+                                                        "type": "number"
+                                                    },
+                                                    "js_xhr": {
+                                                        "type": "number"
+                                                    },
+                                                    "lte": {
+                                                        "type": "number"
+                                                    },
+                                                    "lte_advanced": {
+                                                        "type": "number"
+                                                    },
+                                                    "lte_category": {
+                                                        "type": "number"
+                                                    },
+                                                    "manufacturer": {
+                                                        "type": "string"
+                                                    },
+                                                    "manufacturercode": {
+                                                        "type": "string"
+                                                    },
+                                                    "markup_wml1": {
+                                                        "type": "number"
+                                                    },
+                                                    "markup_xhtml_basic_1v0": {
+                                                        "type": "number"
+                                                    },
+                                                    "markup_xhtml_mp_1v0": {
+                                                        "type": "number"
+                                                    },
+                                                    "markup_xhtml_mp_1v1": {
+                                                        "type": "number"
+                                                    },
+                                                    "markup_xhtml_mp_1v2": {
+                                                        "type": "number"
+                                                    },
+                                                    "memory_limit_download": {
+                                                        "type": "number"
+                                                    },
+                                                    "memory_limit_embedded_media": {
+                                                        "type": "number"
+                                                    },
+                                                    "memory_limit_markup": {
+                                                        "type": "number"
+                                                    },
+                                                    "midi_monophonic": {
+                                                        "type": "number"
+                                                    },
+                                                    "midi_polyphonic": {
+                                                        "type": "number"
+                                                    },
+                                                    "mobile_device": {
+                                                        "type": "number"
+                                                    },
+                                                    "modelname": {
+                                                        "type": "string"
+                                                    },
+                                                    "mp3": {
+                                                        "type": "number"
+                                                    },
+                                                    "nfc": {
+                                                        "type": "number"
+                                                    },
+                                                    "nonremovableeuicc": {
+                                                        "type": "string"
+                                                    },
+                                                    "nonremovableuicc": {
+                                                        "type": "string"
+                                                    },
+                                                    "os": {
+                                                        "type": "string"
+                                                    },
+                                                    "os_android": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_bada": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_ios": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_me": {
+                                                        "type": "string"
+                                                    },
+                                                    "os_rim": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_symbian": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_version": {
+                                                        "type": "string"
+                                                    },
+                                                    "os_web_os": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_windows_mobile": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_windows_phone": {
+                                                        "type": "number"
+                                                    },
+                                                    "os_windows_rt": {
+                                                        "type": "number"
+                                                    },
+                                                    "radiointerface": {
+                                                        "type": "string"
+                                                    },
+                                                    "removableeuicc": {
+                                                        "type": "string"
+                                                    },
+                                                    "removableuicc": {
+                                                        "type": "string"
+                                                    },
+                                                    "screencolordepth": {
+                                                        "type": "number"
+                                                    },
+                                                    "screenheight": {
+                                                        "type": "number"
+                                                    },
+                                                    "screenwidth": {
+                                                        "type": "number"
+                                                    },
+                                                    "sim_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "sim_slots": {
+                                                        "type": "number"
+                                                    },
+                                                    "standardised_device_model": {
+                                                        "type": "string"
+                                                    },
+                                                    "standardisedfull": {
+                                                        "type": "string"
+                                                    },
+                                                    "standardisedmarketing": {
+                                                        "type": "string"
+                                                    },
+                                                    "supports_client_side": {
+                                                        "type": "number"
+                                                    },
+                                                    "tac": {
+                                                        "type": "number"
+                                                    },
+                                                    "total_ram": {
+                                                        "type": "string"
+                                                    },
+                                                    "touchscreen": {
+                                                        "type": "number"
+                                                    },
+                                                    "umts": {
+                                                        "type": "number"
+                                                    },
+                                                    "uri_scheme_sms": {
+                                                        "type": "number"
+                                                    },
+                                                    "uri_scheme_sms_to": {
+                                                        "type": "number"
+                                                    },
+                                                    "uri_scheme_tel": {
+                                                        "type": "number"
+                                                    },
+                                                    "vcard_download": {
+                                                        "type": "number"
+                                                    },
+                                                    "volte": {
+                                                        "type": "number"
+                                                    },
+                                                    "vowifi": {
+                                                        "type": "number"
+                                                    },
+                                                    "wifi": {
+                                                        "type": "number"
+                                                    },
+                                                    "wmv": {
+                                                        "type": "number"
+                                                    },
+                                                    "year_released": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Create tmp table",
+                            "actorType": {
+                                "parentType": "DbCassandraCreateTable",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            {
+                                                "name": "source_env_name",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": false,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "tdm_task_execution_id",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": true,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "tdm_rec_id",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": true,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "rec_data",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": false,
+                                                "mandatory": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "10,000 in chunk original ",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "ArrayGrouperOrg",
+                            "actorType": {
+                                "parentType": "ArrayGrouper",
+                                "inputs": [
+                                    {
+                                        "name": "size",
+                                        "const": 1000
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "source_env_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "tdm_task_execution_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "tdm_rec_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "rec_data": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get chunks of data original",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "ConstStringsOrg",
+                            "actorType": {
+                                "parentType": "ConstStrings",
+                                "inputs": [
+                                    {
+                                        "name": "strings",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Parse the records ",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "GET_SRC_ENV",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "for(var p in input) {\r\n    if (p === 'source_env_name'){\r\n        self.result = input[p]\r\n    }\r\n}",
+                                            "script": "for (var p in input) {\n  if (p === 'source_env_name') {\n    self.result = input[p];\n  }\n}"
+                                        }
+                                    },
+                                    {
+                                        "name": "input",
+                                        "schema": {
+                                            "type": "object"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source_env_name": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "GET_TDM_EXEC_ID",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "for(var p in input) {\r\n    if (p === 'tdm_task_execution_id'){\r\n        self.result = input[p]\r\n    }\r\n}",
+                                            "script": "for (var p in input) {\n  if (p === 'tdm_task_execution_id') {\n    self.result = input[p];\n  }\n}"
+                                        }
+                                    },
+                                    {
+                                        "name": "input",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source_env_name": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_task_execution_id": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_rec_id": {
+                                                    "type": "string"
+                                                },
+                                                "aac": {},
+                                                "allocationdate": {},
+                                                "amr": {},
+                                                "brandmodel": {
+                                                    "type": "string"
+                                                },
+                                                "brandname": {},
+                                                "browser_me": {},
+                                                "browser_rendering_engine": {},
+                                                "browser_version": {},
+                                                "camera": {},
+                                                "chipbluetooth": {},
+                                                "chipnfc": {},
+                                                "chipset": {},
+                                                "chipsetmodel": {},
+                                                "chipsetvendor": {},
+                                                "chipwlan": {},
+                                                "cookie": {},
+                                                "countrycode": {},
+                                                "cpu": {},
+                                                "cpu_cores": {},
+                                                "cpu_maximum_frequency": {},
+                                                "csd": {},
+                                                "css_animations": {},
+                                                "css_columns": {},
+                                                "css_transforms": {},
+                                                "css_transitions": {},
+                                                "deviceatlasid": {},
+                                                "devicepixelratio": {},
+                                                "devicetype": {},
+                                                "diagolscreensize": {},
+                                                "displayppi": {},
+                                                "edge": {},
+                                                "expandable_storage": {},
+                                                "fixedcode": {},
+                                                "flash_capable": {},
+                                                "frequencies_band": {},
+                                                "gprs": {},
+                                                "gpu": {},
+                                                "hardwaretype": {},
+                                                "hscsd": {},
+                                                "hsdpa": {},
+                                                "hspa": {},
+                                                "html_audio": {},
+                                                "html_canvas": {},
+                                                "html_inline_svg": {},
+                                                "html_svg": {},
+                                                "html_video": {},
+                                                "https": {},
+                                                "image__gif87": {},
+                                                "image__gif89a": {},
+                                                "image__jpg": {},
+                                                "image__png": {},
+                                                "interl_storage_capacity": {},
+                                                "interlmodel": {},
+                                                "isereader": {},
+                                                "isgamesconsole": {},
+                                                "ismediaplayer": {},
+                                                "ismobilephone": {},
+                                                "issettupbox": {},
+                                                "istablet": {},
+                                                "istv": {},
+                                                "js_application_cache": {},
+                                                "js_device_motion": {},
+                                                "js_device_orientation": {},
+                                                "js_geo_location": {},
+                                                "js_indexeddb": {},
+                                                "js_json": {},
+                                                "js_local_storage": {},
+                                                "js_modify_css": {},
+                                                "js_modify_dom": {},
+                                                "js_query_selector": {},
+                                                "js_session_storage": {},
+                                                "js_support_basic_java_script": {},
+                                                "js_support_console_log": {},
+                                                "js_support_event_listener": {},
+                                                "js_support_events": {},
+                                                "js_touch_events": {},
+                                                "js_web_gl": {},
+                                                "js_web_sockets": {},
+                                                "js_web_sql_database": {},
+                                                "js_web_workers": {},
+                                                "js_xhr": {},
+                                                "lte": {},
+                                                "lte_advanced": {},
+                                                "lte_category": {},
+                                                "manufacturer": {},
+                                                "manufacturercode": {},
+                                                "markup_wml1": {},
+                                                "markup_xhtml_basic_1v0": {},
+                                                "markup_xhtml_mp_1v0": {},
+                                                "markup_xhtml_mp_1v1": {},
+                                                "markup_xhtml_mp_1v2": {},
+                                                "memory_limit_download": {},
+                                                "memory_limit_embedded_media": {},
+                                                "memory_limit_markup": {},
+                                                "midi_monophonic": {},
+                                                "midi_polyphonic": {},
+                                                "mobile_device": {},
+                                                "modelname": {},
+                                                "mp3": {},
+                                                "nfc": {},
+                                                "nonremovableeuicc": {},
+                                                "nonremovableuicc": {},
+                                                "os": {},
+                                                "os_android": {},
+                                                "os_bada": {},
+                                                "os_ios": {},
+                                                "os_me": {},
+                                                "os_rim": {},
+                                                "os_symbian": {},
+                                                "os_version": {},
+                                                "os_web_os": {},
+                                                "os_windows_mobile": {},
+                                                "os_windows_phone": {},
+                                                "os_windows_rt": {},
+                                                "radiointerface": {},
+                                                "removableeuicc": {},
+                                                "removableuicc": {},
+                                                "screencolordepth": {},
+                                                "screenheight": {},
+                                                "screenwidth": {},
+                                                "sim_size": {},
+                                                "sim_slots": {},
+                                                "standardised_device_model": {},
+                                                "standardisedfull": {},
+                                                "standardisedmarketing": {},
+                                                "supports_client_side": {},
+                                                "tac": {
+                                                    "type": "number"
+                                                },
+                                                "total_ram": {},
+                                                "touchscreen": {},
+                                                "umts": {},
+                                                "uri_scheme_sms": {},
+                                                "uri_scheme_sms_to": {},
+                                                "uri_scheme_tel": {},
+                                                "vcard_download": {},
+                                                "volte": {},
+                                                "vowifi": {},
+                                                "wifi": {},
+                                                "wmv": {},
+                                                "year_released": {}
+                                            }
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "tdm_task_execution_id": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "GET_TDM_REC_ID",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "for(var p in input) {\r\n    if (p === 'tdm_rec_id' ||p === 'rec_id'){\r\n        self.result = input[p]\r\n    }\r\n}",
+                                            "script": "for (var p in input) {\n  if (p === 'tdm_rec_id' || p === 'rec_id') {\n    self.result = input[p];\n  }\n}"
+                                        }
+                                    },
+                                    {
+                                        "name": "input",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source_env_name": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_task_execution_id": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_rec_id": {
+                                                    "type": "string"
+                                                },
+                                                "aac": {},
+                                                "allocationdate": {},
+                                                "amr": {},
+                                                "brandmodel": {
+                                                    "type": "string"
+                                                },
+                                                "brandname": {},
+                                                "browser_me": {},
+                                                "browser_rendering_engine": {},
+                                                "browser_version": {},
+                                                "camera": {},
+                                                "chipbluetooth": {},
+                                                "chipnfc": {},
+                                                "chipset": {},
+                                                "chipsetmodel": {},
+                                                "chipsetvendor": {},
+                                                "chipwlan": {},
+                                                "cookie": {},
+                                                "countrycode": {},
+                                                "cpu": {},
+                                                "cpu_cores": {},
+                                                "cpu_maximum_frequency": {},
+                                                "csd": {},
+                                                "css_animations": {},
+                                                "css_columns": {},
+                                                "css_transforms": {},
+                                                "css_transitions": {},
+                                                "deviceatlasid": {},
+                                                "devicepixelratio": {},
+                                                "devicetype": {},
+                                                "diagolscreensize": {},
+                                                "displayppi": {},
+                                                "edge": {},
+                                                "expandable_storage": {},
+                                                "fixedcode": {},
+                                                "flash_capable": {},
+                                                "frequencies_band": {},
+                                                "gprs": {},
+                                                "gpu": {},
+                                                "hardwaretype": {},
+                                                "hscsd": {},
+                                                "hsdpa": {},
+                                                "hspa": {},
+                                                "html_audio": {},
+                                                "html_canvas": {},
+                                                "html_inline_svg": {},
+                                                "html_svg": {},
+                                                "html_video": {},
+                                                "https": {},
+                                                "image__gif87": {},
+                                                "image__gif89a": {},
+                                                "image__jpg": {},
+                                                "image__png": {},
+                                                "interl_storage_capacity": {},
+                                                "interlmodel": {},
+                                                "isereader": {},
+                                                "isgamesconsole": {},
+                                                "ismediaplayer": {},
+                                                "ismobilephone": {},
+                                                "issettupbox": {},
+                                                "istablet": {},
+                                                "istv": {},
+                                                "js_application_cache": {},
+                                                "js_device_motion": {},
+                                                "js_device_orientation": {},
+                                                "js_geo_location": {},
+                                                "js_indexeddb": {},
+                                                "js_json": {},
+                                                "js_local_storage": {},
+                                                "js_modify_css": {},
+                                                "js_modify_dom": {},
+                                                "js_query_selector": {},
+                                                "js_session_storage": {},
+                                                "js_support_basic_java_script": {},
+                                                "js_support_console_log": {},
+                                                "js_support_event_listener": {},
+                                                "js_support_events": {},
+                                                "js_touch_events": {},
+                                                "js_web_gl": {},
+                                                "js_web_sockets": {},
+                                                "js_web_sql_database": {},
+                                                "js_web_workers": {},
+                                                "js_xhr": {},
+                                                "lte": {},
+                                                "lte_advanced": {},
+                                                "lte_category": {},
+                                                "manufacturer": {},
+                                                "manufacturercode": {},
+                                                "markup_wml1": {},
+                                                "markup_xhtml_basic_1v0": {},
+                                                "markup_xhtml_mp_1v0": {},
+                                                "markup_xhtml_mp_1v1": {},
+                                                "markup_xhtml_mp_1v2": {},
+                                                "memory_limit_download": {},
+                                                "memory_limit_embedded_media": {},
+                                                "memory_limit_markup": {},
+                                                "midi_monophonic": {},
+                                                "midi_polyphonic": {},
+                                                "mobile_device": {},
+                                                "modelname": {},
+                                                "mp3": {},
+                                                "nfc": {},
+                                                "nonremovableeuicc": {},
+                                                "nonremovableuicc": {},
+                                                "os": {},
+                                                "os_android": {},
+                                                "os_bada": {},
+                                                "os_ios": {},
+                                                "os_me": {},
+                                                "os_rim": {},
+                                                "os_symbian": {},
+                                                "os_version": {},
+                                                "os_web_os": {},
+                                                "os_windows_mobile": {},
+                                                "os_windows_phone": {},
+                                                "os_windows_rt": {},
+                                                "radiointerface": {},
+                                                "removableeuicc": {},
+                                                "removableuicc": {},
+                                                "screencolordepth": {},
+                                                "screenheight": {},
+                                                "screenwidth": {},
+                                                "sim_size": {},
+                                                "sim_slots": {},
+                                                "standardised_device_model": {},
+                                                "standardisedfull": {},
+                                                "standardisedmarketing": {},
+                                                "supports_client_side": {},
+                                                "tac": {
+                                                    "type": "number"
+                                                },
+                                                "total_ram": {},
+                                                "touchscreen": {},
+                                                "umts": {},
+                                                "uri_scheme_sms": {},
+                                                "uri_scheme_sms_to": {},
+                                                "uri_scheme_tel": {},
+                                                "vcard_download": {},
+                                                "volte": {},
+                                                "vowifi": {},
+                                                "wifi": {},
+                                                "wmv": {},
+                                                "year_released": {}
+                                            }
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "tdm_rec_id": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get_Data",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "var result = {};\r\nfor (var key in input) {      \r\n    if (!(key === \"source_env_name\" || key === \"tdm_task_execution_id\" || key === \"tdm_rec_id\"|| key ===\"rec_id\")) {\r\n        result[key] = input[key];\r\n    }\r\n}\r\nself.result = result;",
+                                            "script": "var result = {};\n\nfor (var key in input) {\n  if (!(key === \"source_env_name\" || key === \"tdm_task_execution_id\" || key === \"tdm_rec_id\" || key === \"rec_id\")) {\n    result[key] = input[key];\n  }\n}\n\nself.result = result;"
+                                        }
+                                    },
+                                    {
+                                        "name": "input",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source_env_name": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_task_execution_id": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_rec_id": {
+                                                    "type": "string"
+                                                },
+                                                "aac": {},
+                                                "allocationdate": {},
+                                                "amr": {},
+                                                "brandmodel": {
+                                                    "type": "string"
+                                                },
+                                                "brandname": {},
+                                                "browser_me": {},
+                                                "browser_rendering_engine": {},
+                                                "browser_version": {},
+                                                "camera": {},
+                                                "chipbluetooth": {},
+                                                "chipnfc": {},
+                                                "chipset": {},
+                                                "chipsetmodel": {},
+                                                "chipsetvendor": {},
+                                                "chipwlan": {},
+                                                "cookie": {},
+                                                "countrycode": {},
+                                                "cpu": {},
+                                                "cpu_cores": {},
+                                                "cpu_maximum_frequency": {},
+                                                "csd": {},
+                                                "css_animations": {},
+                                                "css_columns": {},
+                                                "css_transforms": {},
+                                                "css_transitions": {},
+                                                "deviceatlasid": {},
+                                                "devicepixelratio": {},
+                                                "devicetype": {},
+                                                "diagolscreensize": {},
+                                                "displayppi": {},
+                                                "edge": {},
+                                                "expandable_storage": {},
+                                                "fixedcode": {},
+                                                "flash_capable": {},
+                                                "frequencies_band": {},
+                                                "gprs": {},
+                                                "gpu": {},
+                                                "hardwaretype": {},
+                                                "hscsd": {},
+                                                "hsdpa": {},
+                                                "hspa": {},
+                                                "html_audio": {},
+                                                "html_canvas": {},
+                                                "html_inline_svg": {},
+                                                "html_svg": {},
+                                                "html_video": {},
+                                                "https": {},
+                                                "image__gif87": {},
+                                                "image__gif89a": {},
+                                                "image__jpg": {},
+                                                "image__png": {},
+                                                "interl_storage_capacity": {},
+                                                "interlmodel": {},
+                                                "isereader": {},
+                                                "isgamesconsole": {},
+                                                "ismediaplayer": {},
+                                                "ismobilephone": {},
+                                                "issettupbox": {},
+                                                "istablet": {},
+                                                "istv": {},
+                                                "js_application_cache": {},
+                                                "js_device_motion": {},
+                                                "js_device_orientation": {},
+                                                "js_geo_location": {},
+                                                "js_indexeddb": {},
+                                                "js_json": {},
+                                                "js_local_storage": {},
+                                                "js_modify_css": {},
+                                                "js_modify_dom": {},
+                                                "js_query_selector": {},
+                                                "js_session_storage": {},
+                                                "js_support_basic_java_script": {},
+                                                "js_support_console_log": {},
+                                                "js_support_event_listener": {},
+                                                "js_support_events": {},
+                                                "js_touch_events": {},
+                                                "js_web_gl": {},
+                                                "js_web_sockets": {},
+                                                "js_web_sql_database": {},
+                                                "js_web_workers": {},
+                                                "js_xhr": {},
+                                                "lte": {},
+                                                "lte_advanced": {},
+                                                "lte_category": {},
+                                                "manufacturer": {},
+                                                "manufacturercode": {},
+                                                "markup_wml1": {},
+                                                "markup_xhtml_basic_1v0": {},
+                                                "markup_xhtml_mp_1v0": {},
+                                                "markup_xhtml_mp_1v1": {},
+                                                "markup_xhtml_mp_1v2": {},
+                                                "memory_limit_download": {},
+                                                "memory_limit_embedded_media": {},
+                                                "memory_limit_markup": {},
+                                                "midi_monophonic": {},
+                                                "midi_polyphonic": {},
+                                                "mobile_device": {},
+                                                "modelname": {},
+                                                "mp3": {},
+                                                "nfc": {},
+                                                "nonremovableeuicc": {},
+                                                "nonremovableuicc": {},
+                                                "os": {},
+                                                "os_android": {},
+                                                "os_bada": {},
+                                                "os_ios": {},
+                                                "os_me": {},
+                                                "os_rim": {},
+                                                "os_symbian": {},
+                                                "os_version": {},
+                                                "os_web_os": {},
+                                                "os_windows_mobile": {},
+                                                "os_windows_phone": {},
+                                                "os_windows_rt": {},
+                                                "radiointerface": {},
+                                                "removableeuicc": {},
+                                                "removableuicc": {},
+                                                "screencolordepth": {},
+                                                "screenheight": {},
+                                                "screenwidth": {},
+                                                "sim_size": {},
+                                                "sim_slots": {},
+                                                "standardised_device_model": {},
+                                                "standardisedfull": {},
+                                                "standardisedmarketing": {},
+                                                "supports_client_side": {},
+                                                "tac": {
+                                                    "type": "number"
+                                                },
+                                                "total_ram": {},
+                                                "touchscreen": {},
+                                                "umts": {},
+                                                "uri_scheme_sms": {},
+                                                "uri_scheme_sms_to": {},
+                                                "uri_scheme_tel": {},
+                                                "vcard_download": {},
+                                                "volte": {},
+                                                "vowifi": {},
+                                                "wifi": {},
+                                                "wmv": {},
+                                                "year_released": {}
+                                            }
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source_env_name": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_task_execution_id": {
+                                                    "type": "string"
+                                                },
+                                                "tdm_rec_id": {
+                                                    "type": "string"
+                                                },
+                                                "aac": {
+                                                    "type": "number"
+                                                },
+                                                "allocationdate": {
+                                                    "type": "date"
+                                                },
+                                                "amr": {},
+                                                "brandmodel": {
+                                                    "type": "string"
+                                                },
+                                                "brandname": {
+                                                    "type": "string"
+                                                },
+                                                "browser_me": {
+                                                    "type": "string"
+                                                },
+                                                "browser_rendering_engine": {
+                                                    "type": "string"
+                                                },
+                                                "browser_version": {},
+                                                "camera": {
+                                                    "type": "number"
+                                                },
+                                                "chipbluetooth": {
+                                                    "type": "string"
+                                                },
+                                                "chipnfc": {
+                                                    "type": "string"
+                                                },
+                                                "chipset": {},
+                                                "chipsetmodel": {
+                                                    "type": "string"
+                                                },
+                                                "chipsetvendor": {
+                                                    "type": "string"
+                                                },
+                                                "chipwlan": {
+                                                    "type": "string"
+                                                },
+                                                "cookie": {
+                                                    "type": "number"
+                                                },
+                                                "countrycode": {
+                                                    "type": "number"
+                                                },
+                                                "cpu": {
+                                                    "type": "string"
+                                                },
+                                                "cpu_cores": {
+                                                    "type": "string"
+                                                },
+                                                "cpu_maximum_frequency": {
+                                                    "type": "string"
+                                                },
+                                                "csd": {},
+                                                "css_animations": {
+                                                    "type": "number"
+                                                },
+                                                "css_columns": {
+                                                    "type": "number"
+                                                },
+                                                "css_transforms": {
+                                                    "type": "number"
+                                                },
+                                                "css_transitions": {
+                                                    "type": "number"
+                                                },
+                                                "deviceatlasid": {
+                                                    "type": "string"
+                                                },
+                                                "devicepixelratio": {
+                                                    "type": "number"
+                                                },
+                                                "devicetype": {
+                                                    "type": "string"
+                                                },
+                                                "diagolscreensize": {
+                                                    "type": "number"
+                                                },
+                                                "displayppi": {
+                                                    "type": "number"
+                                                },
+                                                "edge": {
+                                                    "type": "number"
+                                                },
+                                                "expandable_storage": {
+                                                    "type": "number"
+                                                },
+                                                "fixedcode": {
+                                                    "type": "string"
+                                                },
+                                                "flash_capable": {
+                                                    "type": "number"
+                                                },
+                                                "frequencies_band": {
+                                                    "type": "string"
+                                                },
+                                                "gprs": {
+                                                    "type": "number"
+                                                },
+                                                "gpu": {
+                                                    "type": "string"
+                                                },
+                                                "hardwaretype": {
+                                                    "type": "string"
+                                                },
+                                                "hscsd": {},
+                                                "hsdpa": {
+                                                    "type": "number"
+                                                },
+                                                "hspa": {
+                                                    "type": "number"
+                                                },
+                                                "html_audio": {
+                                                    "type": "number"
+                                                },
+                                                "html_canvas": {
+                                                    "type": "number"
+                                                },
+                                                "html_inline_svg": {
+                                                    "type": "number"
+                                                },
+                                                "html_svg": {
+                                                    "type": "number"
+                                                },
+                                                "html_video": {
+                                                    "type": "number"
+                                                },
+                                                "https": {
+                                                    "type": "number"
+                                                },
+                                                "image__gif87": {
+                                                    "type": "number"
+                                                },
+                                                "image__gif89a": {},
+                                                "image__jpg": {
+                                                    "type": "number"
+                                                },
+                                                "image__png": {
+                                                    "type": "number"
+                                                },
+                                                "interl_storage_capacity": {
+                                                    "type": "string"
+                                                },
+                                                "interlmodel": {
+                                                    "type": "string"
+                                                },
+                                                "isereader": {
+                                                    "type": "number"
+                                                },
+                                                "isgamesconsole": {
+                                                    "type": "number"
+                                                },
+                                                "ismediaplayer": {
+                                                    "type": "number"
+                                                },
+                                                "ismobilephone": {
+                                                    "type": "number"
+                                                },
+                                                "issettupbox": {
+                                                    "type": "number"
+                                                },
+                                                "istablet": {
+                                                    "type": "number"
+                                                },
+                                                "istv": {
+                                                    "type": "number"
+                                                },
+                                                "js_application_cache": {
+                                                    "type": "number"
+                                                },
+                                                "js_device_motion": {
+                                                    "type": "number"
+                                                },
+                                                "js_device_orientation": {
+                                                    "type": "number"
+                                                },
+                                                "js_geo_location": {
+                                                    "type": "number"
+                                                },
+                                                "js_indexeddb": {},
+                                                "js_json": {
+                                                    "type": "number"
+                                                },
+                                                "js_local_storage": {},
+                                                "js_modify_css": {
+                                                    "type": "number"
+                                                },
+                                                "js_modify_dom": {
+                                                    "type": "number"
+                                                },
+                                                "js_query_selector": {
+                                                    "type": "number"
+                                                },
+                                                "js_session_storage": {
+                                                    "type": "number"
+                                                },
+                                                "js_support_basic_java_script": {
+                                                    "type": "number"
+                                                },
+                                                "js_support_console_log": {
+                                                    "type": "number"
+                                                },
+                                                "js_support_event_listener": {
+                                                    "type": "number"
+                                                },
+                                                "js_support_events": {
+                                                    "type": "number"
+                                                },
+                                                "js_touch_events": {
+                                                    "type": "number"
+                                                },
+                                                "js_web_gl": {
+                                                    "type": "number"
+                                                },
+                                                "js_web_sockets": {
+                                                    "type": "number"
+                                                },
+                                                "js_web_sql_database": {},
+                                                "js_web_workers": {
+                                                    "type": "number"
+                                                },
+                                                "js_xhr": {
+                                                    "type": "number"
+                                                },
+                                                "lte": {
+                                                    "type": "number"
+                                                },
+                                                "lte_advanced": {
+                                                    "type": "number"
+                                                },
+                                                "lte_category": {
+                                                    "type": "number"
+                                                },
+                                                "manufacturer": {
+                                                    "type": "string"
+                                                },
+                                                "manufacturercode": {
+                                                    "type": "string"
+                                                },
+                                                "markup_wml1": {},
+                                                "markup_xhtml_basic_1v0": {
+                                                    "type": "number"
+                                                },
+                                                "markup_xhtml_mp_1v0": {
+                                                    "type": "number"
+                                                },
+                                                "markup_xhtml_mp_1v1": {
+                                                    "type": "number"
+                                                },
+                                                "markup_xhtml_mp_1v2": {
+                                                    "type": "number"
+                                                },
+                                                "memory_limit_download": {
+                                                    "type": "number"
+                                                },
+                                                "memory_limit_embedded_media": {
+                                                    "type": "number"
+                                                },
+                                                "memory_limit_markup": {
+                                                    "type": "number"
+                                                },
+                                                "midi_monophonic": {
+                                                    "type": "number"
+                                                },
+                                                "midi_polyphonic": {
+                                                    "type": "number"
+                                                },
+                                                "mobile_device": {
+                                                    "type": "number"
+                                                },
+                                                "modelname": {
+                                                    "type": "string"
+                                                },
+                                                "mp3": {
+                                                    "type": "number"
+                                                },
+                                                "nfc": {
+                                                    "type": "number"
+                                                },
+                                                "nonremovableeuicc": {
+                                                    "type": "string"
+                                                },
+                                                "nonremovableuicc": {
+                                                    "type": "string"
+                                                },
+                                                "os": {
+                                                    "type": "string"
+                                                },
+                                                "os_android": {
+                                                    "type": "number"
+                                                },
+                                                "os_bada": {
+                                                    "type": "number"
+                                                },
+                                                "os_ios": {
+                                                    "type": "number"
+                                                },
+                                                "os_me": {
+                                                    "type": "string"
+                                                },
+                                                "os_rim": {
+                                                    "type": "number"
+                                                },
+                                                "os_symbian": {
+                                                    "type": "number"
+                                                },
+                                                "os_version": {
+                                                    "type": "string"
+                                                },
+                                                "os_web_os": {
+                                                    "type": "number"
+                                                },
+                                                "os_windows_mobile": {
+                                                    "type": "number"
+                                                },
+                                                "os_windows_phone": {
+                                                    "type": "number"
+                                                },
+                                                "os_windows_rt": {
+                                                    "type": "number"
+                                                },
+                                                "radiointerface": {
+                                                    "type": "string"
+                                                },
+                                                "removableeuicc": {
+                                                    "type": "string"
+                                                },
+                                                "removableuicc": {
+                                                    "type": "string"
+                                                },
+                                                "screencolordepth": {
+                                                    "type": "number"
+                                                },
+                                                "screenheight": {
+                                                    "type": "number"
+                                                },
+                                                "screenwidth": {
+                                                    "type": "number"
+                                                },
+                                                "sim_size": {
+                                                    "type": "string"
+                                                },
+                                                "sim_slots": {
+                                                    "type": "number"
+                                                },
+                                                "standardised_device_model": {
+                                                    "type": "string"
+                                                },
+                                                "standardisedfull": {
+                                                    "type": "string"
+                                                },
+                                                "standardisedmarketing": {
+                                                    "type": "string"
+                                                },
+                                                "supports_client_side": {
+                                                    "type": "number"
+                                                },
+                                                "tac": {
+                                                    "type": "number"
+                                                },
+                                                "total_ram": {
+                                                    "type": "string"
+                                                },
+                                                "touchscreen": {
+                                                    "type": "number"
+                                                },
+                                                "umts": {
+                                                    "type": "number"
+                                                },
+                                                "uri_scheme_sms": {
+                                                    "type": "number"
+                                                },
+                                                "uri_scheme_sms_to": {},
+                                                "uri_scheme_tel": {
+                                                    "type": "number"
+                                                },
+                                                "vcard_download": {
+                                                    "type": "number"
+                                                },
+                                                "volte": {
+                                                    "type": "number"
+                                                },
+                                                "vowifi": {
+                                                    "type": "number"
+                                                },
+                                                "wifi": {
+                                                    "type": "number"
+                                                },
+                                                "wmv": {},
+                                                "year_released": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Convert records to string",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "ToStringSRC",
+                            "actorType": {
+                                "parentType": "ToString",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "ToStringEXECID",
+                            "actorType": {
+                                "parentType": "ToString",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "ToStringRECID",
+                            "actorType": {
+                                "parentType": "ToString",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "ToStringDATA",
+                            "actorType": {
+                                "parentType": "ToString",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Insert the parsed data to tmp table",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "Insert Data",
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "CASSANDRA_LD"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            "source_env_name",
+                                            "tdm_task_execution_id",
+                                            "tdm_rec_id",
+                                            "rec_data",
+                                            "",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "name": "ignoreNulls",
+                                        "const": true
+                                    },
+                                    {
+                                        "name": "source_env_name",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tdm_task_execution_id",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tdm_rec_id",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "rec_data",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Close inner loop for original",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Drop original table",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Drop table ",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "DROP TABLE IF EXISTS ${@refKeySpace}.${@tableName}"
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Tmp table name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Create tmp table",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Tmp table name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get table records",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ArrayGrouperOrg",
+                "name": "input"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ArrayGrouperOrg",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ConstStringsOrg",
+                "name": "strings"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsOrg",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "GET_SRC_ENV",
+                "name": "input"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsOrg",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "GET_TDM_EXEC_ID",
+                "name": "input"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsOrg",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "GET_TDM_REC_ID",
+                "name": "input"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsOrg",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "Get_Data",
+                "name": "input"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "GET_SRC_ENV",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToStringSRC",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "GET_TDM_EXEC_ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToStringEXECID",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "GET_TDM_REC_ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToStringRECID",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get_Data",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToStringDATA",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToStringSRC",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "source_env_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToStringEXECID",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "tdm_task_execution_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToStringRECID",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "tdm_rec_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToStringDATA",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "rec_data"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "Tmp table name",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Get table records",
+                "name": "refKeySpace"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "Get table records",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Create tmp table",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Insert Data",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Drop table ",
+                "name": "refKeySpace"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "Drop table ",
+                "name": "tableName"
+            }
+        }
+    ]
+}

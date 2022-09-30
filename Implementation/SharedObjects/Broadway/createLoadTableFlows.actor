@@ -1,0 +1,62 @@
+{
+    "type": "createLoadTableFlows",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "TARGET_INTERFACE",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.interface",
+                "interfaceType": [
+                    "database",
+                    "CassandraLoader"
+                ]
+            }
+        },
+        {
+            "name": "TARGET_SCHEMA",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.default"
+            }
+        },
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit"
+            }
+        },
+        {
+            "name": "TARGET_ENVIRONMENT",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "OVERRIDE_EXISTING_FLOWS",
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "createLoadTableFlows",
+            "mandatory": true
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

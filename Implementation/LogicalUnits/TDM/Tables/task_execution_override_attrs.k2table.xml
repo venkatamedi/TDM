@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_execution_override_attrs</Name>
+  <ID>tbl_task_execution_override_attrs</ID>
+  <Columns>
+    <Column name="task_id" id="tblCol_edd18d24f8a2441eb136fb850f1bca88" index="0" datatype="Integer" mandatory="true" />
+    <Column name="task_execution_id" id="tblCol_73f0849e37a340bb94c530f08f7f3266" index="1" datatype="Integer" mandatory="true" />
+    <Column name="override_parameters" id="tblCol_aee6d8fa77a3454f9a8df8c367f69c8c" index="2" datatype="Text" mandatory="true" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="tblCol_edd18d24f8a2441eb136fb850f1bca88,tblCol_73f0849e37a340bb94c530f08f7f3266" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

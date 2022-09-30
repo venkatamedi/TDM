@@ -1,0 +1,374 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Change LU Name To Lower",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Lower Case LU Name",
+                            "actorType": {
+                                "parentType": "Lowercase",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get TDM LU Key Space",
+                            "actorType": {
+                                "parentType": "LuKeyspace",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "TDM"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Build Table Name",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Format the Table Name",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${luName}_entity_list"
+                                    },
+                                    {
+                                        "name": "luName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check If Table Exists",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Check if Table already Exists",
+                            "actorType": {
+                                "parentType": "DbFetchField",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "select count(1) from system_schema.tables where keyspace_name = ${schema_name} and table_name = ${tableName}"
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "schema_name",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get the TTL of the table",
+                            "minHeight": 175,
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_EXTERNAL_ENTITY_LIST_TTL",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Set The Output Table Name",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${schema}.${tableName}"
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Create Table If Does Not Exists",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "const": 0
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Create The LU Entity List Table",
+                            "actorType": {
+                                "parentType": "DbCassandraCreateTable",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            {
+                                                "name": "lu_name",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": true,
+                                                "mandatory": true
+                                            },
+                                            {
+                                                "name": "source_env_name",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": false,
+                                                "mandatory": true
+                                            },
+                                            {
+                                                "name": "source_iid",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": false,
+                                                "mandatory": true
+                                            },
+                                            {
+                                                "name": "tdm_eid",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": true,
+                                                "mandatory": true
+                                            },
+                                            {
+                                                "name": "task_execution_id",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": false,
+                                                "mandatory": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "default_time_to_live",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Lower Case LU Name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Format the Table Name",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get TDM LU Key Space",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "Create The LU Entity List Table",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get TDM LU Key Space",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "Set The Output Table Name",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get TDM LU Key Space",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "Check if Table already Exists",
+                "name": "schema_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Format the Table Name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Check if Table already Exists",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Format the Table Name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Create The LU Entity List Table",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Format the Table Name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Set The Output Table Name",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Check if Table already Exists",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Equals1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the TTL of the table",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Create The LU Entity List Table",
+                "name": "default_time_to_live"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "luName"
+            },
+            "rightPort": {
+                "actor": "Lower Case LU Name",
+                "name": "string"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Set The Output Table Name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "ENTITY_LIST_TABLE"
+            }
+        }
+    ]
+}

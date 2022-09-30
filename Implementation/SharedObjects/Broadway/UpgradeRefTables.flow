@@ -1,0 +1,276 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get the Keysapce",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Keyspace",
+                            "actorType": {
+                                "parentType": "LuKeyspace",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "TDM"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get all Reference tables from trnRefList",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Reference Table Data",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "functionName",
+                                        "const": "fnGetRefrenceTables"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Call inner flow RefTableToTmp",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "InnerFlowAsyncRef2Tmp",
+                            "actorType": {
+                                "parentType": "InnerFlowAsync",
+                                "inputs": [
+                                    {
+                                        "name": "flowName",
+                                        "const": "RefTableToTmpTable"
+                                    },
+                                    {
+                                        "name": "threadCount",
+                                        "const": 5
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "results",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Wait.....",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Wait",
+                            "actorType": {
+                                "parentType": "InnerFlowJoin",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get again all the tables from trnReflist",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Reference Table Data__1",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "functionName",
+                                        "const": "fnGetRefrenceTables"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Call inner flow TmpTableToRef",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "InnerFlowAsyncTmp2Ref",
+                            "actorType": {
+                                "parentType": "InnerFlowAsync",
+                                "inputs": [
+                                    {
+                                        "name": "flowName",
+                                        "const": "TmpTableToRefTable"
+                                    },
+                                    {
+                                        "name": "threadCount",
+                                        "const": 5
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {},
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "results",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get Keyspace",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "InnerFlowAsyncRef2Tmp",
+                "name": "refKeySpace"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Keyspace",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "InnerFlowAsyncTmp2Ref",
+                "name": "refKeySpace"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Reference Table Data",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "InnerFlowAsyncRef2Tmp",
+                "name": "tableName"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "InnerFlowAsyncRef2Tmp",
+                "name": "remaining"
+            },
+            "rightPort": {
+                "actor": "Wait",
+                "name": "remaining"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "InnerFlowAsyncRef2Tmp",
+                "name": "failures"
+            },
+            "rightPort": {
+                "actor": "Wait",
+                "name": "failures"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Reference Table Data__1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "InnerFlowAsyncTmp2Ref",
+                "name": "tableName"
+            },
+            "iterate": "Iterate"
+        }
+    ]
+}

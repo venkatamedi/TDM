@@ -1,0 +1,49 @@
+{
+    "type": "InitiateTDMLoad_Actor",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "syncMode",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dropdown",
+                "options": [
+                    "ON",
+                    "OFF",
+                    "FORCE"
+                ]
+            }
+        },
+        {
+            "name": "iid",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "InitiateTDMLoad",
+            "mandatory": true
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

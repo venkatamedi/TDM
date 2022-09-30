@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GenericInterface xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="REDIS" displayName="Redis" enabled="true" version="1.8">
+  <Name>FabricRedis</Name>
+  <Properties>
+    <Property name="Servers">
+      <Value>localhost:6379</Value>
+    </Property>
+    <Property name="Password">
+      <Value />
+    </Property>
+    <Property name="ConnectionTimeout">
+      <Value>10000</Value>
+    </Property>
+    <Property name="SoTimeout">
+      <Value>10000</Value>
+    </Property>
+    <Property name="MaxAttempts">
+      <Value>10</Value>
+    </Property>
+    <Property name="MaxTotal">
+      <Value>128</Value>
+    </Property>
+    <Property name="MaxIdle">
+      <Value>128</Value>
+    </Property>
+    <Property name="MinIdle">
+      <Value>16</Value>
+    </Property>
+    <Property name="TestOnBorrow">
+      <Value>True</Value>
+    </Property>
+    <Property name="TestOnReturn">
+      <Value>True</Value>
+    </Property>
+    <Property name="TestWhileIdle">
+      <Value>True</Value>
+    </Property>
+    <Property name="MinEvictableIdle">
+      <Value>60000</Value>
+    </Property>
+    <Property name="EvictionRunIntervals">
+      <Value>30000</Value>
+    </Property>
+    <Property name="TestPerEviction">
+      <Value>3</Value>
+    </Property>
+    <Property name="BlockWhenExhausted">
+      <Value>False</Value>
+    </Property>
+  </Properties>
+</GenericInterface>

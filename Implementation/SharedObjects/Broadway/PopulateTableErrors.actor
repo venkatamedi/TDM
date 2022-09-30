@@ -1,0 +1,37 @@
+{
+    "type": "PopulateTableErrors",
+    "actorClass": null,
+    "parentType": "InnerFlow",
+    "inputs": [
+        {
+            "name": "error",
+            "schema": {
+                "type": "Any"
+            }
+        },
+        {
+            "name": "error_category",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dropdown",
+                "options": [
+                    "Record Rejected",
+                    "Entity Failed"
+                ]
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "PopulateTableErrors"
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

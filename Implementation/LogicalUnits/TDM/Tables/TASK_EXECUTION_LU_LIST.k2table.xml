@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>TASK_EXECUTION_LU_LIST</Name>
+  <ID>tbl_TASK_EXECUTION_LU_LIST</ID>
+  <EntityId>tblCol_e38506569e27408688f8e7f46f3c3eaf</EntityId>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <Columns>
+    <Column name="TASK_EXECUTION_ID" id="tblCol_e38506569e27408688f8e7f46f3c3eaf" index="0" datatype="text" />
+    <Column name="LU_LIST" id="tblCol_06b4f0e508b442609621f7cb7eb9e05e" index="1" datatype="text" />
+  </Columns>
+  <IndexesList />
+  <EnrichmentList>
+    <Enrichment>
+      <Name>fnDelTaskFromSource</Name>
+      <Type>Function</Type>
+      <TableName>TASK_EXECUTION</TableName>
+    </Enrichment>
+  </EnrichmentList>
+</TableObject>

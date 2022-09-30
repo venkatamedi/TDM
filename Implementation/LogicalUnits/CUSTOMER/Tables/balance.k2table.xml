@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>balance</Name>
+  <ID>tbl_balance</ID>
+  <Columns>
+    <Column name="subscriber_id" id="subscriber_id" index="0" datatype="Integer" />
+    <Column name="balance_id" id="balance_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="balance_ref_id" id="balance_ref_id" index="2" datatype="Integer" />
+    <Column name="available_amount" id="available_amount" index="3" datatype="Integer" />
+    <Column name="reset_amount" id="reset_amount" index="4" datatype="Integer" />
+    <Column name="reset_date" id="reset_date" index="5" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="balance_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

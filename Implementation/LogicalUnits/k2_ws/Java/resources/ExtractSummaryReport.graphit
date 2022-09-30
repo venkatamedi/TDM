@@ -1,0 +1,141 @@
+{
+  "name": "rootNode",
+  "children": [
+    {
+      "name": "result",
+      "children": [
+        {
+          "name": "General Info",
+          "type": "sql",
+          "code": "Select T.TASK_NAME,\n  T.TASK_ID,\n  T.TASK_EXECUTION_ID,\n  T.TASK_CREATED_BY As CREATED_BY,\n  L.TASK_EXECUTED_BY As EXECUTED_BY,\n  MIN(L.START_EXECUTION_TIME) As START_EXECUTION,\n  MAX(L.END_EXECUTION_TIME) As END_EXECUTION,\n  Case When (Exists(Select 1 From task_execution_list\n    Where task_execution_id = L.task_execution_id And execution_status =\n      'failed')) Then 'failed' \n  When (Exists(Select 1 From task_execution_list\n    Where task_execution_id = L.task_execution_id And execution_status =\n      'stopped')) Then 'stopped' \n  Else 'completed' End As EXECUTION_STATUS,\n  T.SOURCE_ENV,\n  T.BE_NAME,\n  T.TASK_TYPE,\n  T.VERSION_IND,\n  L.VERSION_EXPIRATION_DATE,\n  T.RETENTION_PERIOD_TYPE,\n  T.RETENTION_PERIOD_VALUE,\n  O.OVERRIDE_PARAMETERS,\n  T.RESERVE_IND,\n  T.RESERVE_RETENTION_PERIOD_TYPE,\n  T.RESERVE_RETENTION_PERIOD_VALUE\nFrom TDM.TASKS T\n  LEFT JOIN TDM.TASK_EXECUTION_LIST L ON T.TASK_EXECUTION_ID = L.TASK_EXECUTION_ID\n  LEFT JOIN TDM.TASK_EXECUTION_OVERRIDE_ATTRS O ON T.TASK_EXECUTION_ID = O.TASK_EXECUTION_ID"
+        },
+        {
+          "name": "Task Execution Summary",
+          "type": "sql",
+          "code": "select ifnull(fabric_execution_id, -1) as fabric_execution_id, lu_id, lu_name, process_id, process_name, num_of_processed_entities from task_execution_list",
+          "children": [
+            {
+              "type": "condition",
+              "code": "lu_id > 0",
+              "children": [
+                {
+                  "name": "LUs",
+                  "children": [
+                    {
+                      "name": "LU Name",
+                      "type": "variable",
+                      "code": "lu_name"
+                    },
+                    {
+                      "name": "LU Reference Summary",
+                      "type": "sql",
+                      "code": "Select count(*) as count, min(entity_start_time) as start_time, max(entity_end_time) as end_time, execution_status, lu_name \nfrom task_execution_entities where id_type = 'REFERENCE' and lu_name = ${lu_name} group by lu_name, execution_status"
+                    },
+                    {
+                      "type": "condition",
+                      "code": "fabric_execution_id != \"null\" && num_of_processed_entities > 0",
+                      "children": [
+                        {
+                          "name": "LU Migration Summary",
+                          "type": "sql",
+                          "code": "batch_summary ${fabric_execution_id}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Post Execution Processes",
+                  "children": [
+                    {
+                      "name": "Process Name",
+                      "type": "variable",
+                      "code": "process_name"
+                    },
+                    {
+                      "type": "condition",
+                      "code": "fabric_execution_id != \"null\"",
+                      "children": [
+                        {
+                          "name": "Process Summary",
+                          "type": "sql",
+                          "code": "batch_summary ${fabric_execution_id}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "List of Root Entities",
+          "children": [
+            {
+              "name": "Number of Copied Entities",
+              "type": "sql",
+              "code": "select count(*) as number_of_copied_root_entities from (Select distinct be_root_entity_id, TARGET_ROOT_ENTITY_ID from TDM.TASK_EXECUTION_LINK_ENTITIES where root_entity_status = 'completed' \nEXCEPT Select be_root_entity_id, TARGET_ROOT_ENTITY_ID from TDM.TASK_EXECUTION_LINK_ENTITIES where root_entity_status <> 'completed')"
+            },
+            {
+              "name": "List of Copied Entities",
+              "type": "sql",
+              "code": "Select Distinct ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And root_entity_status = 'completed'\nEXCEPT Select ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id \nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And root_entity_status <> 'completed'"
+            },
+            {
+              "name": "Number of Failed Entities",
+              "type": "sql",
+              "code": "Select count(Distinct ENTITY_ID) as number_of_failed_root_entities\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' and root_entity_status <> 'completed'"
+            },
+            {
+              "name": "List of Failed Entities",
+              "type": "sql",
+              "code": "Select Distinct ENTITY_ID as source_id, TARGET_ENTITY_ID as target_id\nFrom TDM.TASK_EXECUTION_LINK_ENTITIES\nWhere PARENT_ENTITY_ID = '' And root_entity_status <> 'completed'"
+            }
+          ]
+        },
+        {
+          "name": "List of Reference Tables",
+          "children": [
+            {
+              "name": "Number of Copied Reference Tables",
+              "type": "sql",
+              "code": "Select Count(1) as count\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' and execution_status = 'completed'"
+            },
+            {
+              "name": "List of Copied Reference Tables",
+              "type": "sql",
+              "code": "select target_entity_id as table_name, lu_name\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' And execution_status = 'completed'"
+            },
+            {
+              "name": "Number of Failed Reference Tables",
+              "type": "sql",
+              "code": "Select Count(1) as count\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' and execution_status <> 'completed'"
+            },
+            {
+              "name": "List of Failed Reference Tables",
+              "type": "sql",
+              "code": "select target_entity_id as table_name, lu_name\nFrom task_execution_entities\nWhere id_type = 'REFERENCE' And execution_status <> 'completed'"
+            }
+          ]
+        },
+        {
+          "name": "Error Summary",
+          "type": "sql",
+          "code": "Select lu_name, flow_name, stage_name, actor_name, error_category, error_code, error_message, count(distinct nullif(target_entity_id, ' ')) as number_of_entities, count(*) as number_of_records\nFrom task_exe_error_detailed \ngroup by lu_name, flow_name, actor_name, stage_name, error_category, error_code, error_message\norder by error_category, lu_name, entity_id"
+        }
+      ]
+    },
+    {
+      "name": "errorCode",
+      "type": "string",
+      "code": "SUCCESS"
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "code": ""
+    }
+  ],
+  "params": []
+}

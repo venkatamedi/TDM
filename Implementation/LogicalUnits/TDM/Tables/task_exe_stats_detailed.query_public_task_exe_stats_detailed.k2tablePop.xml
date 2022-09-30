@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_public_task_exe_stats_detailed</ID>
+  <PopulationObjectName>query_public_task_exe_stats_detailed</PopulationObjectName>
+  <TableName>task_exe_stats_detailed</TableName>
+  <RootItemID>query_query_public_task_exe_stats_detailed</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="task_execution_id" id="queryCol_0" dataType="Text" index="0" />
+    <Arg name="lu_name" id="queryCol_1" dataType="Text" index="1" />
+    <Arg name="entity_id" id="queryCol_2" dataType="Text" index="2" />
+    <Arg name="target_entity_id" id="queryCol_3" dataType="Text" index="3" />
+    <Arg name="table_name" id="queryCol_4" dataType="Text" index="4" />
+    <Arg name="stage_name" id="queryCol_5" dataType="Text" index="5" />
+    <Arg name="flow_name" id="queryCol_6" dataType="Text" index="6" />
+    <Arg name="actor_name" id="queryCol_7" dataType="Text" index="7" />
+    <Arg name="creation_date" id="queryCol_9" dataType="Text" index="9" />
+    <Arg name="source_count" id="queryCol_10" dataType="Text" index="10" />
+    <Arg name="target_count" id="queryCol_11" dataType="Text" index="11" />
+    <Arg name="diff" id="queryCol_12" dataType="Text" index="12" />
+    <Arg name="results" id="queryCol_13" dataType="Text" index="13" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="DBQueryDataSave" id="query_query_public_task_exe_stats_detailed" name="query_public_task_exe_stats_detailed" nodeOrder="0" module="DBQuery" mapObjectModule="DBQuery" connName="TDM">
+      <OutputsList>
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_0" name="task_execution_id" dataType="Text" index="0" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_1" name="lu_name" dataType="Text" index="1" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_2" name="entity_id" dataType="Text" index="2" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_3" name="target_entity_id" dataType="Text" index="3" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_4" name="table_name" dataType="Text" index="4" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_5" name="stage_name" dataType="Text" index="5" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_6" name="flow_name" dataType="Text" index="6" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_7" name="actor_name" dataType="Text" index="7" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_9" name="creation_date" dataType="Text" index="9" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_10" name="source_count" dataType="Text" index="10" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_11" name="target_count" dataType="Text" index="11" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_12" name="diff" dataType="Text" index="12" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_13" name="results" dataType="Text" index="13" />
+      </OutputsList>
+      <SQL><![CDATA[Select *
+From task_exe_stats_detailed]]></SQL>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="30" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_0" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_61ada4a4d80a451992114103b8ad30e1" />
+    <Link partId="31" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_1" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_823d7e374fd645709b0f68d94388e059" />
+    <Link partId="32" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_2" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_8ba6e691656548b1bcb8dc848e4cd61d" />
+    <Link partId="33" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_3" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_36f5bdf3a31d48f8a5a7a44467f9f5fa" />
+    <Link partId="34" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_4" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_faad0ce69eee45d092f5fd32a8b5a40e" />
+    <Link partId="35" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_5" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_dbd8b9259b4941cbb857cf352be66954" />
+    <Link partId="36" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_6" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_69115b10371e48b9808eb7d23d193409" />
+    <Link partId="37" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_7" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_be61165bed3046bd8820f0e80f286e8d" />
+    <Link partId="38" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_9" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_cf841ea16ca64f8c80b5aa8748c51ff9" />
+    <Link partId="39" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_10" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_0d7c9212b50f4596a702cda5c1a0e24b" />
+    <Link partId="40" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_11" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_ea1b01093ba1480b84f08fbf5a9de26e" />
+    <Link partId="41" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_12" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_71524825c7ff47429e9373409038babf" />
+    <Link partId="42" fromNodeOrder="0" fromItemID="query_query_public_task_exe_stats_detailed" fromColID="queryCol_13" toItemID="tbl_task_exe_stats_detailed" toColID="tblCol_7f4d043f4f2b4a43a329aca67c02d360" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="task_exe_stats_detailed.query_public_task_exe_stats_detailed.k2tablePop.xml" lastPartID="127">
+      <TableNode partID="0" name="task_exe_stats_detailed" pos="494.0299 5.48959351" width="253" />
+      <DBQueryNode partID="16" name="TDM" pos="10.3431244 0.526046753" size="339.840881 229.020828" isRoot="true">
+        <DBQuery>{"Name":"query_public_task_exe_stats_detailed","ID":"query_query_public_task_exe_stats_detailed","ConnName":"TDM","SQL":"Select *\r\nFrom task_exe_stats_detailed","ColumnsList":[{"ID":"queryCol_0","Name":"task_execution_id","DataType":"Text","Index":0,"IsInputArgument":true},{"ID":"queryCol_1","Name":"lu_name","DataType":"Text","Index":1,"IsInputArgument":true},{"ID":"queryCol_2","Name":"entity_id","DataType":"Text","Index":2,"IsInputArgument":true},{"ID":"queryCol_3","Name":"target_entity_id","DataType":"Text","Index":3,"IsInputArgument":true},{"ID":"queryCol_4","Name":"table_name","DataType":"Text","Index":4,"IsInputArgument":true},{"ID":"queryCol_5","Name":"stage_name","DataType":"Text","Index":5,"IsInputArgument":true},{"ID":"queryCol_6","Name":"flow_name","DataType":"Text","Index":6,"IsInputArgument":true},{"ID":"queryCol_7","Name":"actor_name","DataType":"Text","Index":7,"IsInputArgument":true},{"ID":"queryCol_8","Name":"actor_inputs","DataType":"Text","Index":8,"IsInputArgument":false},{"ID":"queryCol_9","Name":"creation_date","DataType":"Text","Index":9,"IsInputArgument":true},{"ID":"queryCol_10","Name":"source_count","DataType":"Text","Index":10,"IsInputArgument":true},{"ID":"queryCol_11","Name":"target_count","DataType":"Text","Index":11,"IsInputArgument":true},{"ID":"queryCol_12","Name":"diff","DataType":"Text","Index":12,"IsInputArgument":true},{"ID":"queryCol_13","Name":"results","DataType":"Text","Index":13,"IsInputArgument":true}]}</DBQuery>
+      </DBQueryNode>
+      <Link partID="30" from="0" to="1" pointsArr="350.184021 36.5625038 360.184021 36.5625038 484.0299 36.52605 494.0299 36.52605" fromNodePartID="16" fromNodeColumnName="task_execution_id" toNodePartID="0" toNodeColumnName="task_execution_id" />
+      <Link partID="31" from="2" to="3" pointsArr="350.184021 48.63542 360.184021 48.63542 484.0299 48.59897 494.0299 48.59897" fromNodePartID="16" fromNodeColumnName="lu_name" toNodePartID="0" toNodeColumnName="lu_name" />
+      <Link partID="32" from="4" to="5" pointsArr="350.184021 60.7083359 360.184021 60.7083359 484.0299 60.6718826 494.0299 60.6718826" fromNodePartID="16" fromNodeColumnName="entity_id" toNodePartID="0" toNodeColumnName="entity_id" />
+      <Link partID="33" from="6" to="7" pointsArr="350.184021 72.78125 360.184021 72.78125 484.0299 72.7448 494.0299 72.7448" fromNodePartID="16" fromNodeColumnName="target_entity_id" toNodePartID="0" toNodeColumnName="target_entity_id" />
+      <Link partID="34" from="8" to="9" pointsArr="350.184021 84.8541641 360.184021 84.8541641 484.0299 84.81771 494.0299 84.81771" fromNodePartID="16" fromNodeColumnName="table_name" toNodePartID="0" toNodeColumnName="table_name" />
+      <Link partID="35" from="10" to="11" pointsArr="350.184021 96.92708 360.184021 96.92708 484.0299 96.890625 494.0299 96.890625" fromNodePartID="16" fromNodeColumnName="stage_name" toNodePartID="0" toNodeColumnName="stage_name" />
+      <Link partID="36" from="12" to="13" pointsArr="350.184021 109 360.184021 109 484.0299 108.963547 494.0299 108.963547" fromNodePartID="16" fromNodeColumnName="flow_name" toNodePartID="0" toNodeColumnName="flow_name" />
+      <Link partID="37" from="14" to="15" pointsArr="350.184021 121.072922 360.184021 121.072922 484.0299 121.036469 494.0299 121.036469" fromNodePartID="16" fromNodeColumnName="actor_name" toNodePartID="0" toNodeColumnName="actor_name" />
+      <Link partID="38" from="16" to="17" pointsArr="350.184021 145.218765 360.184021 145.218765 484.0299 133.10939 494.0299 133.10939" fromNodePartID="16" fromNodeColumnName="creation_date" toNodePartID="0" toNodeColumnName="creation_date" />
+      <Link partID="39" from="18" to="19" pointsArr="350.184021 157.291687 360.184021 157.291687 484.0299 145.182312 494.0299 145.182312" fromNodePartID="16" fromNodeColumnName="source_count" toNodePartID="0" toNodeColumnName="source_count" />
+      <Link partID="40" from="20" to="21" pointsArr="350.184021 169.3646 360.184021 169.3646 484.0299 157.255234 494.0299 157.255234" fromNodePartID="16" fromNodeColumnName="target_count" toNodePartID="0" toNodeColumnName="target_count" />
+      <Link partID="41" from="22" to="23" pointsArr="350.184021 181.4375 360.184021 181.4375 484.0299 169.32814 494.0299 169.32814" fromNodePartID="16" fromNodeColumnName="diff" toNodePartID="0" toNodeColumnName="diff" />
+      <Link partID="42" from="24" to="25" pointsArr="350.184021 193.5104 360.184021 193.5104 484.0299 181.401047 494.0299 181.401047" fromNodePartID="16" fromNodeColumnName="results" toNodePartID="0" toNodeColumnName="results" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

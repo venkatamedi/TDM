@@ -1,0 +1,639 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get Seq Indicator",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "FabricSetRead1",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "enable_sequences",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check if Sequencing was part of the task",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals2",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "true"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get instance Info",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Target Entity ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TARGET_ENTITY_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Input IID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "INPUT_IID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get LU Type",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "LU_TYPE",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Prepare the Data",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Task Execution ID",
+                            "actorType": {
+                                "parentType": "getLUVariable_Actor",
+                                "inputs": [
+                                    {
+                                        "name": "luName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "variableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "TDM_TASK_EXE_ID"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Source Environment",
+                            "actorType": {
+                                "parentType": "getLUVariable_Actor",
+                                "inputs": [
+                                    {
+                                        "name": "luName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "variableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "TDM_SOURCE_ENVIRONMENT_NAME"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get Data from TDM_SEQ_MAPPING",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Data From Cassandra Table",
+                            "minHeight": 449,
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "select TARGET_VALUE as TARGET_ID,\r\n  TASK_EXECUTION_ID,\r\n  LU_TYPE,\r\n  TABLE_NAME,\r\n  COLUMN_NAME,\r\n  SEQ_NAME,\r\n  SOURCE_VALUE as SOURCE_ID \r\nfrom k2masking.tdm_seq_mapping\r\nwhere TASK_EXECUTION_ID = ${taskExeId} and iid = ${iid} and LU_TYPE = ${luType} ALLOW FILTERING"
+                                    },
+                                    {
+                                        "name": "taskExeId",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "luType",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "target_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "task_execution_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "lu_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "table_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "column_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "seq_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "source_id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check If Instance ID",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Check If Root Table And Field",
+                            "actorType": {
+                                "parentType": "CheckIfRootTableAndField",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 5",
+                    "dependsOnList": [
+                        "Check If Instance ID"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Instance Indicator is No",
+                            "minHeight": 323,
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "Y"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [
+                        "Check If Instance ID"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "Instance Indicator is Yes__1",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "N"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Load Data to Entities table",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "actors": [
+                        {
+                            "name": "DbLoad1",
+                            "minHeight": 339,
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": "public"
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": "tdm_seq_mapping"
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            "task_execution_id",
+                                            "lu_type",
+                                            "source_env",
+                                            "entity_target_id",
+                                            "seq_name",
+                                            "table_name",
+                                            "column_name",
+                                            "source_id",
+                                            "target_id",
+                                            "is_instance_id",
+                                            "entity_sequence"
+                                        ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "postgres"
+                                    },
+                                    {
+                                        "name": "task_execution_id",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "lu_type",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "source_env",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "entity_target_id",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "seq_name",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "table_name",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "column_name",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "source_id",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "target_id",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "is_instance_id",
+                                        "schema": {}
+                                    },
+                                    {
+                                        "name": "entity_sequence",
+                                        "schema": {}
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Count1",
+                            "actorType": {
+                                "parentType": "Count",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "FabricSetRead1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Equals2",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DbLoad1",
+                "name": "entity_target_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Input IID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "iid"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "luType"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Task Execution ID",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Source Environment",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Check If Root Table And Field",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task Execution ID",
+                "name": "variableValue"
+            },
+            "rightPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "taskExeId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Source Environment",
+                "name": "variableValue"
+            },
+            "rightPort": {
+                "actor": "DbLoad1",
+                "name": "source_env"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DbLoad1",
+                "name": "params"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Check If Root Table And Field",
+                "name": "tableName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "table_name"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Get Data From Cassandra Table",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Check If Root Table And Field",
+                "name": "fieldName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "column_name"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Check If Root Table And Field",
+                "name": "root_indicator"
+            },
+            "rightPort": {
+                "actor": "Equals1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Instance Indicator is No",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "DbLoad1",
+                "name": "is_instance_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Instance Indicator is Yes__1",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "DbLoad1",
+                "name": "is_instance_id"
+            }
+        }
+    ]
+}

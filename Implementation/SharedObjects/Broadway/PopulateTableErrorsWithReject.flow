@@ -1,0 +1,78 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Call Error Flow",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Populate Table Errors",
+                            "actorType": {
+                                "parentType": "PopulateTableErrors",
+                                "inputs": [
+                                    {
+                                        "name": "error_category",
+                                        "const": "Record Rejected"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Commit",
+                            "isDisabled": true,
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "commit;"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "error"
+            },
+            "rightPort": {
+                "actor": "Populate Table Errors",
+                "name": "error"
+            }
+        }
+    ]
+}

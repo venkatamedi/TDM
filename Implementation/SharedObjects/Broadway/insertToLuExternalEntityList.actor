@@ -1,0 +1,40 @@
+{
+    "type": "insertToLuExternalEntityList",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            },
+            "doc": "The name of the Logical Unit"
+        },
+        {
+            "name": "SOURCE_IID",
+            "const": "",
+            "schema": {
+                "type": "string"
+            },
+            "isDefault": true,
+            "doc": "The source Identifier"
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "insertToLuExternalEntityList",
+            "hidden": true
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ],
+    "doc": "Insert data into External Entity List table of the Logical Unit, in Cassandra DB.\nThis can be used when the source Interface is a non JDBC."
+}

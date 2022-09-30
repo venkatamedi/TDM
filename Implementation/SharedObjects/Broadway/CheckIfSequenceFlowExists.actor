@@ -1,0 +1,41 @@
+{
+    "type": "CheckIfSequenceFlowExists",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "FLOW_FILE_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.innerFlow"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "CheckIfSequenceFlowExists",
+            "hidden": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "SKIP_TABLE",
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "SKIP_TABLE",
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

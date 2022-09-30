@@ -1,0 +1,248 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "TDMSeqSrc2TrgMapping1",
+                            "actorType": {
+                                "parentType": "TDMSeqSrc2TrgMapping",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "table",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "LU_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "SEQUENCE_NAME": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "actors": [
+                        {
+                            "name": "JavaScript1",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "flowArgs.SeqList = flowArgs.SeqList||new Array();\r\nif (seqRec.get(\"LU_NAME\") == luName && \r\n    (seqRec.get(\"FABRIC_TABLE_NAME\")).toLowerCase() == tableName.toLowerCase()) {\r\n        flowArgs.SeqList.push(seqRec);\r\n}\r\nflowArgs.SeqList",
+                                            "script": "flowArgs.SeqList = flowArgs.SeqList || new Array();\n\nif (seqRec.get(\"LU_NAME\") == luName && seqRec.get(\"FABRIC_TABLE_NAME\").toLowerCase() == tableName.toLowerCase()) {\n  flowArgs.SeqList.push(seqRec);\n}\n\nflowArgs.SeqList;"
+                                        }
+                                    },
+                                    {
+                                        "name": "luName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "seqRec",
+                                        "schema": {
+                                            "type": "object"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "LU_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "SEQUENCE_NAME": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Const1",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "object"
+                                        },
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "LU_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "SEQUENCE_NAME": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "TDMSeqSrc2TrgMapping1",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "seqRec"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Const1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "FABRIC_TABLE_NAME"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Const1",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "tableSeqList"
+            }
+        }
+    ]
+}

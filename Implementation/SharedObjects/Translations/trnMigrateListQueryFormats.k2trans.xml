@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Translation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>trnMigrateListQueryFormats</Name>
+  <InputNotFoundAction>Use_Default</InputNotFoundAction>
+  <SchemaColumns>
+    <Column>
+      <Title>interface_type</Title>
+      <ColumnName>interface_type</ColumnName>
+      <Direction>Input</Direction>
+      <Type>Text</Type>
+      <Length>100</Length>
+      <Format>^[a-z0-9 ]+$</Format>
+      <Index>0</Index>
+      <AllowNULL>true</AllowNULL>
+      <Comment>Enter interfaces that do not support || (double pipe) as a concatenation operator. interface type should be according to the "Database Type" section in the interface object - in lowercase</Comment>
+      <GridColumnProperties width="100" />
+    </Column>
+    <Column>
+      <Title>version_ind</Title>
+      <ColumnName>version_ind</ColumnName>
+      <Direction>Input</Direction>
+      <Type>Text</Type>
+      <Length>10</Length>
+      <Format>(?:true|false)</Format>
+      <Index>1</Index>
+      <AllowNULL>true</AllowNULL>
+      <Comment>true / false only</Comment>
+      <GridColumnProperties width="100" />
+    </Column>
+    <Column>
+      <Title>query_format</Title>
+      <ColumnName>query_format</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Text</Type>
+      <Length>10000</Length>
+      <Format />
+      <Index>0</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <Comment>Use the following variables : &lt;source_env_name&gt; , &lt;entity_id&gt; ,  &lt;task_name&gt; ,  &lt;timestamp&gt;     ( &lt;task_name&gt; ,  &lt;timestamp&gt;   is needed only in case of version_ind=true) </Comment>
+      <GridColumnProperties width="727" />
+    </Column>
+  </SchemaColumns>
+  <IsImportFromSQL>false</IsImportFromSQL>
+  <IsDynamicData>false</IsDynamicData>
+  <ColumnMapping />
+  <TranslationData>
+    <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+      <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="trnMigrateListQueryFormats" msdata:UseCurrentLocale="true">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trnMigrateListQueryFormats">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="interface_type" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="version_ind" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="query_format" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+      <DocumentElement>
+        <trnMigrateListQueryFormats diffgr:id="trnMigrateListQueryFormats1" msdata:rowOrder="0">
+          <interface_type>sqlserver</interface_type>
+          <version_ind>true</version_ind>
+          <query_format>CONCAT(&lt;source_env_name&gt;,'_',&lt;entity_id&gt;,'_',&lt;task_name&gt;,'_',&lt;timestamp&gt;)</query_format>
+        </trnMigrateListQueryFormats>
+        <trnMigrateListQueryFormats diffgr:id="trnMigrateListQueryFormats2" msdata:rowOrder="1">
+          <interface_type>sqlserver</interface_type>
+          <version_ind>false</version_ind>
+          <query_format>CONCAT(&lt;source_env_name&gt;,'_',&lt;entity_id&gt;)</query_format>
+        </trnMigrateListQueryFormats>
+      </DocumentElement>
+    </diffgr:diffgram>
+  </TranslationData>
+  <DataRowsHeight>20</DataRowsHeight>
+</Translation>

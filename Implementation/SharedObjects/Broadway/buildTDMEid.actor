@@ -1,0 +1,31 @@
+{
+    "type": "buildTDMEid",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "SOURCE_IID",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "buildTDMEid"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "TDM_EID",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

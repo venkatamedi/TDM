@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>query_public_task_execution_entities</ID>
+  <PopulationObjectName>query_public_task_execution_entities</PopulationObjectName>
+  <TableName>task_execution_entities</TableName>
+  <RootItemID>query_query_public_task_execution_entities</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>true</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="task_execution_id" id="queryCol_0" dataType="Text" index="0" />
+    <Arg name="lu_name" id="queryCol_1" dataType="Text" index="1" />
+    <Arg name="entity_id" id="queryCol_2" dataType="Text" index="2" />
+    <Arg name="target_entity_id" id="queryCol_3" dataType="Text" index="3" />
+    <Arg name="creation_date" id="queryCol_4" dataType="Text" index="4" />
+    <Arg name="entity_end_time" id="queryCol_5" dataType="Text" index="5" />
+    <Arg name="entity_start_time" id="queryCol_6" dataType="Text" index="6" />
+    <Arg name="env_id" id="queryCol_7" dataType="Text" index="7" />
+    <Arg name="execution_status" id="queryCol_8" dataType="Text" index="8" />
+    <Arg name="id_type" id="queryCol_9" dataType="Text" index="9" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="DBQueryDataSave" id="query_query_public_task_execution_entities" name="query_public_task_execution_entities" nodeOrder="0" module="DBQuery" mapObjectModule="DBQuery" connName="TDM">
+      <OutputsList>
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_0" name="task_execution_id" dataType="Text" index="0" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_1" name="lu_name" dataType="Text" index="1" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_2" name="entity_id" dataType="Text" index="2" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_3" name="target_entity_id" dataType="Text" index="3" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_4" name="creation_date" dataType="Text" index="4" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_5" name="entity_end_time" dataType="Text" index="5" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_6" name="entity_start_time" dataType="Text" index="6" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_7" name="env_id" dataType="Text" index="7" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_8" name="execution_status" dataType="Text" index="8" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_9" name="id_type" dataType="Text" index="9" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_10" name="fabric_execution_id" dataType="Text" index="10" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_11" name="iid" dataType="Text" index="11" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_12" name="source_env" dataType="Text" index="12" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_13" name="version_name" dataType="Text" index="13" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_14" name="version_datetime" dataType="Text" index="14" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_15" name="fabric_get_time" dataType="Integer" index="15" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_16" name="total_processing_time" dataType="Integer" index="16" />
+        <Output xsi:type="DBQueryDataSaveColumn" id="queryCol_17" name="clone_no" dataType="Text" index="17" />
+      </OutputsList>
+      <SQL><![CDATA[Select *
+From task_execution_entities]]></SQL>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="24" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_0" toItemID="tbl_task_execution_entities" toColID="tblCol_f65095098e244813b9ede85c264c9fcc" />
+    <Link partId="25" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_1" toItemID="tbl_task_execution_entities" toColID="tblCol_459fafe389134000bd83d175fa47e334" />
+    <Link partId="26" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_2" toItemID="tbl_task_execution_entities" toColID="tblCol_212eaafa09144124bb6ef9badf2ae750" />
+    <Link partId="124" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_3" toItemID="tbl_task_execution_entities" toColID="tblCol_650a9fadfe0c4467a21b7d92ad4a22b7" />
+    <Link partId="28" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_4" toItemID="tbl_task_execution_entities" toColID="tblCol_0dcaec3e19cf4e18b95e07d607835d06" />
+    <Link partId="29" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_5" toItemID="tbl_task_execution_entities" toColID="tblCol_f6ac43a44d4946f581822e03669c2853" />
+    <Link partId="30" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_6" toItemID="tbl_task_execution_entities" toColID="tblCol_601d6d0219eb4e9eb0d938aecc6e2f57" />
+    <Link partId="31" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_7" toItemID="tbl_task_execution_entities" toColID="tblCol_20e4de376a964c72bb1571613f0b2b68" />
+    <Link partId="32" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_8" toItemID="tbl_task_execution_entities" toColID="tblCol_213830e16f1248dc9d5fa0394215813e" />
+    <Link partId="33" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_9" toItemID="tbl_task_execution_entities" toColID="tblCol_3f0f319c4894419288952cfffb9b789c" />
+    <Link partId="248" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_10" toItemID="tbl_task_execution_entities" toColID="tblCol_ea2f9df846b747df90d3a7d7a1b2326f" />
+    <Link partId="354" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_11" toItemID="tbl_task_execution_entities" toColID="tblCol_acaae10411ee41d095869a409d3d1a5d" />
+    <Link partId="355" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_12" toItemID="tbl_task_execution_entities" toColID="tblCol_7b83a92ade9c4d07be74e5ef768bb64e" />
+    <Link partId="356" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_13" toItemID="tbl_task_execution_entities" toColID="tblCol_e7023d790d1e45fabd736c3412accc4c" />
+    <Link partId="357" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_14" toItemID="tbl_task_execution_entities" toColID="tblCol_6f84b51a627b419aa92be5b344292c92" />
+    <Link partId="466" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_15" toItemID="tbl_task_execution_entities" toColID="tblCol_5b4ffed884c047b7aa17e074303f0c45" />
+    <Link partId="463" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_16" toItemID="tbl_task_execution_entities" toColID="tblCol_c460ba21d3c04d999886af1512542d4f" />
+    <Link partId="464" fromNodeOrder="0" fromItemID="query_query_public_task_execution_entities" fromColID="queryCol_17" toItemID="tbl_task_execution_entities" toColID="tblCol_b9884a9b672f4ae8a3265d9e53e7bc14" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="task_execution_entities.query_public_task_execution_entities.k2tablePop.xml" lastPartID="542">
+      <TableNode partID="0" name="task_execution_entities" pos="915.8684 43.4531326" width="302.885132" />
+      <DBQueryNode partID="13" name="TDM" pos="10 47.5625076" size="641.7547 277.3125" isRoot="true">
+        <DBQuery>{"Name":"query_public_task_execution_entities","ID":"query_query_public_task_execution_entities","ConnName":"TDM","SQL":"Select *\r\nFrom task_execution_entities","ColumnsList":[{"ID":"queryCol_0","Name":"task_execution_id","DataType":"Text","Index":0,"IsInputArgument":true},{"ID":"queryCol_1","Name":"lu_name","DataType":"Text","Index":1,"IsInputArgument":true},{"ID":"queryCol_2","Name":"entity_id","DataType":"Text","Index":2,"IsInputArgument":true},{"ID":"queryCol_3","Name":"target_entity_id","DataType":"Text","Index":3,"IsInputArgument":true},{"ID":"queryCol_4","Name":"creation_date","DataType":"Text","Index":4,"IsInputArgument":true},{"ID":"queryCol_5","Name":"entity_end_time","DataType":"Text","Index":5,"IsInputArgument":true},{"ID":"queryCol_6","Name":"entity_start_time","DataType":"Text","Index":6,"IsInputArgument":true},{"ID":"queryCol_7","Name":"env_id","DataType":"Text","Index":7,"IsInputArgument":true},{"ID":"queryCol_8","Name":"execution_status","DataType":"Text","Index":8,"IsInputArgument":true},{"ID":"queryCol_9","Name":"id_type","DataType":"Text","Index":9,"IsInputArgument":true},{"ID":"queryCol_10","Name":"fabric_execution_id","DataType":"Text","Index":10,"IsInputArgument":false},{"ID":"queryCol_11","Name":"iid","DataType":"Text","Index":11,"IsInputArgument":false},{"ID":"queryCol_12","Name":"source_env","DataType":"Text","Index":12,"IsInputArgument":false},{"ID":"queryCol_13","Name":"version_name","DataType":"Text","Index":13,"IsInputArgument":false},{"ID":"queryCol_14","Name":"version_datetime","DataType":"Text","Index":14,"IsInputArgument":false},{"ID":"queryCol_15","Name":"fabric_get_time","DataType":"Integer","Index":15,"IsInputArgument":false},{"ID":"queryCol_16","Name":"total_processing_time","DataType":"Integer","Index":16,"IsInputArgument":false},{"ID":"queryCol_17","Name":"clone_no","DataType":"Text","Index":17,"IsInputArgument":false}]}</DBQuery>
+      </DBQueryNode>
+      <Link partID="24" from="0" to="1" pointsArr="651.7547 83.59896 661.7547 83.59896 905.8684 74.4895859 915.8684 74.4895859" fromNodePartID="13" fromNodeColumnName="task_execution_id" toNodePartID="0" toNodeColumnName="task_execution_id" />
+      <Link partID="25" from="2" to="3" pointsArr="651.7547 95.671875 661.7547 95.671875 905.8684 86.5625 915.8684 86.5625" fromNodePartID="13" fromNodeColumnName="lu_name" toNodePartID="0" toNodeColumnName="lu_name" />
+      <Link partID="26" from="4" to="5" pointsArr="651.7547 107.744789 661.7547 107.744789 905.8684 98.6354141 915.8684 98.6354141" fromNodePartID="13" fromNodeColumnName="entity_id" toNodePartID="0" toNodeColumnName="entity_id" />
+      <Link partID="124" from="6" to="7" pointsArr="651.7547 119.8177 661.7547 119.8177 905.8684 110.708328 915.8684 110.708328" fromNodePartID="13" fromNodeColumnName="target_entity_id" toNodePartID="0" toNodeColumnName="target_entity_id" />
+      <Link partID="28" from="8" to="9" pointsArr="651.7547 131.890625 661.7547 131.890625 905.8684 122.781242 915.8684 122.781242" fromNodePartID="13" fromNodeColumnName="creation_date" toNodePartID="0" toNodeColumnName="creation_date" />
+      <Link partID="29" from="10" to="11" pointsArr="651.7547 143.963531 661.7547 143.963531 905.8684 134.854156 915.8684 134.854156" fromNodePartID="13" fromNodeColumnName="entity_end_time" toNodePartID="0" toNodeColumnName="entity_end_time" />
+      <Link partID="30" from="12" to="13" pointsArr="651.7547 156.036453 661.7547 156.036453 905.8684 146.927078 915.8684 146.927078" fromNodePartID="13" fromNodeColumnName="entity_start_time" toNodePartID="0" toNodeColumnName="entity_start_time" />
+      <Link partID="31" from="14" to="15" pointsArr="651.7547 168.109375 661.7547 168.109375 905.8684 159 915.8684 159" fromNodePartID="13" fromNodeColumnName="env_id" toNodePartID="0" toNodeColumnName="env_id" />
+      <Link partID="32" from="16" to="17" pointsArr="651.7547 180.1823 661.7547 180.1823 905.8684 171.072922 915.8684 171.072922" fromNodePartID="13" fromNodeColumnName="execution_status" toNodePartID="0" toNodeColumnName="execution_status" />
+      <Link partID="33" from="18" to="19" pointsArr="651.7547 192.255219 661.7547 192.255219 905.8684 183.145844 915.8684 183.145844" fromNodePartID="13" fromNodeColumnName="id_type" toNodePartID="0" toNodeColumnName="id_type" />
+      <Link partID="248" from="20" to="21" pointsArr="651.7547 204.32814 661.7547 204.32814 905.8684 195.218765 915.8684 195.218765" fromNodePartID="13" fromNodeColumnName="fabric_execution_id" toNodePartID="0" toNodeColumnName="fabric_execution_id" />
+      <Link partID="354" from="22" to="23" pointsArr="651.7547 216.401047 661.7547 216.401047 905.8684 207.291672 915.8684 207.291672" fromNodePartID="13" fromNodeColumnName="iid" toNodePartID="0" toNodeColumnName="iid" />
+      <Link partID="355" from="24" to="25" pointsArr="651.7547 228.473953 661.7547 228.473953 905.8684 219.364578 915.8684 219.364578" fromNodePartID="13" fromNodeColumnName="source_env" toNodePartID="0" toNodeColumnName="source_env" />
+      <Link partID="356" from="26" to="27" pointsArr="651.7547 240.54686 661.7547 240.54686 905.8684 231.437485 915.8684 231.437485" fromNodePartID="13" fromNodeColumnName="version_name" toNodePartID="0" toNodeColumnName="version_name" />
+      <Link partID="357" from="28" to="29" pointsArr="651.7547 252.619766 661.7547 252.619766 905.8684 243.510391 915.8684 243.510391" fromNodePartID="13" fromNodeColumnName="version_datetime" toNodePartID="0" toNodeColumnName="version_datetime" />
+      <Link partID="463" from="30" to="31" pointsArr="651.7547 276.765564 661.7547 276.765564 905.8684 267.6562 915.8684 267.6562" fromNodePartID="13" fromNodeColumnName="total_processing_time" toNodePartID="0" toNodeColumnName="total_processing_time" />
+      <Link partID="464" from="32" to="33" pointsArr="651.7547 288.8385 661.7547 288.8385 905.8684 279.729126 915.8684 279.729126" fromNodePartID="13" fromNodeColumnName="clone_no" toNodePartID="0" toNodeColumnName="clone_no" />
+      <Link partID="466" from="34" to="35" pointsArr="651.7547 264.6927 661.7547 264.6927 905.8684 255.5833 915.8684 255.5833" fromNodePartID="13" fromNodeColumnName="fabric_get_time" toNodePartID="0" toNodeColumnName="fabric_get_time" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

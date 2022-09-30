@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Translation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>trnLuParams</Name>
+  <InputNotFoundAction>Use_Default</InputNotFoundAction>
+  <SchemaColumns>
+    <Column>
+      <Title>INDEX</Title>
+      <ColumnName>INDEX</ColumnName>
+      <Direction>Input</Direction>
+      <Type>Auto Increment</Type>
+      <Length>10</Length>
+      <Format />
+      <Index>0</Index>
+      <DefaultValue />
+      <AllowNULL>true</AllowNULL>
+      <Comment>Counter for each rule</Comment>
+      <GridColumnProperties width="59" />
+    </Column>
+    <Column>
+      <Title>COLUMN_NAME</Title>
+      <ColumnName>COLUMN_NAME</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Text</Type>
+      <Length>20</Length>
+      <Format />
+      <Index>0</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <Comment>Column used as a parameter</Comment>
+      <GridColumnProperties width="148" />
+    </Column>
+    <Column>
+      <Title>SQL</Title>
+      <ColumnName>SQL</ColumnName>
+      <Direction>Output</Direction>
+      <Type>SQL</Type>
+      <Length>300</Length>
+      <Format />
+      <Index>1</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <Comment>Query used to select the different values</Comment>
+      <GridColumnProperties width="538" />
+    </Column>
+  </SchemaColumns>
+  <IsImportFromSQL>false</IsImportFromSQL>
+  <IsDynamicData>false</IsDynamicData>
+  <ColumnMapping />
+  <TranslationData>
+    <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+      <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="trnLuParams" msdata:UseCurrentLocale="true">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trnLuParams">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="INDEX" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" minOccurs="0" />
+                  <xs:element name="COLUMN_NAME" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SQL" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="300" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1">
+          <xs:selector xpath=".//trnLuParams" />
+          <xs:field xpath="INDEX" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+  </TranslationData>
+  <DataRowsHeight>39</DataRowsHeight>
+</Translation>

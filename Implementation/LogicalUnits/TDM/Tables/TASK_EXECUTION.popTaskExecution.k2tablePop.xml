@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>popTaskExecution</ID>
+  <PopulationObjectName>popTaskExecution</PopulationObjectName>
+  <TableName>TASK_EXECUTION</TableName>
+  <RootItemID>f_52</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="TASK_EXECUTION_ID" id="fi_52.0" dataType="String" index="0" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="FunctionDiagramItemDataSave" id="f_52" name="funRootExecID" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="funRootExecID.k2function.xml">
+      <InputsList>
+        <Input id="fi_52.0" name="TASK_EXECUTION_ID" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_52.0" name="TASK_EXECUTION_ID" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="109" fromNodeOrder="0" fromItemID="f_52" fromColID="fo_52.0" toItemID="tbl_TASK_EXECUTION" toColID="tblCol_e38506569e27408688f8e7f46f3c3eaf" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="TASK_EXECUTION.popTaskExecution.k2tablePop.xml" lastPartID="134">
+      <TableNode partID="0" name="TASK_EXECUTION" pos="321.5247 17.9270935" width="307.3441" />
+      <FunctionMapNode id="0" L0="1" R0="2" partID="52" topLabel="funRootExecID (52)" pos="9.855303 27.4544258" size="264.834137 45.0911446" isRoot="true">
+        <KFunction>{"Name":"funRootExecID","ID":"f_52","Category":"Root","FunctionLevel":0,"FunctionType2":1,"ReturnType":"void","RegisterAsLuDbFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"FunctionBody":"","IsRootFunction":true,"inputParams":[{"Name":"TASK_EXECUTION_ID","ID":"fi_52.0","Index":0,"DataType":"String","Comment":""}],"outputParams":[{"Name":"TASK_EXECUTION_ID","ID":"fo_52.0","Index":0,"DataType":"void","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="109" from="2" to="3" pointsArr="274.689453 52.54557 284.689453 52.54557 311.5247 48.96355 321.5247 48.96355" fromNodePartID="52" fromNodeColumnName="TASK_EXECUTION_ID" toNodePartID="0" toNodeColumnName="TASK_EXECUTION_ID" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

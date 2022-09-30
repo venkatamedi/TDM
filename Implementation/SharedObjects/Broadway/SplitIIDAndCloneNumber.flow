@@ -1,0 +1,387 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "JavaScript1",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "self.result = IID.split('#params#');\r\nif (self.result == IID) {\r\n    self.result[1] = {}\r\n}\r\nself.result;\r\n",
+                                            "script": "self.result = IID.split('#params#');\n\nif (self.result == IID) {\n  self.result[1] = {};\n}\n\nself.result;"
+                                        }
+                                    },
+                                    {
+                                        "name": "IID",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "JavaScript2",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "IidArray[0];"
+                                    },
+                                    {
+                                        "name": "IidArray",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "JavaScript3",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "if (IidArray[1] != '{}') {\r\n    IidArray[1]\r\n} else '{\"clone_no\" : 0}';",
+                                            "script": "if (IidArray[1] != '{}') {\n  IidArray[1];\n} else '{\"clone_no\" : 0}';"
+                                        }
+                                    },
+                                    {
+                                        "name": "IidArray",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Split UID",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "functionName",
+                                        "const": "fnSplitUID2"
+                                    },
+                                    {
+                                        "name": "uid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "instanceID",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "envName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "versionName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "versiionDateTime",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "JsonParser1",
+                            "actorType": {
+                                "parentType": "JsonParser",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "object",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "clone_no": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Const1",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Const2",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "JavaScript1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "JavaScript2",
+                "name": "IidArray"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "JavaScript3",
+                "name": "IidArray"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript2",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Split UID",
+                "name": "uid"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript2",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Const2",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript3",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "JsonParser1",
+                "name": "stream"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JsonParser1",
+                "name": "object"
+            },
+            "rightPort": {
+                "actor": "Const1",
+                "name": "value"
+            },
+            "path": [
+                "clone_no"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "iid"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "IID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript3",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "cloneNo"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Split UID",
+                "name": "instanceID"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "instanceID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Split UID",
+                "name": "envName"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "envName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Split UID",
+                "name": "versionName"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "versionName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Split UID",
+                "name": "versiionDateTime"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "versiionDateTime"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Const1",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "cloneNo"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Const2",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "UID"
+            }
+        }
+    ]
+}

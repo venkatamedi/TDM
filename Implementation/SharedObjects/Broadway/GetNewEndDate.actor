@@ -1,0 +1,55 @@
+{
+    "type": "GetNewEndDate",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "nowDate",
+            "schema": {
+                "type": "date"
+            }
+        },
+        {
+            "name": "retentionPeriodType",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dropdown",
+                "options": [
+                    "Seconds",
+                    "Minutes",
+                    "Hours",
+                    "Days",
+                    "Weeks",
+                    "Years"
+                ]
+            }
+        },
+        {
+            "name": "retentionPeriodValue",
+            "schema": {
+                "type": "integer"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "GetNewEndDate",
+            "mandatory": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "newEndDate",
+            "schema": {
+                "type": "date"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

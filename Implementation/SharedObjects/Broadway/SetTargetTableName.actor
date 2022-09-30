@@ -1,0 +1,41 @@
+{
+    "type": "SetTargetTableName",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit"
+            }
+        },
+        {
+            "name": "TABLE_NAME",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "SetTargetTableName",
+            "mandatory": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "TARGET_TABLE_NAME",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

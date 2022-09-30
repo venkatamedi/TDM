@@ -1,0 +1,267 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get Field Values",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get TDM LU Key Space",
+                            "actorType": {
+                                "parentType": "LuKeyspace",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "TDM"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Set Name of Entity List Table",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${LU_NAME}_entity_list"
+                                    },
+                                    {
+                                        "name": "LU_NAME",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "remark": "The Name of Logical Unit."
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Source Environment",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_SOURCE_ENVIRONMENT_NAME",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Task Execution ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_TASK_EXE_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get TDM Eid",
+                            "actorType": {
+                                "parentType": "buildTDMEid",
+                                "inputs": [
+                                    {
+                                        "name": "SOURCE_IID",
+                                        "remark": "The Source Identifier"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Load Data to Table",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Insert Data to Entity List Table",
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            "lu_name",
+                                            "source_env_name",
+                                            "task_execution_id",
+                                            "source_iid",
+                                            "tdm_eid"
+                                        ]
+                                    },
+                                    {
+                                        "name": "keys",
+                                        "const": [
+                                            "task_execution_id"
+                                        ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "cassandra"
+                                    },
+                                    {
+                                        "name": "batch",
+                                        "const": true
+                                    },
+                                    {
+                                        "name": "lu_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "source_env_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "task_execution_id",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "source_iid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "tdm_eid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get TDM LU Key Space",
+                "name": "keyspace"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Set Name of Entity List Table",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Source Environment",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "source_env_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task Execution ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "task_execution_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get TDM Eid",
+                "name": "TDM_EID"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "tdm_eid"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Set Name of Entity List Table",
+                "name": "LU_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "SOURCE_IID"
+            },
+            "rightPort": {
+                "actor": "Get TDM Eid",
+                "name": "SOURCE_IID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "lu_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "SOURCE_IID"
+            },
+            "rightPort": {
+                "actor": "Insert Data to Entity List Table",
+                "name": "source_iid"
+            }
+        }
+    ]
+}

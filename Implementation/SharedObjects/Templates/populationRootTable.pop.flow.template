@@ -1,0 +1,673 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get TDM_SYNC_SOURCE_DATA",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Get Variable TDM_SYNC_SOURCE_DATA",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_SYNC_SOURCE_DATA",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Delete Only Task Indicator",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_DELETE_ONLY_TASK",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Delete Before Load indicator",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_DELETE_BEFORE_LOAD",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Is Child LU Indicator",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "CHILD_LU_IND",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check Variable And Delete Root Table",
+                    "dependsOnList": [
+                        "Get TDM_SYNC_SOURCE_DATA"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Check TDM_SYNC_SOURCE_DATA",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "true"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Delete Root Table",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "fabric"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "delete from {{__LU_NAME}}.{{TABLE_NAME}}"
+                                    },
+                                    {
+                                        "name": "table",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Instance should not be synced",
+                    "dependsOnList": [
+                        "Get TDM_SYNC_SOURCE_DATA"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "Check if first Sync",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "{{__LU_NAME}}"
+                                    },
+                                    {
+                                        "name": "functionName",
+                                        "const": "fnIsFirstSync"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "firstSyncInd",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Not1",
+                            "actorType": {
+                                "parentType": "Not",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Input",
+                    "dependsOnList": [
+                        "Check Variable And Delete Root Table"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "PopulationArgs",
+                            "actorType": {
+                                "parentType": "PopulationArgs",
+                                "readOnly": true,
+                                "inputs": [
+                                    {
+                                        "name": "{{KEY}}",
+                                        "schema": {}
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Init Instance As Not Found",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "flowArgs.instanceFound = false;"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "if First Sync Throw Exception",
+                    "dependsOnList": [
+                        "Instance should not be synced"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "First Sync Is True and Not A Delete Only Task",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "And",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Throw Exception",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "throw \"The instance does not exist in Fabric and sync from source is off\""
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Source",
+                    "dependsOnList": [
+                        "Input"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Query",
+                            "actorType": {
+                                "parentType": "SourceDbQuery",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "{{SOURCE_INTERFACE}}"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "select * from {{TABLE_NAME}}"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Tables Fields",
+                            "actorType": {
+                                "parentType": "LuFunction",
+                                "inputs": [
+                                    {
+                                        "name": "luType",
+                                        "const": "{{__LU_NAME}}"
+                                    },
+                                    {
+                                        "name": "functionName",
+                                        "const": "getLuTableColumns"
+                                    },
+                                    {
+                                        "const": "{{TABLE_NAME}}",
+                                        "name": "table",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "res",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "ToBool1",
+                            "actorType": {
+                                "parentType": "ToBool",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "ToBool2",
+                            "actorType": {
+                                "parentType": "ToBool",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Do Nothing",
+                    "dependsOnList": [
+                        "if First Sync Throw Exception"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Set instance As Found",
+                    "dependsOnList": [
+                        "Source"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Instance Is Found In Source",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "flowArgs.instanceFound = true;"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Do Nothing 1",
+                    "dependsOnList": [
+                        "Do Nothing"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "LU Table",
+                    "dependsOnList": [
+                        "Set instance As Found"
+                    ],
+                    "isLast": 1,
+                    "actors": [
+                        {
+                            "name": "Root Table",
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "fabric"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": "{{TABLE_NAME}}"
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "keys",
+                                        "const": [
+                                            "{{KEY}}"
+                                        ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "sqlite"
+                                    },
+                                    {
+                                        "name": "{{KEY}}",
+                                        "schema": {}
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Do Nothing 2",
+                    "dependsOnList": [
+                        "Do Nothing 1"
+                    ],
+                    "isLast": 1,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Post Load",
+                    "dependsOnList": [
+                        "LU Table"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Check if Instance Was Not Found In Source",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "if ((deleteBeforeLoad == false || isChildLu == false ) \r\n  && flowArgs.instanceFound == false) {\r\n    throw \"Instance \" + iid + \" is not found in the Source\"\r\n}",
+                                            "script": "if ((deleteBeforeLoad == false || isChildLu == false) && flowArgs.instanceFound == false) {\n  throw \"Instance \" + iid + \" is not found in the Source\";\n}"
+                                        }
+                                    },
+                                    {
+                                        "name": "iid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "deleteBeforeLoad",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "isChildLu",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Do Nothing 3",
+                    "dependsOnList": [
+                        "Do Nothing 2"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get Variable TDM_SYNC_SOURCE_DATA",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Check TDM_SYNC_SOURCE_DATA",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Delete Only Task Indicator",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Not1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Delete Before Load indicator",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToBool1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Is Child LU Indicator",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToBool2",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Check if first Sync",
+                "name": "firstSyncInd"
+            },
+            "rightPort": {
+                "actor": "First Sync Is True and Not A Delete Only Task",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Not1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "First Sync Is True and Not A Delete Only Task",
+                "name": "b"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "PopulationArgs",
+                "name": "iid"
+            },
+            "rightPort": {
+                "actor": "Check if Instance Was Not Found In Source",
+                "name": "iid"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "PopulationArgs",
+                "name": "parent_rows"
+            },
+            "rightPort": {
+                "actor": "Query",
+                "name": "parent_rows"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Query",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Root Table",
+                "name": "params"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "Get Tables Fields",
+                "name": "res"
+            },
+            "rightPort": {
+                "actor": "Root Table",
+                "name": "fields"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToBool1",
+                "name": "bool"
+            },
+            "rightPort": {
+                "actor": "Check if Instance Was Not Found In Source",
+                "name": "deleteBeforeLoad"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToBool2",
+                "name": "bool"
+            },
+            "rightPort": {
+                "actor": "Check if Instance Was Not Found In Source",
+                "name": "isChildLu"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "Delete Root Table",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "{{KEY}}"
+            },
+            "rightPort": {
+                "actor": "PopulationArgs",
+                "name": "{{KEY}}"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "schema"
+            },
+            "rightPort": {
+                "actor": "Root Table",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "table"
+            },
+            "rightPort": {
+                "actor": "Root Table",
+                "name": "table"
+            }
+        }
+    ]
+}

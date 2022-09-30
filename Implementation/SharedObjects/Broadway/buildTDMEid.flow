@@ -1,0 +1,399 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get Inputs",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Version Indicator",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_DATAFLUX_TASK",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Source Environment",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_SOURCE_ENVIRONMENT_NAME",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "getTDMSeparators1",
+                            "actorType": {
+                                "parentType": "getTDMSeparators",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check if Data Flux",
+                    "dependsOnList": [
+                        "Get Inputs"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Equals1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "true"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Version Name",
+                            "minHeight": 234,
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_VERSION_NAME",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Version DateTime",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_VERSION_DATETIME",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Build Simple TDM_EID",
+                    "dependsOnList": [
+                        "Get Inputs"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "Format Simple EID",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${sourceEnv}${iidSeparator}${iidOpenSeparator}${sourceIID}${iidCloseSeparator}"
+                                    },
+                                    {
+                                        "name": "sourceEnv",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidOpenSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "sourceIID",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidCloseSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Build DataFlux IID",
+                    "dependsOnList": [
+                        "Check if Data Flux"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Format DataFlux EID",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${sourceEnv}${iidSeparator}${iidOpenSeparator}${sourceIID}${iidCloseSeparator}${iidSeparator}${versionName}${iidSeparator}${versionDateTime}"
+                                    },
+                                    {
+                                        "name": "sourceEnv",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidOpenSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "sourceIID",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iidCloseSeparator",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "versionName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "versionDateTime",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Do Nothing",
+                    "dependsOnList": [
+                        "Build Simple TDM_EID"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get Version Indicator",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Equals1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Source Environment",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Format Simple EID",
+                "name": "sourceEnv"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Source Environment",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "sourceEnv"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_CLOSE_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format Simple EID",
+                "name": "iidCloseSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_OPEN_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format Simple EID",
+                "name": "iidOpenSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format Simple EID",
+                "name": "iidSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "iidSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_OPEN_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "iidOpenSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "getTDMSeparators1",
+                "name": "IID_CLOSE_SEPARATOR"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "iidCloseSeparator"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Version Name",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "versionName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Version DateTime",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "versionDateTime"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Format Simple EID",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "TDM_EID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "SOURCE_IID"
+            },
+            "rightPort": {
+                "actor": "Format Simple EID",
+                "name": "sourceIID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Format DataFlux EID",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "TDM_EID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "SOURCE_IID"
+            },
+            "rightPort": {
+                "actor": "Format DataFlux EID",
+                "name": "sourceIID"
+            }
+        }
+    ]
+}

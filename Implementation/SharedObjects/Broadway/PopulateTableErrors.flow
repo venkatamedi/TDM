@@ -1,0 +1,652 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Prepare the Data",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get LU Type",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "LU_TYPE",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get IID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "IID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Target Entity ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TARGET_ENTITY_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Source Entity ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "SOURCE_ENTITY_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Current Date",
+                            "actorType": {
+                                "parentType": "Now",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Continue Preparing",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Task Execution ID",
+                            "minHeight": 191,
+                            "actorType": {
+                                "parentType": "getLUVariable_Actor",
+                                "inputs": [
+                                    {
+                                        "name": "luName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "variableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "TDM_TASK_EXE_ID"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Equals1",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "NO_ID"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get the Error Fields",
+                            "actorType": {
+                                "parentType": "ErrorFields",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "inputs",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "interface": {
+                                                    "type": "string"
+                                                },
+                                                "command": {
+                                                    "type": "string"
+                                                },
+                                                "schema": {
+                                                    "type": "string"
+                                                },
+                                                "table": {
+                                                    "type": "string"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "keys": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "dialect": {
+                                                    "type": "string"
+                                                },
+                                                "ignoreNulls": {
+                                                    "type": "boolean"
+                                                },
+                                                "params": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "PATIENT_ID": {
+                                                            "type": "string"
+                                                        },
+                                                        "SSN": {
+                                                            "type": "string"
+                                                        },
+                                                        "FIRST_NAME": {
+                                                            "type": "string"
+                                                        },
+                                                        "LAST_NAME": {
+                                                            "type": "string"
+                                                        },
+                                                        "ADDRESS": {
+                                                            "type": "string"
+                                                        },
+                                                        "CITY": {
+                                                            "type": "string"
+                                                        },
+                                                        "ZIP": {
+                                                            "type": "string"
+                                                        },
+                                                        "STATE": {
+                                                            "type": "string"
+                                                        },
+                                                        "COUNTRY": {
+                                                            "type": "string"
+                                                        },
+                                                        "DATE1": {},
+                                                        "ATTR_LIST": {
+                                                            "type": "string"
+                                                        },
+                                                        "PATIENT_CODE": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "PATIENT_ID": {
+                                                    "type": "integer"
+                                                },
+                                                "DATE1": {
+                                                    "type": "string"
+                                                },
+                                                "ATTR_LIST": {
+                                                    "type": "string"
+                                                },
+                                                "PATIENT_CODE": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "name": "additional",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "rootExceptionClass": {
+                                                    "type": "string"
+                                                },
+                                                "exceptionClass": {
+                                                    "type": "string"
+                                                },
+                                                "sql": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Format the current date to load it ",
+                            "actorType": {
+                                "parentType": "DateFormat",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Format the actor's parameters",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Build string from input parameters",
+                            "actorType": {
+                                "parentType": "CsvBuilder",
+                                "inputs": [
+                                    {
+                                        "name": "header",
+                                        "const": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "IfElse1",
+                            "actorType": {
+                                "parentType": "IfElse",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Load Data to Detailed Error table",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Load Data To Error Table",
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": "public"
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": "task_exe_error_detailed"
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            "task_execution_id",
+                                            "lu_name",
+                                            "entity_id",
+                                            "iid",
+                                            "target_entity_id",
+                                            "error_category",
+                                            "error_code",
+                                            "error_message",
+                                            "creation_date",
+                                            "flow_name",
+                                            "stage_name",
+                                            "actor_name",
+                                            "actor_parameters"
+                                        ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "postgres"
+                                    },
+                                    {
+                                        "name": "task_execution_id",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "lu_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "entity_id",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "iid",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "target_entity_id",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "error_category",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "error_code",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "error_message",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "creation_date",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "flow_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "stage_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "actor_name",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "actor_parameters",
+                                        "const": "",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "isDefault": true
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "lu_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get LU Type",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Task Execution ID",
+                "name": "luName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get IID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "iid"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get IID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "IfElse1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Equals1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "IfElse1",
+                "name": "b"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Source Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "entity_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Current Date",
+                "name": "date"
+            },
+            "rightPort": {
+                "actor": "Format the current date to load it ",
+                "name": "date"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task Execution ID",
+                "name": "variableValue"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "task_execution_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Equals1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "IfElse1",
+                "name": "test"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "errorCode"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "error_code"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "message"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "error_message"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "flow"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "flow_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "stage"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "stage_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "actor"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "actor_name"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get the Error Fields",
+                "name": "inputs"
+            },
+            "rightPort": {
+                "actor": "Build string from input parameters",
+                "name": "maps"
+            },
+            "path": [
+                "params"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Format the current date to load it ",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "creation_date"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Build string from input parameters",
+                "name": "csv"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "actor_parameters"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "IfElse1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "target_entity_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "error"
+            },
+            "rightPort": {
+                "actor": "Get the Error Fields",
+                "name": "error"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "error_category"
+            },
+            "rightPort": {
+                "actor": "Load Data To Error Table",
+                "name": "error_category"
+            }
+        }
+    ]
+}

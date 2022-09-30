@@ -1,0 +1,18 @@
+{
+  "type": "PopulateTdmSeqMapping_Actor",
+  "actorClass": null,
+  "parentType": "InnerFlow",
+  "inputs": [
+    {
+      "name": "flowName",
+      "schema": {
+        "type": "string"
+      },
+      "const": "PopulateTdmSeqMapping"
+    }
+  ],
+  "outputs": [],
+  "tags": [
+    "tdm"
+  ]
+}

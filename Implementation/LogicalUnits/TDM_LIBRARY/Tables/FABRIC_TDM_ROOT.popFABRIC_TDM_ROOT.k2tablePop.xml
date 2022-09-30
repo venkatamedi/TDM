@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ID>popFABRIC_TDM_ROOT</ID>
+  <PopulationObjectName>popFABRIC_TDM_ROOT</PopulationObjectName>
+  <TableName>FABRIC_TDM_ROOT</TableName>
+  <RootItemID>f_8</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <InputArguments>
+    <Arg name="TDM_INSTANCE_ID" id="fi_8.0" dataType="String" index="0" />
+  </InputArguments>
+  <ItemsList>
+    <Item id="f_8" name="fnRtK2TDMRoot" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnRtK2TDMRoot.k2function.xml">
+      <InputsList>
+        <Input id="fi_8.0" name="TDM_INSTANCE_ID" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_8.0" name="k2_tdm_eid" />
+        <Output id="fo_8.1" name="source_env" />
+        <Output id="fo_8.2" name="IID" />
+        <Output id="fo_8.3" name="task_name" />
+        <Output id="fo_8.4" name="timestamp" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="15" fromNodeOrder="0" fromItemID="f_8" fromColID="fo_8.0" toItemID="tbl_FABRIC_TDM_ROOT" toColID="tblCol_e8decb7400b7436299d5bcbb45e2c6b8" />
+    <Link partId="16" fromNodeOrder="0" fromItemID="f_8" fromColID="fo_8.1" toItemID="tbl_FABRIC_TDM_ROOT" toColID="tblCol_fcc1c717e14e44fba3181b3f4a456354" />
+    <Link partId="17" fromNodeOrder="0" fromItemID="f_8" fromColID="fo_8.2" toItemID="tbl_FABRIC_TDM_ROOT" toColID="tblCol_2108d9693f114111ae320111c0d1b1c8" />
+    <Link partId="18" fromNodeOrder="0" fromItemID="f_8" fromColID="fo_8.3" toItemID="tbl_FABRIC_TDM_ROOT" toColID="tblCol_f654a763ae0b460295677d2736c7e8e9" />
+    <Link partId="19" fromNodeOrder="0" fromItemID="f_8" fromColID="fo_8.4" toItemID="tbl_FABRIC_TDM_ROOT" toColID="tblCol_2b3824d9700e4f788970ffb7e1603e00" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="FABRIC_TDM_ROOT.popFABRIC_TDM_ROOT.k2tablePop.xml" lastPartID="32">
+      <TableNode partID="0" name="FABRIC_TDM_ROOT" pos="280.564819 16.78125" width="309.3241" />
+      <FunctionMapNode id="0" L0="1" R0="2" R1="3" R2="4" R3="5" R4="6" partID="8" topLabel="fnRtK2TDMRoot (8)" pos="10.007288 32.27214" size="193.550247 85.45572" isRoot="true">
+        <KFunction>{"Name":"fnRtK2TDMRoot","ID":"f_8","Category":"TDM","FunctionLevel":0,"FunctionType":0,"FunctionType2":1,"RegisterAsLuDbFunction":false,"SaveToDLUR":false,"ApiFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"IsRootFunction":true,"inputParams":[{"Name":"TDM_INSTANCE_ID","ID":"fi_8.0","Index":0,"DataType":"String"}],"outputParams":[{"Name":"k2_tdm_eid","ID":"fo_8.0","Index":0,"DataType":"String","Comment":""},{"Name":"source_env","ID":"fo_8.1","Index":1,"DataType":"String","Comment":""},{"Name":"IID","ID":"fo_8.2","Index":2,"DataType":"String","Comment":""},{"Name":"task_name","ID":"fo_8.3","Index":3,"DataType":"String","Comment":""},{"Name":"timestamp","ID":"fo_8.4","Index":4,"DataType":"String","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="15" from="2" to="7" pointsArr="203.557541 53.3997421 213.557541 53.3997421 270.564819 47.8177071 280.564819 47.8177071" fromNodePartID="8" fromNodeColumnName="k2_tdm_eid" toNodePartID="0" toNodeColumnName="k2_tdm_eid" />
+      <Link partID="16" from="3" to="8" pointsArr="203.557541 65.47266 213.557541 65.47266 270.564819 59.890625 280.564819 59.890625" fromNodePartID="8" fromNodeColumnName="source_env" toNodePartID="0" toNodeColumnName="source_env" />
+      <Link partID="17" from="4" to="9" pointsArr="203.557541 77.54557 213.557541 77.54557 270.564819 71.96354 280.564819 71.96354" fromNodePartID="8" fromNodeColumnName="IID" toNodePartID="0" toNodeColumnName="IID" />
+      <Link partID="18" from="5" to="10" pointsArr="203.557541 89.6184845 213.557541 89.6184845 270.564819 84.03645 280.564819 84.03645" fromNodePartID="8" fromNodeColumnName="task_name" toNodePartID="0" toNodeColumnName="task_name" />
+      <Link partID="19" from="6" to="11" pointsArr="203.557541 101.691406 213.557541 101.691406 270.564819 96.10937 280.564819 96.10937" fromNodePartID="8" fromNodeColumnName="timestamp" toNodePartID="0" toNodeColumnName="timestamp" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

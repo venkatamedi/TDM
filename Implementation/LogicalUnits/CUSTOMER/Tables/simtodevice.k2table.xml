@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>simtodevice</Name>
+  <ID>tbl_simtodevice</ID>
+  <Columns>
+    <Column name="msisdn" id="msisdn" index="0" datatype="Text" />
+    <Column name="imei1" id="imei1" index="1" datatype="Text" />
+    <Column name="tac1" id="tac1" index="2" datatype="Text" />
+    <Column name="reminder1" id="reminder1" index="3" datatype="Text" />
+    <Column name="imei2" id="imei2" index="4" datatype="Text" />
+    <Column name="tac2" id="tac2" index="5" datatype="Text" />
+    <Column name="reminder2" id="reminder2" index="6" datatype="Text" />
+    <Column name="imei3" id="imei3" index="7" datatype="Text" />
+    <Column name="tac3" id="tac3" index="8" datatype="Text" />
+    <Column name="reminder3" id="reminder3" index="9" datatype="Text" />
+    <Column name="imei4" id="imei4" index="10" datatype="Text" />
+    <Column name="tac4" id="tac4" index="11" datatype="Text" />
+    <Column name="reminder4" id="reminder4" index="12" datatype="Text" />
+  </Columns>
+  <IndexesList />
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

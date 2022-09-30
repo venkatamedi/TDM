@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>contract</Name>
+  <ID>tbl_contract</ID>
+  <Columns>
+    <Column name="customer_id" id="customer_id" index="0" datatype="Integer" />
+    <Column name="contract_id" id="contract_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="contract_ref_id" id="contract_ref_id" index="2" datatype="Integer" />
+    <Column name="associated_line" id="associated_line" index="3" datatype="Text" />
+    <Column name="contract_description" id="contract_description" index="4" datatype="Text" />
+    <Column name="from_date" id="from_date" index="5" datatype="Text" />
+    <Column name="to_date" id="to_date" index="6" datatype="Text" />
+    <Column name="associated_line_fmt" id="associated_line_fmt" index="7" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="contract_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

@@ -1,0 +1,162 @@
+{
+    "type": "TDMSeqSrc2TrgMapping",
+    "badge": "TD",
+    "tags": [
+        "basic"
+    ],
+    "inputs": [
+        {
+            "name": "table",
+            "const": [
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "address",
+                    "TARGET_FIELD_NAME": "address_id",
+                    "FABRIC_TABLE_NAME": "address",
+                    "FABRIC_FIELD_NAME": "address_id",
+                    "SEQUENCE_NAME": "ADDRESS_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "address",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "address",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "cases",
+                    "TARGET_FIELD_NAME": "case_id",
+                    "FABRIC_TABLE_NAME": "cases",
+                    "FABRIC_FIELD_NAME": "case_id",
+                    "SEQUENCE_NAME": "CASE_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "cases",
+                    "TARGET_FIELD_NAME": "activity_id",
+                    "FABRIC_TABLE_NAME": "cases",
+                    "FABRIC_FIELD_NAME": "activity_id",
+                    "SEQUENCE_NAME": "ACTIVITY_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "case_note",
+                    "TARGET_FIELD_NAME": "case_id",
+                    "FABRIC_TABLE_NAME": "case_note",
+                    "FABRIC_FIELD_NAME": "case_id",
+                    "SEQUENCE_NAME": "CASE_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "case_note",
+                    "TARGET_FIELD_NAME": "note_id",
+                    "FABRIC_TABLE_NAME": "case_note",
+                    "FABRIC_FIELD_NAME": "note_id",
+                    "SEQUENCE_NAME": "NOTE_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "customer",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "customer",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "contract",
+                    "TARGET_FIELD_NAME": "contract_id",
+                    "FABRIC_TABLE_NAME": "contract",
+                    "FABRIC_FIELD_NAME": "contract_id",
+                    "SEQUENCE_NAME": "CONTRACT_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "contract",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "contract",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "activity",
+                    "TARGET_FIELD_NAME": "activity_id",
+                    "FABRIC_TABLE_NAME": "activity",
+                    "FABRIC_FIELD_NAME": "activity_id",
+                    "SEQUENCE_NAME": "ACTIVITY_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "activity",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "activity",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "collection",
+                    "TARGET_FIELD_NAME": "collection_id",
+                    "FABRIC_TABLE_NAME": "collection",
+                    "FABRIC_FIELD_NAME": "collection_id",
+                    "SEQUENCE_NAME": "COLLECTION_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "collection",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "collection",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "orders",
+                    "TARGET_FIELD_NAME": "order_id",
+                    "FABRIC_TABLE_NAME": "orders",
+                    "FABRIC_FIELD_NAME": "order_id",
+                    "SEQUENCE_NAME": "ORDER_ID_SEQ"
+                },
+                {
+                    "LU_NAME": "CUSTOMER",
+                    "TARGET_TABLE_NAME": "orders",
+                    "TARGET_FIELD_NAME": "customer_id",
+                    "FABRIC_TABLE_NAME": "orders",
+                    "FABRIC_FIELD_NAME": "customer_id",
+                    "SEQUENCE_NAME": "CUSTOMER_ID_SEQ"
+                }
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "LU_NAME": {
+                            "type": "string"
+                        },
+                        "TARGET_TABLE_NAME": {
+                            "type": "string"
+                        },
+                        "TARGET_FIELD_NAME": {
+                            "type": "string"
+                        },
+                        "FABRIC_TABLE_NAME": {
+                            "type": "string"
+                        },
+                        "FABRIC_FIELD_NAME": {
+                            "type": "string"
+                        },
+                        "SEQUENCE_NAME": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": [],
+    "parentType": "ConstTable"
+}

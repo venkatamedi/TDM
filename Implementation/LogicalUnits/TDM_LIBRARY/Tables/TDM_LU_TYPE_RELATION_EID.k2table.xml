@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TDM_LU_TYPE_RELATION_EID</Name>
+  <ID>TDM_LU_TYPE_RELATION_EID</ID>
+  <Version>4.0.4.2</Version>
+  <SerializationName />
+  <Columns>
+    <Column name="source_env" id="tblCol_5bfd92f6a4c74ac88d47a03ff357d382" index="0" datatype="Text" serializationName="source_env" />
+    <Column name="lu_type_1" id="tblCol_c1c2793e0bac4fb29c688a50aca21a9b" index="1" datatype="Text" serializationName="lu_type_1" />
+    <Column name="lu_type_2" id="tblCol_26aa2d05149f4897a40f33d7294986f1" index="2" datatype="Text" serializationName="lu_type_2" />
+    <Column name="lu_type1_eid" id="tblCol_52e6ceec4355454c8f60b2b8525b279f" index="3" datatype="Text" serializationName="lu_type1_eid" />
+    <Column name="lu_type2_eid" id="tblCol_5effbcf906974718b923cb149c99c488" index="4" datatype="Text" serializationName="lu_type2_eid" />
+    <Column name="creation_date" id="tblCol_15c0a239d24b46379d2e1a594a6543b8" index="5" datatype="Text" serializationName="creation_date" />
+    <Column name="version_name" id="tblCol_ffde9c6e8da34b45a4549006229b4f7b" index="6" datatype="text" />
+    <Column name="version_datetime" id="tblCol_7f66c732aaba436a8249f207384ad9d8" index="7" datatype="text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" columnsIdsList="tblCol_5bfd92f6a4c74ac88d47a03ff357d382,tblCol_c1c2793e0bac4fb29c688a50aca21a9b,tblCol_26aa2d05149f4897a40f33d7294986f1,tblCol_52e6ceec4355454c8f60b2b8525b279f,tblCol_5effbcf906974718b923cb149c99c488" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+</TableObject>

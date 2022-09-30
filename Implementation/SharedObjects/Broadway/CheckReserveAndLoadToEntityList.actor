@@ -1,0 +1,42 @@
+{
+    "type": "CheckReserveAndLoadToEntityList",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "SOURCE_IID",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "CheckReserveAndLoadToEntityList",
+            "mandatory": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "recordLoaded",
+            "schema": {
+                "type": "integer"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

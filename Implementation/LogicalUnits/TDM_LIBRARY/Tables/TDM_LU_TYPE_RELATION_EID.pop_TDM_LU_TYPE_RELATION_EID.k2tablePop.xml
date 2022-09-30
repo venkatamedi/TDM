@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>pop_TDM_LU_TYPE_RELATION_EID</ID>
+  <PopulationObjectName>pop_TDM_LU_TYPE_RELATION_EID</PopulationObjectName>
+  <TableName>TDM_LU_TYPE_RELATION_EID</TableName>
+  <RootItemID>f_9</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="dummy_input" id="fi_9.0" dataType="String" index="0" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="FunctionDiagramItemDataSave" id="f_9" name="fnPop_TDM_LU_TYPE_RELATION_EID" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnPop_TDM_LU_TYPE_RELATION_EID.k2function.xml">
+      <InputsList>
+        <Input id="fi_9.0" name="dummy_input" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_9.0" name="dummy_output" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="52" fromNodeOrder="0" fromItemID="f_9" fromColID="fo_9.0" toItemID="TDM_LU_TYPE_RELATION_EID" toColID="tblCol_c1c2793e0bac4fb29c688a50aca21a9b" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="TDM_LU_TYPE_RELATION_EID.pop_TDM_LU_TYPE_RELATION_EID.k2tablePop.xml" lastPartID="64">
+      <TableNode partID="0" name="TDM_LU_TYPE_RELATION_EID" pos="400.641785 0.744796753" width="308.6563" />
+      <FunctionMapNode id="0" L0="1" R0="2" partID="9" topLabel="fnPop_TDM_LU_TYPE_RELATION_EID (9)" pos="9.933339 22.1876984" size="270.1072 77.6567459" isRoot="true">
+        <KFunction>{"Name":"fnPop_TDM_LU_TYPE_RELATION_EID","ID":"f_9","Category":"TDM","FunctionLevel":0,"FunctionType2":1,"ReturnType":"void","RegisterAsLuDbFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"FunctionBody":"","IsRootFunction":true,"inputParams":[{"Name":"dummy_input","ID":"fi_9.0","Index":0,"DataType":"String","Comment":""}],"outputParams":[{"Name":"dummy_output","ID":"fo_9.0","Index":0,"DataType":"void","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="52" from="2" to="3" pointsArr="280.040558 63.56164 290.040558 63.56164 390.641785 43.8541641 400.641785 43.8541641" fromNodePartID="9" fromNodeColumnName="dummy_output" toNodePartID="0" toNodeColumnName="lu_type_1" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

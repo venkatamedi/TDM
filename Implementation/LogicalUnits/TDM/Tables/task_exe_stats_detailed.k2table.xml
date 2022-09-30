@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_exe_stats_detailed</Name>
+  <ID>tbl_task_exe_stats_detailed</ID>
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_61ada4a4d80a451992114103b8ad30e1" index="0" datatype="Integer" mandatory="true" />
+    <Column name="lu_name" id="tblCol_823d7e374fd645709b0f68d94388e059" index="1" datatype="Text" mandatory="true" />
+    <Column name="entity_id" id="tblCol_8ba6e691656548b1bcb8dc848e4cd61d" index="2" datatype="text" />
+    <Column name="target_entity_id" id="tblCol_36f5bdf3a31d48f8a5a7a44467f9f5fa" index="3" datatype="text" mandatory="true" />
+    <Column name="table_name" id="tblCol_faad0ce69eee45d092f5fd32a8b5a40e" index="4" datatype="Text" mandatory="true" />
+    <Column name="stage_name" id="tblCol_dbd8b9259b4941cbb857cf352be66954" index="5" datatype="text" />
+    <Column name="flow_name" id="tblCol_69115b10371e48b9808eb7d23d193409" index="6" datatype="text" />
+    <Column name="actor_name" id="tblCol_be61165bed3046bd8820f0e80f286e8d" index="7" datatype="text" />
+    <Column name="creation_date" id="tblCol_cf841ea16ca64f8c80b5aa8748c51ff9" index="8" datatype="Text" />
+    <Column name="source_count" id="tblCol_0d7c9212b50f4596a702cda5c1a0e24b" index="9" datatype="Text" />
+    <Column name="target_count" id="tblCol_ea1b01093ba1480b84f08fbf5a9de26e" index="10" datatype="Text" />
+    <Column name="diff" id="tblCol_71524825c7ff47429e9373409038babf" index="11" datatype="Text" />
+    <Column name="results" id="tblCol_7f4d043f4f2b4a43a329aca67c02d360" index="12" datatype="Text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="tblCol_61ada4a4d80a451992114103b8ad30e1,tblCol_823d7e374fd645709b0f68d94388e059,tblCol_36f5bdf3a31d48f8a5a7a44467f9f5fa,tblCol_faad0ce69eee45d092f5fd32a8b5a40e" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

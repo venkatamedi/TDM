@@ -1,0 +1,51 @@
+{
+    "type": "checkMainTableAndSequentialIID",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "INPUT_TABLE_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dbtable"
+            }
+        },
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "checkMainTableAndSequentialIID",
+            "hidden": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "SEQ_FIELD_NAME",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "SEQUENCE_NAME",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

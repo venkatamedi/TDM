@@ -1,0 +1,1229 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Get Field's Values",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Get Reserve Retention Value",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "RESERVE_RETENTION_PERIOD_VALUE",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Now",
+                            "actorType": {
+                                "parentType": "Now",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Reserve Retention Type__1",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "RESERVE_RETENTION_PERIOD_TYPE",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Target Entity ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TARGET_ENTITY_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Business Entity ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "BE_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get Target Environment ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TARGET_ENVIRONMENT_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get Task ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_TASK_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get Task Execution ID",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "TDM_TASK_EXE_ID",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get Session User",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "USER_NAME",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get User's Fabric Roles",
+                            "actorType": {
+                                "parentType": "FabricSetRead",
+                                "inputs": [
+                                    {
+                                        "name": "key",
+                                        "const": "USER_FABRIC_ROLES",
+                                        "isDefault": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 7",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "ToNumber1",
+                            "actorType": {
+                                "parentType": "ToNumber",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Logger2",
+                            "actorType": {
+                                "parentType": "Logger",
+                                "inputs": [
+                                    {
+                                        "name": "message",
+                                        "const": "NOW: ${now}"
+                                    },
+                                    {
+                                        "name": "level",
+                                        "const": "info"
+                                    },
+                                    {
+                                        "name": "now",
+                                        "schema": {},
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Calculate Retention",
+                    "dependsOnList": [
+                        "Stage 7"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "NotEquals1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "NotEquals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "number"
+                                        },
+                                        "const": 0
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "GetNewEndDate1",
+                            "actorType": {
+                                "parentType": "GetNewEndDate",
+                                "inputs": [
+                                    {
+                                        "name": "retentionPeriodValue",
+                                        "schema": {
+                                            "type": "number"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [
+                        "Stage 7"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "infinity Date",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": "infinity"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [
+                        "Calculate Retention"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Date Format",
+                            "actorType": {
+                                "parentType": "DateFormat",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Logger3",
+                            "actorType": {
+                                "parentType": "Logger",
+                                "inputs": [
+                                    {
+                                        "name": "message",
+                                        "const": "After retention: ${now} "
+                                    },
+                                    {
+                                        "name": "level",
+                                        "const": "info"
+                                    },
+                                    {
+                                        "name": "now",
+                                        "schema": {},
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 9",
+                    "dependsOnList": [
+                        "Stage 1"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 8",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Const1",
+                            "actorType": {
+                                "parentType": "Const",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "DbFetchFirstRow1",
+                            "actorType": {
+                                "parentType": "DbFetchFirstRow",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "SELECT TDM_RESERVED_ENTITIES.reserve_owner, TDM_RESERVED_ENTITIES.start_datetime, TDM_RESERVED_ENTITIES.end_datetime\r\nFROM TDM_RESERVED_ENTITIES\r\nWHERE TDM_RESERVED_ENTITIES.entity_id = ${entityId} AND \r\nTDM_RESERVED_ENTITIES.be_id = ${beId} AND\r\nTDM_RESERVED_ENTITIES.env_id = ${envId} AND\r\nTDM_RESERVED_ENTITIES.start_datetime <= timezone('UTC', now()) AND\r\n(TDM_RESERVED_ENTITIES.end_datetime IS NULL OR TDM_RESERVED_ENTITIES.end_datetime >= timezone('UTC', now()))\r\nUNION SELECT null as reserve_owner, null as start_datetime, null as end_datetime\r\nLIMIT 1"
+                                    },
+                                    {
+                                        "name": "entityId",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "beId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "envId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "reserve_owner": {
+                                                    "type": "string"
+                                                },
+                                                "start_datetime": {
+                                                    "type": "date"
+                                                },
+                                                "end_datetime": {
+                                                    "type": "date"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Logger1",
+                            "actorType": {
+                                "parentType": "Logger",
+                                "inputs": [
+                                    {
+                                        "name": "message",
+                                        "const": "After date format: ${date}"
+                                    },
+                                    {
+                                        "name": "level",
+                                        "const": "info"
+                                    },
+                                    {
+                                        "name": "date",
+                                        "schema": {},
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check Record Exists",
+                    "dependsOnList": [
+                        "Stage 8"
+                    ],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "NotNull1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "NotNull",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Compare Owner with User",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "GetNewEndDate2",
+                            "actorType": {
+                                "parentType": "GetNewEndDate",
+                                "inputs": [
+                                    {
+                                        "name": "retentionPeriodValue",
+                                        "schema": {
+                                            "type": "number"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "StringFormat1",
+                            "minHeight": 354,
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "Entity cannot be reserved by user ${userName} as it is reseved by user: ${owner}"
+                                    },
+                                    {
+                                        "name": "owner",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "userName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Insert New Reservation",
+                    "dependsOnList": [
+                        "Stage 8"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "ErrorHandler1",
+                            "onError": "result",
+                            "actorType": {
+                                "parentType": "ErrorHandler",
+                                "inputs": [
+                                    {
+                                        "name": "config",
+                                        "const": [
+                                            {
+                                                "exceptionKey": "java.lang.Exception",
+                                                "conditions": {
+                                                    "message": ""
+                                                },
+                                                "actions": {
+                                                    "suppress": false,
+                                                    "log": true,
+                                                    "flowName": "PopulateTableErrorsWithFailed"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Insert Record Into TDM_RESERVED_ENTITIES",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "INSERT INTO TDM_RESERVED_ENTITIES (entity_id, be_id, env_id, task_id, task_execution_id, start_datetime, end_datetime, reserve_owner) \r\n(SELECT ${entityId}, ${beId}, ${envId}, ${taskId}, ${taskExecutionId}, timezone('UTC', now()), \r\n(CASE WHEN ${newEndDate} = 'infinity' THEN NULL ELSE to_timestamp(${newEndDate}, 'YYYY-MM-DD HH24:MI:SS.MS') END), ${userName})\r\nON CONFLICT ON CONSTRAINT TDM_RESERVED_ENTITIES_PKEY DO UPDATE SET task_id = ${taskId}, task_execution_id = ${taskExecutionId}, \r\n    start_datetime = timezone('UTC', now()), end_datetime = (CASE WHEN ${newEndDate} = 'infinity' THEN NULL ELSE to_timestamp(${newEndDate}, 'YYYY-MM-DD HH24:MI:SS.MS') END), reserve_owner = ${userName}\r\nWHERE TDM_RESERVED_ENTITIES.entity_id = ${entityId} AND \r\nTDM_RESERVED_ENTITIES.be_id = ${beId} AND\r\nTDM_RESERVED_ENTITIES.env_id = ${envId}"
+                                    },
+                                    {
+                                        "name": "entityId",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "beId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "envId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "taskId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "taskExecutionId",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "newEndDate",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "userName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [
+                        "Stage 8"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Check Owner",
+                    "dependsOnList": [
+                        "Check Record Exists"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Check if the user is the owner",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": true
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Update the End date",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "TDM"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "UPDATE TDM_RESERVED_ENTITIES set task_id = ${taskID}, task_execution_id = ${taskExecID}, end_datetime = (CASE WHEN ${newEndDate} = 'infinity' THEN NULL ELSE to_timestamp(${newEndDate}, 'YYYY-MM-DD HH24:MI:SS.MS') END)\r\nWHERE entity_id = ${entityID} AND be_id = ${beID} AND env_id = ${envID}"
+                                    },
+                                    {
+                                        "name": "taskID",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "taskExecID",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "newEndDate",
+                                        "schema": {
+                                            "type": "date"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "entityID",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "beID",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "envID",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 6",
+                    "dependsOnList": [
+                        "Check Record Exists"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "hasElse": true,
+                    "actors": [
+                        {
+                            "name": "ErrorHandler2",
+                            "onError": "result",
+                            "actorType": {
+                                "parentType": "ErrorHandler",
+                                "inputs": [
+                                    {
+                                        "name": "config",
+                                        "const": [
+                                            {
+                                                "exceptionKey": "java.lang.Exception",
+                                                "conditions": {
+                                                    "message": ""
+                                                },
+                                                "actions": {
+                                                    "suppress": false,
+                                                    "log": true,
+                                                    "flowName": "PopulateTableErrorsWithFailed"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Throw Exception, reserved by other",
+                            "actorType": {
+                                "parentType": "Fail",
+                                "inputs": [
+                                    {
+                                        "name": "message",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [
+                        "Insert New Reservation"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                },
+                {
+                    "name": "Stage 5",
+                    "dependsOnList": [
+                        "Stage 4"
+                    ],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Get Reserve Retention Value",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ToNumber1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Now",
+                "name": "date"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate1",
+                "name": "nowDate"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Now",
+                "name": "date"
+            },
+            "rightPort": {
+                "actor": "Logger2",
+                "name": "now"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Reserve Retention Type__1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate1",
+                "name": "retentionPeriodType"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Reserve Retention Type__1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate2",
+                "name": "retentionPeriodType"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "entityId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "entityId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "entityID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Business Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "beId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Business Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "beId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Business Entity ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "beID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Environment ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "envId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Environment ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "envId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Target Environment ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "envID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "taskId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "taskID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task Execution ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "taskExecutionId"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Task Execution ID",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "taskExecID"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Session User",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Compare Owner with User",
+                "name": "b"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Session User",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "userName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Session User",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "StringFormat1",
+                "name": "userName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToNumber1",
+                "name": "number"
+            },
+            "rightPort": {
+                "actor": "NotEquals1",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToNumber1",
+                "name": "number"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate1",
+                "name": "retentionPeriodValue"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ToNumber1",
+                "name": "number"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate2",
+                "name": "retentionPeriodValue"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "GetNewEndDate1",
+                "name": "newEndDate"
+            },
+            "rightPort": {
+                "actor": "Date Format",
+                "name": "date"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "GetNewEndDate1",
+                "name": "newEndDate"
+            },
+            "rightPort": {
+                "actor": "Logger3",
+                "name": "now"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "infinity Date",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "Const1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Date Format",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Const1",
+                "name": "value"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Date Format",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Logger1",
+                "name": "date"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Const1",
+                "name": "value"
+            },
+            "rightPort": {
+                "actor": "Insert Record Into TDM_RESERVED_ENTITIES",
+                "name": "newEndDate"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Compare Owner with User",
+                "name": "a"
+            },
+            "path": [
+                "reserve_owner"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "NotNull1",
+                "name": "value"
+            },
+            "path": [
+                "reserve_owner"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "GetNewEndDate2",
+                "name": "nowDate"
+            },
+            "path": [
+                "start_datetime"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "DbFetchFirstRow1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "StringFormat1",
+                "name": "owner"
+            },
+            "path": [
+                "reserve_owner"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Compare Owner with User",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Check if the user is the owner",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "GetNewEndDate2",
+                "name": "newEndDate"
+            },
+            "rightPort": {
+                "actor": "Update the End date",
+                "name": "newEndDate"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "StringFormat1",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Throw Exception, reserved by other",
+                "name": "message"
+            }
+        }
+    ]
+}

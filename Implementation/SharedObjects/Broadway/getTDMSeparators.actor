@@ -1,0 +1,55 @@
+{
+    "type": "getTDMSeparators",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "getTDMSeparators"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "IID_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "IID_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "IID_OPEN_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "IID_OPEN_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "IID_CLOSE_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "IID_CLOSE_SEPARATOR",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

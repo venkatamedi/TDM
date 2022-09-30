@@ -1,0 +1,128 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "JavaScript1",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "var retention_in_seconds = 0;\r\n\r\nswitch (retentionPeriodType) {\r\n    case \"Minutes\":\r\n        retention_in_seconds = Math.round(retentionPeriodValue * 60);\r\n        break;\r\n    case \"Hours\":\r\n        retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60);\r\n        break;\r\n    case \"Days\":\r\n        retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24);\r\n        break;\r\n    case \"Weeks\":\r\n        retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24 * 7);\r\n        break;\r\n    case \"Years\":\r\n        retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24 * 365);\r\n        break;\r\n}\r\n\r\nretention_in_seconds",
+                                            "script": "var retention_in_seconds = 0;\n\nswitch (retentionPeriodType) {\n  case \"Minutes\":\n    retention_in_seconds = Math.round(retentionPeriodValue * 60);\n    break;\n\n  case \"Hours\":\n    retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60);\n    break;\n\n  case \"Days\":\n    retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24);\n    break;\n\n  case \"Weeks\":\n    retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24 * 7);\n    break;\n\n  case \"Years\":\n    retention_in_seconds = Math.round(retentionPeriodValue * 60 * 60 * 24 * 365);\n    break;\n}\n\nretention_in_seconds;"
+                                        }
+                                    },
+                                    {
+                                        "name": "retentionPeriodType",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "retentionPeriodValue",
+                                        "schema": {
+                                            "type": "integer"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "DateAdd1",
+                            "actorType": {
+                                "parentType": "DateAdd",
+                                "inputs": [
+                                    {
+                                        "name": "seconds",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "JavaScript1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "DateAdd1",
+                "name": "seconds"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "retentionPeriodType"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "retentionPeriodType"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "retentionPeriodValue"
+            },
+            "rightPort": {
+                "actor": "JavaScript1",
+                "name": "retentionPeriodValue"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "nowDate"
+            },
+            "rightPort": {
+                "actor": "DateAdd1",
+                "name": "date"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "DateAdd1",
+                "name": "date"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "newEndDate"
+            }
+        }
+    ]
+}

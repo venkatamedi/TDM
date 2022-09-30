@@ -1,0 +1,45 @@
+{
+    "type": "getTableSequenceMapping",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "LU_NAME",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit"
+            }
+        },
+        {
+            "name": "FABRIC_TABLE_NAME",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "getTableSequenceMapping",
+            "mandatory": true
+        }
+    ],
+    "outputs": [
+        {
+            "name": "tableSeqList",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": null
+                }
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

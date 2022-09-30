@@ -1,0 +1,25 @@
+{
+    "type": "createSequenceActors",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "OVERRIDE_EXISTING_FLOWS",
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "createSequenceActors",
+            "mandatory": true
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

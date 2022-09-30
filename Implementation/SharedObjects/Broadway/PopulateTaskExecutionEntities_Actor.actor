@@ -1,0 +1,31 @@
+{
+    "type": "PopulateTaskExecutionEntities_Actor",
+    "actorClass": null,
+    "parentType": "InnerFlow",
+    "inputs": [
+        {
+            "name": "idType",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dropdown",
+                "options": [
+                    "REFERENCE",
+                    "ENTITY"
+                ]
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "PopulateTaskExecutionEntities"
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

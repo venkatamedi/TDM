@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TDM_SEQ_MAPPING</Name>
+  <ID>TDM_SEQ_MAPPING</ID>
+  <Version>4.0.4.2</Version>
+  <SerializationName />
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_4cddafdd4da040c49dab0615a03320d3" index="0" datatype="Integer" serializationName="task_execution_id" />
+    <Column name="lu_type" id="tblCol_45fb36be28624964aeb0d0cc8e761c67" index="1" datatype="Text" serializationName="lu_type" />
+    <Column name="source_env" id="tblCol_62c0d71a7c1048bc80d97078726a4b59" index="2" datatype="Text" serializationName="source_env" />
+    <Column name="entity_target_id" id="tblCol_b375d11384734a018e2d5d39ca2fa2cb" index="3" datatype="Text" serializationName="entity_target_id" />
+    <Column name="seq_name" id="tblCol_ee56597990294e73b16e15794761e74b" index="4" datatype="Text" serializationName="seq_name" />
+    <Column name="table_name" id="tblCol_dbb9df075b2a457d901a58ff2da4cfbb" index="5" datatype="Text" serializationName="table_name" />
+    <Column name="column_name" id="tblCol_94af44e1941b4ee7b0b2feeea7c7accb" index="6" datatype="Text" serializationName="column_name" />
+    <Column name="source_id" id="tblCol_d8055206d69648ba9eb56e64799a97a8" index="7" datatype="Text" serializationName="source_id" />
+    <Column name="target_id" id="tblCol_520f6d0eac0f4d35a44f563b4d8fe745" index="8" datatype="Text" serializationName="target_id" />
+    <Column name="is_instance_id" id="tblCol_62d0b602a7114e4589a28c3eed6b059c" index="9" datatype="Text" serializationName="is_instance_id" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" instanceOnly="true" columnsIdsList="tblCol_45fb36be28624964aeb0d0cc8e761c67,tblCol_d8055206d69648ba9eb56e64799a97a8,tblCol_62d0b602a7114e4589a28c3eed6b059c" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

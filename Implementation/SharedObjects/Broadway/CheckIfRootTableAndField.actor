@@ -1,0 +1,50 @@
+{
+    "type": "CheckIfRootTableAndField",
+    "parentType": "InnerFlow",
+    "actorClass": null,
+    "inputs": [
+        {
+            "name": "tableName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.dbtable"
+            }
+        },
+        {
+            "name": "fieldName",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "luName",
+            "schema": {
+                "type": "string"
+            },
+            "editor": {
+                "id": "com.k2view.logicalUnit",
+                "addEmptyEntry": true
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "CheckIfRootTableAndField"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "root_indicator",
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    ],
+    "tags": [
+        "tdm"
+    ]
+}

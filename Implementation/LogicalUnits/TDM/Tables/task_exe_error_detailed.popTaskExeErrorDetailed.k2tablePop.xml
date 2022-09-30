@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>popTaskExeErrorDetailed</ID>
+  <PopulationObjectName>popTaskExeErrorDetailed</PopulationObjectName>
+  <TableName>task_exe_error_detailed</TableName>
+  <RootItemID>f_32</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="task_execution_id" id="fi_32.0" dataType="String" index="0" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="FunctionDiagramItemDataSave" id="f_32" name="fnPopTaskExeErrDetailed" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnPopTaskExeErrDetailed.k2function.xml">
+      <InputsList>
+        <Input id="fi_32.0" name="task_execution_id" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_32.0" name="task_execution_id" />
+        <Output id="fo_32.1" name="lu_name" />
+        <Output id="fo_32.2" name="entity_id" />
+        <Output id="fo_32.3" name="iid" />
+        <Output id="fo_32.4" name="target_entity_id" />
+        <Output id="fo_32.5" name="error_category" />
+        <Output id="fo_32.6" name="error_code" />
+        <Output id="fo_32.7" name="error_message" />
+        <Output id="fo_32.8" name="creation_date" />
+        <Output id="fo_32.9" name="flow_name" />
+        <Output id="fo_32.10" name="stage_name" />
+        <Output id="fo_32.11" name="actor_name" />
+        <Output id="fo_32.12" name="actor_parameters" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="43" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.0" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_d513dfe8417547ce95874e3e9a6c6997" />
+    <Link partId="44" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.1" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_bac26b0f48e142e9b23b92d0bef4b2b7" />
+    <Link partId="45" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.2" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_c93dd33176254fff95ffcb83b4f0d35b" />
+    <Link partId="46" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.3" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_697883ae58554fb091aad08b13f88c8d" />
+    <Link partId="47" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.4" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_adae9beb27b244a7b2037fe4f68b7bc3" />
+    <Link partId="79" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.5" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_fe11ff5d21724f08a235c309b97dc18e" />
+    <Link partId="148" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.6" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_afdb27307f694ee09186c3301058925b" />
+    <Link partId="149" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.7" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_3c705bd26f46450b829e80eb9692c853" />
+    <Link partId="80" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.8" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_e83435e47c2546c68d8c9e64978b94b0" />
+    <Link partId="114" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.9" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_2189d0857f8f4240af15899423b2775f" />
+    <Link partId="115" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.10" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_c06f355e2c26475fae6ad466b14d10f7" />
+    <Link partId="116" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.11" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_ab0f387f15244d4896431dbfb33582ed" />
+    <Link partId="117" fromNodeOrder="0" fromItemID="f_32" fromColID="fo_32.12" toItemID="tbl_task_exe_error_detailed" toColID="tblCol_f06e0c8b44fd4ef3bb4f775327b86d96" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="task_exe_error_detailed.popTaskExeErrorDetailed.k2tablePop.xml" lastPartID="179">
+      <TableNode partID="0" name="task_exe_error_detailed" pos="436 0.635421753" width="253" />
+      <FunctionMapNode id="0" R0="1" R1="2" R2="3" R3="4" R4="5" R5="6" R6="7" R7="8" R8="9" R9="10" R10="11" R11="12" R12="13" L0="14" partID="32" topLabel="fnPopTaskExeErrDetailed (32)" pos="3.32398558 11.9315042" size="237.056519 182.039047" isRoot="true">
+        <KFunction>{"Name":"fnPopTaskExeErrDetailed","ID":"f_32","Category":"Root","Version":"6.4.0.34","FunctionLevel":0,"FunctionType2":1,"ReturnType":"void","RegisterAsLuDbFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"This function populates the TASK_EXE_ERROR_DETAILED","Language":1,"FunctionBody":"","IsRootFunction":true,"inputParams":[{"Name":"task_execution_id","ID":"fi_32.0","Index":0,"DataType":"String","Comment":""}],"outputParams":[{"Name":"task_execution_id","ID":"fo_32.0","Index":0,"DataType":"String","Comment":""},{"Name":"lu_name","ID":"fo_32.1","Index":1,"DataType":"String","Comment":""},{"Name":"entity_id","ID":"fo_32.2","Index":2,"DataType":"String","Comment":""},{"Name":"iid","ID":"fo_32.3","Index":3,"DataType":"String","Comment":""},{"Name":"target_entity_id","ID":"fo_32.4","Index":4,"DataType":"String","Comment":""},{"Name":"error_category","ID":"fo_32.5","Index":5,"DataType":"String","Comment":""},{"Name":"error_code","ID":"fo_32.6","Index":6,"DataType":"String","Comment":""},{"Name":"error_message","ID":"fo_32.7","Index":7,"DataType":"String","Comment":""},{"Name":"creation_date","ID":"fo_32.8","Index":8,"DataType":"String","Comment":""},{"Name":"flow_name","ID":"fo_32.9","Index":9,"DataType":"String","Comment":""},{"Name":"stage_name","ID":"fo_32.10","Index":10,"DataType":"String","Comment":""},{"Name":"actor_name","ID":"fo_32.11","Index":11,"DataType":"String","Comment":""},{"Name":"actor_parameters","ID":"fo_32.12","Index":12,"DataType":"String","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="43" from="1" to="15" pointsArr="240.380508 33.0591049 250.380508 33.0591049 426 31.6718788 436 31.6718788" fromNodePartID="32" fromNodeColumnName="task_execution_id" toNodePartID="0" toNodeColumnName="task_execution_id" />
+      <Link partID="44" from="2" to="16" pointsArr="240.380508 45.13202 250.380508 45.13202 426 43.7447968 436 43.7447968" fromNodePartID="32" fromNodeColumnName="lu_name" toNodePartID="0" toNodeColumnName="lu_name" />
+      <Link partID="45" from="3" to="17" pointsArr="240.380508 57.2049332 250.380508 57.2049332 426 55.81771 436 55.81771" fromNodePartID="32" fromNodeColumnName="entity_id" toNodePartID="0" toNodeColumnName="entity_id" />
+      <Link partID="46" from="4" to="18" pointsArr="240.380508 69.27785 250.380508 69.27785 426 67.890625 436 67.890625" fromNodePartID="32" fromNodeColumnName="iid" toNodePartID="0" toNodeColumnName="iid" />
+      <Link partID="47" from="5" to="19" pointsArr="240.380508 81.35077 250.380508 81.35077 426 79.96354 436 79.96354" fromNodePartID="32" fromNodeColumnName="target_entity_id" toNodePartID="0" toNodeColumnName="target_entity_id" />
+      <Link partID="79" from="6" to="20" pointsArr="240.380508 93.4236755 250.380508 93.4236755 426 92.03645 436 92.03645" fromNodePartID="32" fromNodeColumnName="error_category" toNodePartID="0" toNodeColumnName="error_category" />
+      <Link partID="80" from="9" to="21" pointsArr="240.380508 129.642441 250.380508 129.642441 426 128.255219 436 128.255219" fromNodePartID="32" fromNodeColumnName="creation_date" toNodePartID="0" toNodeColumnName="creation_date" />
+      <Link partID="114" from="10" to="22" pointsArr="240.380508 141.715363 250.380508 141.715363 426 140.32814 436 140.32814" fromNodePartID="32" fromNodeColumnName="flow_name" toNodePartID="0" toNodeColumnName="flow_name" />
+      <Link partID="115" from="11" to="23" pointsArr="240.380508 153.788284 250.380508 153.788284 426 152.401062 436 152.401062" fromNodePartID="32" fromNodeColumnName="stage_name" toNodePartID="0" toNodeColumnName="stage_name" />
+      <Link partID="116" from="12" to="24" pointsArr="240.380508 165.861191 250.380508 165.861191 426 164.473969 436 164.473969" fromNodePartID="32" fromNodeColumnName="actor_name" toNodePartID="0" toNodeColumnName="actor_name" />
+      <Link partID="117" from="13" to="25" pointsArr="240.380508 177.9341 250.380508 177.9341 426 176.546875 436 176.546875" fromNodePartID="32" fromNodeColumnName="actor_parameters" toNodePartID="0" toNodeColumnName="actor_parameters" />
+      <Link partID="148" from="7" to="26" pointsArr="240.380508 105.4966 250.380508 105.4966 426 104.109375 436 104.109375" fromNodePartID="32" fromNodeColumnName="error_code" toNodePartID="0" toNodeColumnName="error_code" />
+      <Link partID="149" from="8" to="27" pointsArr="240.380508 117.569519 250.380508 117.569519 426 116.1823 436 116.1823" fromNodePartID="32" fromNodeColumnName="error_message" toNodePartID="0" toNodeColumnName="error_message" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>invoice</Name>
+  <ID>tbl_invoice</ID>
+  <Columns>
+    <Column name="subscriber_id" id="subscriber_id" index="0" datatype="Integer" />
+    <Column name="invoice_id" id="invoice_id" index="1" datatype="Integer" mandatory="true" />
+    <Column name="issued_date" id="issued_date" index="2" datatype="Text" />
+    <Column name="due_date" id="due_date" index="3" datatype="Text" />
+    <Column name="status" id="status" index="4" datatype="Text" />
+    <Column name="balance" id="balance" index="5" datatype="Integer" />
+    <Column name="invoice_image" id="invoice_image" index="6" datatype="BLOB" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" pk="true" unique="true" instanceOnly="true" columnsIdsList="invoice_id" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00" />
+  <TriggersList />
+</TableObject>

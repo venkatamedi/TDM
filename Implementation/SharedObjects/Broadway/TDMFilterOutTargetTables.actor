@@ -1,0 +1,63 @@
+{
+    "type": "TDMFilterOutTargetTables",
+    "badge": "TD",
+    "tags": [
+        "basic"
+    ],
+    "inputs": [
+        {
+            "name": "table",
+            "const": [
+                {
+                    "table_regex": "FABRIC_TDM_ROOT",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                },
+                {
+                    "table_regex": "INSTANCE_TABLE_COUNT",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                },
+                {
+                    "table_regex": "LU_PARAMS",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                },
+                {
+                    "table_regex": "TDM_LU_TYPE_REL_TAR_EID",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                },
+                {
+                    "table_regex": "TDM_LU_TYPE_RELATION_EID",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                },
+                {
+                    "table_regex": "TAR_.*",
+                    "active": true,
+                    "lu_name": "ALL_LUS"
+                }
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "table_regex": {
+                            "type": "string"
+                        },
+                        "active": {
+                            "type": "boolean"
+                        },
+                        "lu_name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": [],
+    "parentType": "ConstTable"
+}

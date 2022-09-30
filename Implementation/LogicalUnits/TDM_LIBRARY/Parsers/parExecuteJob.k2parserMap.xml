@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParserMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="5.3.2.0">
+  <Name>parExecuteJob</Name>
+  <MapType>ParserMap</MapType>
+  <RootItemID>f_3</RootItemID>
+  <SimpleObject>false</SimpleObject>
+  <TargetsList>
+    <Target xsi:type="ParserMapTargetItem">
+      <TargetName>execSplitParser</TargetName>
+      <Module>Parser_Map</Module>
+      <ItemsList>
+        <Item xsi:type="FunctionDiagramItemDataSave" id="f_3" name="fnSplitParser" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnSplitParser.k2function.xml">
+          <InputsList>
+            <Input id="fi_3.0" name="luName" />
+            <Input id="fi_3.1" name="engine" defaultValue="6" />
+          </InputsList>
+          <OutputsList>
+            <Output id="fo_3.0" name="parserName" />
+            <Output id="fo_3.1" name="currSplitNumber" />
+          </OutputsList>
+        </Item>
+        <Item xsi:type="ParserRecordTypeDataSave" id="rt_execSplitParser" name="execSplitParser" nodeOrder="1" module="ParserRecordType" mapObjectModule="ParserRecordType" parentParser="parExecuteJob">
+          <InputsList>
+            <Input xsi:type="ParserRecordTypeDataSaveColumnInput" id="rtCol_f1896a91738f4e0a8dc421467d519aae" name="parserName" dataType="Text" />
+            <Input xsi:type="ParserRecordTypeDataSaveColumnInput" id="rtCol_d9676b2689184e85a84d8067d43e0c09" name="currSplitNumber" dataType="Text" />
+          </InputsList>
+          <OutputsList />
+          <RecordTypeKeyColumn />
+          <PkColumnsList>
+            <RecordTypePkColumn id="rtCol_f1896a91738f4e0a8dc421467d519aae" name="parserName" pkType="Partition_Key" />
+            <RecordTypePkColumn id="rtCol_d9676b2689184e85a84d8067d43e0c09" name="currSplitNumber" pkType="Clustering_Key" />
+          </PkColumnsList>
+          <ClusteringKeyOrder>ASC</ClusteringKeyOrder>
+          <CompactionStrategy>SizeTieredCompactionStrategy</CompactionStrategy>
+          <TimeToLive>0</TimeToLive>
+          <CreateStatement><![CDATA[]]></CreateStatement>
+        </Item>
+      </ItemsList>
+      <LinksList>
+        <Link partId="8" fromNodeOrder="0" fromItemID="f_3" fromColID="fo_3.0" toItemID="rt_execSplitParser" toColID="rtCol_f1896a91738f4e0a8dc421467d519aae" />
+        <Link partId="9" fromNodeOrder="0" fromItemID="f_3" fromColID="fo_3.1" toItemID="rt_execSplitParser" toColID="rtCol_d9676b2689184e85a84d8067d43e0c09" />
+      </LinksList>
+      <ParserMapRecordType id="rt_execSplitParser" name="execSplitParser" parentParser="parExecuteJob">
+        <Active xsi:nil="true" />
+        <RecordTypeKeyColumn />
+        <Columns>
+          <Column id="rtCol_f1896a91738f4e0a8dc421467d519aae" name="parserName" index="0">
+            <DataType>Text</DataType>
+          </Column>
+          <Column id="rtCol_d9676b2689184e85a84d8067d43e0c09" name="currSplitNumber" index="1">
+            <DataType>Text</DataType>
+          </Column>
+        </Columns>
+        <PkColumns>
+          <PkColumn id="rtCol_f1896a91738f4e0a8dc421467d519aae" name="parserName" pkType="Partition_Key" />
+          <PkColumn id="rtCol_d9676b2689184e85a84d8067d43e0c09" name="currSplitNumber" pkType="Clustering_Key" />
+        </PkColumns>
+        <CreateStatement><![CDATA[]]></CreateStatement>
+      </ParserMapRecordType>
+    </Target>
+  </TargetsList>
+  <DiagramGraph>
+    <Graph name="parExecuteJob.k2parserMap.xml" lastPartID="15" mapType="ParserMap" logicalUnitNodeType="Full_Hierarchy">
+      <ParserRecordTypeTargetNode partID="0" name="execSplitParser" pos="227.038055 12.9270859" size="312.9996 74.14583" parserName="parExecuteJob" isTargetNode="true" isRoot="false" />
+      <FunctionMapNode id="0" L0="1" L1="2" R0="3" R1="4" partID="3" topLabel="fnSplitParser (3)" pos="9.99927 0.3815117" size="172.039185 49.2369728" isRoot="true">
+        <KFunction>{"Name":"fnSplitParser","ID":"f_3","Category":"ParserExecuteJob","FunctionLevel":0,"FunctionType":0,"FunctionType2":1,"RegisterAsLuDbFunction":false,"SaveToDLUR":false,"ApiFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"IsRootFunction":true,"inputParams":[{"Name":"luName","ID":"fi_3.0","Index":0,"DataType":"String"},{"Name":"engine","ID":"fi_3.1","Index":1,"DataType":"Integer","MapDefaultValue":"6"}],"outputParams":[{"Name":"parserName","ID":"fo_3.0","Index":0,"DataType":"String","Comment":""},{"Name":"currSplitNumber","ID":"fo_3.1","Index":1,"DataType":"String","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link from="3" to="5" partID="8" pointsArr="182.038452 21.5091133 192.038452 21.5091133 194.53772 25 214.53772 25 217.038055 43.9635429 227.038055 43.9635429" fromNodePartID="3" fromNodeColumnName="parserName" toNodePartID="0" toNodeColumnName="parserName" />
+      <Link from="4" to="6" partID="9" pointsArr="182.038452 33.5820274 192.038452 33.5820274 194.53772 50 214.53772 50 217.038055 56.03646 227.038055 56.03646" fromNodePartID="3" fromNodeColumnName="currSplitNumber" toNodePartID="0" toNodeColumnName="currSplitNumber" />
+    </Graph>
+  </DiagramGraph>
+  <Active>true</Active>
+  <ScheduleType>TimeInterval</ScheduleType>
+  <syncEvery>00:00:00</syncEvery>
+</ParserMap>

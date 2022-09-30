@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TASK_EXECUTION</Name>
+  <ID>tbl_TASK_EXECUTION</ID>
+  <EntityId>tblCol_e38506569e27408688f8e7f46f3c3eaf</EntityId>
+  <Columns>
+    <Column name="TASK_EXECUTION_ID" id="tblCol_e38506569e27408688f8e7f46f3c3eaf" index="0" datatype="text" />
+  </Columns>
+  <IndexesList />
+  <EnrichmentList>
+    <Enrichment>
+      <Name>fnDelTaskFromSource</Name>
+      <Type>Function</Type>
+    </Enrichment>
+    <Enrichment>
+      <Name>fnUpdateTaskSyncStatus</Name>
+      <Type>Function</Type>
+    </Enrichment>
+    <Enrichment>
+      <Name>fnUpdateTaskSummaryTable</Name>
+      <Type>Function</Type>
+    </Enrichment>
+  </EnrichmentList>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

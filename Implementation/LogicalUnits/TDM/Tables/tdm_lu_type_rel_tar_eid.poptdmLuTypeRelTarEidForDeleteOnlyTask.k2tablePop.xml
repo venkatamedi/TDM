@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TablePopulationObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>poptdmLuTypeRelTarEidForDeleteOnlyTask</ID>
+  <PopulationObjectName>poptdmLuTypeRelTarEidForDeleteOnlyTask</PopulationObjectName>
+  <TableName>tdm_lu_type_rel_tar_eid</TableName>
+  <RootItemID>f_11</RootItemID>
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>false</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <SimpleObject>false</SimpleObject>
+  <IidFinderProp />
+  <InputArguments>
+    <Arg name="load_entity" id="fi_11.0" dataType="Integer" index="0" />
+    <Arg name="delete_before_load" id="fi_11.1" dataType="Integer" index="1" />
+  </InputArguments>
+  <ItemsList>
+    <Item xsi:type="FunctionDiagramItemDataSave" id="f_11" name="fnRootPopTdmLuTypeRelTarEidForDeleteOnly" nodeOrder="0" module="Function" mapObjectModule="Function" fileName="fnRootPopTdmLuTypeRelTarEidForDeleteOnly.k2function.xml">
+      <InputsList>
+        <Input id="fi_11.0" name="load_entity" />
+        <Input id="fi_11.1" name="delete_before_load" />
+      </InputsList>
+      <OutputsList>
+        <Output id="fo_11.0" name="target_env" />
+        <Output id="fo_11.1" name="lu_type_1" />
+        <Output id="fo_11.2" name="lu_type_2" />
+        <Output id="fo_11.3" name="lu_type1_eid" />
+        <Output id="fo_11.4" name="lu_type2_eid" />
+        <Output id="fo_11.5" name="creation_date" />
+      </OutputsList>
+    </Item>
+  </ItemsList>
+  <LinksList>
+    <Link partId="27" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.0" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_aa2765289815492b9912119b9822abb6" />
+    <Link partId="29" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.1" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_a47d5ac92aeb4a9092901db24e3315a5" />
+    <Link partId="30" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.2" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_f78caadcd5674eb4a45d7bb801f3a59e" />
+    <Link partId="31" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.3" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_14a022ffef5a4bf58078c76905d88e7d" />
+    <Link partId="32" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.4" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_2c468e5038fb4eb2a018987c992aaa4e" />
+    <Link partId="80" fromNodeOrder="0" fromItemID="f_11" fromColID="fo_11.5" toItemID="tbl_tdm_lu_type_rel_tar_eid" toColID="tblCol_5b0b23b0398942cf981ac84992c97f75" />
+  </LinksList>
+  <ModeKeyColumnIDs />
+  <DiagramGraph>
+    <Graph name="tdm_lu_type_rel_tar_eid.poptdmLuTypeRelTarEidForDeleteOnlyTask.k2tablePop.xml" lastPartID="148">
+      <TableNode partID="0" name="tdm_lu_type_rel_tar_eid" pos="587.2611 74" width="306.063049" />
+      <FunctionMapNode id="0" L0="1" L1="2" R0="3" R1="4" R2="5" R3="6" R4="7" R5="8" partID="11" topLabel="fnRootPopTdmLuTypeRelTarEidForDeleteOnly (11)" pos="54.053566 79.21482" size="334.282745 146.679108" isRoot="true">
+        <KFunction>{"Name":"fnRootPopTdmLuTypeRelTarEidForDeleteOnly","ID":"f_11","Category":"Root","Version":"6.4.0.34","FunctionLevel":0,"FunctionType2":1,"ReturnType":"void","RegisterAsLuDbFunction":false,"DecisionFunction":false,"RequiresLuReference":false,"Desc":"","Language":1,"FunctionBody":"","IsRootFunction":true,"inputParams":[{"Name":"load_entity","ID":"fi_11.0","Index":0,"DataType":"Integer","Comment":""},{"Name":"delete_before_load","ID":"fi_11.1","Index":1,"DataType":"Integer","Comment":""}],"outputParams":[{"Name":"target_env","ID":"fo_11.0","Index":0,"DataType":"String","Comment":""},{"Name":"lu_type_1","ID":"fo_11.1","Index":1,"DataType":"String","Comment":""},{"Name":"lu_type_2","ID":"fo_11.2","Index":2,"DataType":"String","Comment":""},{"Name":"lu_type1_eid","ID":"fo_11.3","Index":3,"DataType":"String","Comment":""},{"Name":"lu_type2_eid","ID":"fo_11.4","Index":4,"DataType":"String","Comment":""},{"Name":"creation_date","ID":"fo_11.5","Index":5,"DataType":"String","Comment":""}],"HideMethodInUi":false}</KFunction>
+      </FunctionMapNode>
+      <Link partID="27" from="3" to="9" pointsArr="388.3363 124.917656 398.3363 124.917656 577.2611 105.036461 587.2611 105.036461" fromNodePartID="11" fromNodeColumnName="target_env" toNodePartID="0" toNodeColumnName="target_env" />
+      <Link partID="29" from="4" to="10" pointsArr="388.3363 136.99057 398.3363 136.99057 577.2611 117.109375 587.2611 117.109375" fromNodePartID="11" fromNodeColumnName="lu_type_1" toNodePartID="0" toNodeColumnName="lu_type_1" />
+      <Link partID="30" from="5" to="11" pointsArr="388.3363 149.063477 398.3363 149.063477 577.2611 129.182281 587.2611 129.182281" fromNodePartID="11" fromNodeColumnName="lu_type_2" toNodePartID="0" toNodeColumnName="lu_type_2" />
+      <Link partID="31" from="6" to="12" pointsArr="388.3363 161.1364 398.3363 161.1364 577.2611 141.2552 587.2611 141.2552" fromNodePartID="11" fromNodeColumnName="lu_type1_eid" toNodePartID="0" toNodeColumnName="lu_type1_eid" />
+      <Link partID="32" from="7" to="13" pointsArr="388.3363 173.20932 398.3363 173.20932 577.2611 153.328125 587.2611 153.328125" fromNodePartID="11" fromNodeColumnName="lu_type2_eid" toNodePartID="0" toNodeColumnName="lu_type2_eid" />
+      <Link partID="80" from="8" to="14" pointsArr="388.3363 185.282227 398.3363 185.282227 577.2611 165.401031 587.2611 165.401031" fromNodePartID="11" fromNodeColumnName="creation_date" toNodePartID="0" toNodeColumnName="creation_date" />
+    </Graph>
+  </DiagramGraph>
+</TablePopulationObject>

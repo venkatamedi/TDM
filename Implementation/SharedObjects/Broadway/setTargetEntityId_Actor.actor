@@ -1,0 +1,24 @@
+{
+    "type": "setTargetEntityId_Actor",
+    "actorClass": null,
+    "parentType": "InnerFlow",
+    "inputs": [
+        {
+            "name": "target_entity_id",
+            "schema": {
+                "type": "String"
+            }
+        },
+        {
+            "name": "flowName",
+            "schema": {
+                "type": "string"
+            },
+            "const": "setTargetEntityId"
+        }
+    ],
+    "outputs": [],
+    "tags": [
+        "tdm"
+    ]
+}

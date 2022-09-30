@@ -1,0 +1,211 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 5",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Create Sequence Flows From Template",
+                            "actorType": {
+                                "parentType": "createSeqFlowsOnlyFromTemplates",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Create Load Table Flows From Template",
+                            "actorType": {
+                                "parentType": "createLoadTableFlows",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Create Load All Tables Flow From Template",
+                            "actorType": {
+                                "parentType": "createLoadAllTablesFlow",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Create Delete Table Flows From Template",
+                            "actorType": {
+                                "parentType": "createDeleteTableFlows",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Create Delete All Tables Flow From Template",
+                            "actorType": {
+                                "parentType": "createDeleteAllTablesFlow",
+                                "inputs": [],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            },
+            "rightPort": {
+                "actor": "Create Sequence Flows From Template",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "TARGET_INTERFACE"
+            },
+            "rightPort": {
+                "actor": "Create Load Table Flows From Template",
+                "name": "TARGET_INTERFACE"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "TARGET_SCHEMA"
+            },
+            "rightPort": {
+                "actor": "Create Load Table Flows From Template",
+                "name": "TARGET_SCHEMA"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Create Load Table Flows From Template",
+                "name": "LU_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            },
+            "rightPort": {
+                "actor": "Create Load Table Flows From Template",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Create Load All Tables Flow From Template",
+                "name": "LU_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "TARGET_INTERFACE"
+            },
+            "rightPort": {
+                "actor": "Create Delete Table Flows From Template",
+                "name": "TARGET_INTERFACE"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "TARGET_SCHEMA"
+            },
+            "rightPort": {
+                "actor": "Create Delete Table Flows From Template",
+                "name": "TARGET_SCHEMA"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Create Delete Table Flows From Template",
+                "name": "LU_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            },
+            "rightPort": {
+                "actor": "Create Delete Table Flows From Template",
+                "name": "OVERRIDE_EXISTING_FLOWS"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "Create Delete All Tables Flow From Template",
+                "name": "LU_NAME"
+            }
+        }
+    ]
+}

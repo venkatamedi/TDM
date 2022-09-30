@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TableObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>task_exe_error_detailed</Name>
+  <ID>tbl_task_exe_error_detailed</ID>
+  <Columns>
+    <Column name="task_execution_id" id="tblCol_d513dfe8417547ce95874e3e9a6c6997" index="0" datatype="text" mandatory="true" />
+    <Column name="lu_name" id="tblCol_bac26b0f48e142e9b23b92d0bef4b2b7" index="1" datatype="text" mandatory="true" />
+    <Column name="entity_id" id="tblCol_c93dd33176254fff95ffcb83b4f0d35b" index="2" datatype="text" mandatory="true" />
+    <Column name="iid" id="tblCol_697883ae58554fb091aad08b13f88c8d" index="3" datatype="text" mandatory="true" />
+    <Column name="target_entity_id" id="tblCol_adae9beb27b244a7b2037fe4f68b7bc3" index="4" datatype="text" mandatory="true" />
+    <Column name="error_category" id="tblCol_fe11ff5d21724f08a235c309b97dc18e" index="5" datatype="text" mandatory="true" />
+    <Column name="error_code" id="tblCol_afdb27307f694ee09186c3301058925b" index="6" datatype="text" />
+    <Column name="error_message" id="tblCol_3c705bd26f46450b829e80eb9692c853" index="7" datatype="text" mandatory="true" />
+    <Column name="creation_date" id="tblCol_e83435e47c2546c68d8c9e64978b94b0" index="8" datatype="text" mandatory="true" />
+    <Column name="flow_name" id="tblCol_2189d0857f8f4240af15899423b2775f" index="9" datatype="text" />
+    <Column name="stage_name" id="tblCol_c06f355e2c26475fae6ad466b14d10f7" index="10" datatype="text" />
+    <Column name="actor_name" id="tblCol_ab0f387f15244d4896431dbfb33582ed" index="11" datatype="text" />
+    <Column name="actor_parameters" id="tblCol_f06e0c8b44fd4ef3bb4f775327b86d96" index="12" datatype="text" />
+  </Columns>
+  <IndexesList>
+    <Index id="1" instanceOnly="true" columnsIdsList="tblCol_d513dfe8417547ce95874e3e9a6c6997,tblCol_bac26b0f48e142e9b23b92d0bef4b2b7,tblCol_adae9beb27b244a7b2037fe4f68b7bc3" />
+  </IndexesList>
+  <EnrichmentList />
+  <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
+    <TruncateBeforeSync>true</TruncateBeforeSync>
+  </LazyDataUpdate>
+  <TriggersList />
+</TableObject>

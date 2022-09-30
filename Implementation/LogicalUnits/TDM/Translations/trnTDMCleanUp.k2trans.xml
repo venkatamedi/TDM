@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Translation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>trnTDMCleanUp</Name>
+  <InputNotFoundAction>Use_Default</InputNotFoundAction>
+  <SchemaColumns>
+    <Column>
+      <Title>TABLE_NAME</Title>
+      <ColumnName>TABLE_NAME</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Text</Type>
+      <Length>100</Length>
+      <Format />
+      <Index>0</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="244" />
+    </Column>
+    <Column>
+      <Title>CLEANUP_ORDER</Title>
+      <ColumnName>CLEANUP_ORDER</ColumnName>
+      <Direction>Input</Direction>
+      <Type>Integer</Type>
+      <Length>10</Length>
+      <Format />
+      <Index>0</Index>
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="36" />
+    </Column>
+    <Column>
+      <Title>CLEANUP_IND</Title>
+      <ColumnName>CLEANUP_IND</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Boolean</Type>
+      <Length>1</Length>
+      <Format />
+      <Index>1</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="132" />
+    </Column>
+    <Column>
+      <Title>CLEANUP_STATEMENT</Title>
+      <ColumnName>CLEANUP_STATEMENT</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Text</Type>
+      <Length>1000</Length>
+      <Format />
+      <Index>2</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="1134" />
+    </Column>
+    <Column>
+      <Title>CLEANUP_LOGIC</Title>
+      <ColumnName>CLEANUP_LOGIC</ColumnName>
+      <Direction>Output</Direction>
+      <Type>Text</Type>
+      <Length>255</Length>
+      <Format />
+      <Index>3</Index>
+      <DefaultValueIsExpression>false</DefaultValueIsExpression>
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="114" />
+    </Column>
+    <Column>
+      <Title>SEQ</Title>
+      <ColumnName>SEQ</ColumnName>
+      <Direction>Input</Direction>
+      <Type>Auto Increment</Type>
+      <Length>10</Length>
+      <Format />
+      <Index>1</Index>
+      <DefaultValue />
+      <AllowNULL>true</AllowNULL>
+      <GridColumnProperties width="59" />
+    </Column>
+  </SchemaColumns>
+  <IsImportFromSQL>false</IsImportFromSQL>
+  <IsDynamicData>false</IsDynamicData>
+  <ColumnMapping />
+  <TranslationData>
+    <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+      <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="trnTDMCleanUp" msdata:UseCurrentLocale="true">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trnTDMCleanUp">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="TABLE_NAME" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="CLEANUP_ORDER" type="xs:long" minOccurs="0" />
+                  <xs:element name="CLEANUP_IND" type="xs:boolean" minOccurs="0" />
+                  <xs:element name="CLEANUP_STATEMENT" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="1000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="CLEANUP_LOGIC" default="" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SEQ" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1">
+          <xs:selector xpath=".//trnTDMCleanUp" />
+          <xs:field xpath="SEQ" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+      <DocumentElement>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp1" msdata:rowOrder="0">
+          <TABLE_NAME>TASK_REF_EXE_STATS </TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_REF_EXE_STATS WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Clean records which belong to task executions that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>1</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp2" msdata:rowOrder="1">
+          <TABLE_NAME>TASK_REF_EXE_STATS </TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_REF_EXE_STATS WHERE TASK_ID IN (SELECT TASK_ID FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Task execution belongs to Inactive task that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>2</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp3" msdata:rowOrder="2">
+          <TABLE_NAME>TASK_EXECUTION_ENTITIES</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXECUTION_ENTITIES WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID::TEXT FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt;?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities belong to task execution IDs that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>3</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp4" msdata:rowOrder="3">
+          <TABLE_NAME>TDM_SEQ_MAPPING</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TDM_SEQ_MAPPING WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities belong to task execution IDs that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>4</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp5" msdata:rowOrder="4">
+          <TABLE_NAME>TASK_EXECUTION_LIST</TABLE_NAME>
+          <CLEANUP_ORDER>2</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Task is not pending or running and end execution time &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>5</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp6" msdata:rowOrder="5">
+          <TABLE_NAME>TASK_EXECUTION_LIST</TABLE_NAME>
+          <CLEANUP_ORDER>2</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXECUTION_LIST WHERE TASK_ID IN (SELECT TASK_ID FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Task execution belongs to Inactive task that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>6</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp7" msdata:rowOrder="6">
+          <TABLE_NAME>TASK_REF_TABLES</TABLE_NAME>
+          <CLEANUP_ORDER>3</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_REF_TABLES WHERE TASK_ID IN (SELECT TASK_ID FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Task execution belongs to Inactive task that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>7</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp8" msdata:rowOrder="7">
+          <TABLE_NAME>TASK_GLOBALS</TABLE_NAME>
+          <CLEANUP_ORDER>3</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_GLOBALS WHERE TASK_ID IN (SELECT TASK_ID FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Global belongs to a task that needs to be cleaned</CLEANUP_LOGIC>
+          <SEQ>8</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp9" msdata:rowOrder="8">
+          <TABLE_NAME>TASKS_LOGICAL_UNITS</TABLE_NAME>
+          <CLEANUP_ORDER>3</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASKS_LOGICAL_UNITS WHERE TASK_ID IN (SELECT TASK_ID FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Records belong to tasks that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>9</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp10" msdata:rowOrder="9">
+          <TABLE_NAME>TASKS</TABLE_NAME>
+          <CLEANUP_ORDER>4</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASKS WHERE UPPER(TASK_STATUS) = 'INACTIVE' AND TASK_LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with task_status = 'Inactive' and task_last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>10</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp11" msdata:rowOrder="10">
+          <TABLE_NAME>ENVIRONMENT_ROLE_USERS</TABLE_NAME>
+          <CLEANUP_ORDER>5</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM ENVIRONMENT_ROLE_USERS WHERE ROLE_ID IN (SELECT ROLE_ID FROM ENVIRONMENT_ROLES WHERE UPPER(ROLE_STATUS) = 'INACTIVE' AND ROLE_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with role_id that belongs to Inactive role that needs to be cleaned</CLEANUP_LOGIC>
+          <SEQ>12</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp12" msdata:rowOrder="11">
+          <TABLE_NAME>ENVIRONMENT_ROLES</TABLE_NAME>
+          <CLEANUP_ORDER>6</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM ENVIRONMENT_ROLES WHERE UPPER(ROLE_STATUS) = 'INACTIVE' AND ROLE_LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with role_status = 'Inactive' and role_last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>13</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp13" msdata:rowOrder="12">
+          <TABLE_NAME>ENVIRONMENT_PRODUCTS</TABLE_NAME>
+          <CLEANUP_ORDER>6</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM ENVIRONMENT_PRODUCTS WHERE UPPER(STATUS) = 'INACTIVE' AND LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with status = 'Inactive' and last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>14</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp14" msdata:rowOrder="13">
+          <TABLE_NAME>ENVIRONMENT_OWNERS</TABLE_NAME>
+          <CLEANUP_ORDER>7</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM ENVIRONMENT_OWNERS WHERE ENVIRONMENT_ID IN (SELECT ENVIRONMENT_ID FROM ENVIRONMENTS WHERE UPPER(ENVIRONMENT_STATUS) = 'INACTIVE' AND ENVIRONMENT_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Owners of environments which need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>17</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp15" msdata:rowOrder="14">
+          <TABLE_NAME>TDM_ENV_GLOBALS</TABLE_NAME>
+          <CLEANUP_ORDER>7</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TDM_ENV_GLOBALS WHERE ENVIRONMENT_ID IN (SELECT ENVIRONMENT_ID FROM ENVIRONMENTS WHERE UPPER(ENVIRONMENT_STATUS) = 'INACTIVE' AND ENVIRONMENT_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Globals belong to environment that needs to be cleaned</CLEANUP_LOGIC>
+          <SEQ>18</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp16" msdata:rowOrder="15">
+          <TABLE_NAME>ENVIRONMENTS</TABLE_NAME>
+          <CLEANUP_ORDER>8</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM ENVIRONMENTS WHERE UPPER(ENVIRONMENT_STATUS) = 'INACTIVE' AND ENVIRONMENT_LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with environment_status = 'Inactive' and environment_last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>19</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp17" msdata:rowOrder="16">
+          <TABLE_NAME>PRODUCTS</TABLE_NAME>
+          <CLEANUP_ORDER>9</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM PRODUCTS WHERE UPPER(PRODUCT_STATUS) = 'INACTIVE' AND PRODUCT_LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with product_status = 'Inactive' and product_last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>20</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp18" msdata:rowOrder="17">
+          <TABLE_NAME>PRODUCT_LOGICAL_UNITS</TABLE_NAME>
+          <CLEANUP_ORDER>10</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM PRODUCT_LOGICAL_UNITS WHERE BE_ID IN (SELECT BE_ID FROM BUSINESS_ENTITIES WHERE UPPER(BE_STATUS) = 'INACTIVE' AND BE_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with be_id belongs to Inactive business entity which needs to be cleaned</CLEANUP_LOGIC>
+          <SEQ>21</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp19" msdata:rowOrder="18">
+          <TABLE_NAME>BUSINESS_ENTITIES</TABLE_NAME>
+          <CLEANUP_ORDER>11</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM BUSINESS_ENTITIES WHERE UPPER(BE_STATUS) = 'INACTIVE' AND BE_LAST_UPDATED_DATE &lt; ?</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Entities with be_status = 'Inactive' and be_last_updated_date &lt; X months ago</CLEANUP_LOGIC>
+          <SEQ>22</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp20" msdata:rowOrder="19">
+          <TABLE_NAME>TDM_BE_ENV_EXCLUSION_LIST</TABLE_NAME>
+          <CLEANUP_ORDER>12</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TDM_BE_ENV_EXCLUSION_LIST WHERE ENVIRONMENT_ID IN (SELECT ENVIRONMENT_ID FROM ENVIRONMENTS  WHERE UPPER(ENVIRONMENT_STATUS) = 'INACTIVE' AND ENVIRONMENT_LAST_UPDATED_DATE &lt; ?)  OR BE_ID IN (SELECT BE_ID FROM BUSINESS_ENTITIES WHERE UPPER(BE_STATUS) = 'INACTIVE' AND BE_LAST_UPDATED_DATE &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC>Records belong to environment that need to be cleaned or business entitiy that need to be cleaned</CLEANUP_LOGIC>
+          <SEQ>24</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp21" msdata:rowOrder="20">
+          <TABLE_NAME>TASK_EXE_ERROR_DETAILED</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXE_ERROR_DETAILED WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC></CLEANUP_LOGIC>
+          <SEQ>25</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp22" msdata:rowOrder="21">
+          <TABLE_NAME>TASK_EXE_STATS_DETAILED</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXE_STATS_DETAILED WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC></CLEANUP_LOGIC>
+          <SEQ>27</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp23" msdata:rowOrder="22">
+          <TABLE_NAME>TASK_EXECUTION_OVERRIDE_ATTRS</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TASK_EXECUTION_OVERRIDE_ATTRS WHERE TASK_EXECUTION_ID IN (SELECT TASK_EXECUTION_ID FROM TASK_EXECUTION_LIST WHERE UPPER(EXECUTION_STATUS) NOT IN ('PENDING', 'RUNNING', 'WAITING') AND END_EXECUTION_TIME &lt; ?)</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC></CLEANUP_LOGIC>
+          <SEQ>28</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp24" msdata:rowOrder="23">
+          <TABLE_NAME>TDM_RESERVED_ENTITIES</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>true</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TDM_RESERVED_ENTITIES WHERE END_DATETIME &lt; now()</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC></CLEANUP_LOGIC>
+          <SEQ>29</SEQ>
+        </trnTDMCleanUp>
+        <trnTDMCleanUp diffgr:id="trnTDMCleanUp25" msdata:rowOrder="24">
+          <TABLE_NAME>TDM_LU_TYPE_RELATION_EID</TABLE_NAME>
+          <CLEANUP_ORDER>1</CLEANUP_ORDER>
+          <CLEANUP_IND>false</CLEANUP_IND>
+          <CLEANUP_STATEMENT>DELETE FROM TDM_LU_TYPE_RELATION_EID r where version_name &lt;&gt; '' and version_name||''||to_char(version_datetime, 'YYYYMMDDHH24MISS')||''||source_env in (select t.task_title||''||to_char(l.version_datetime, 'YYYYMMDDHH24MISS')||''||l.source_env_name from tasks t, task_Execution_list l where t.task_id = l.task_id and l.version_expiration_date &lt;= now())</CLEANUP_STATEMENT>
+          <CLEANUP_LOGIC></CLEANUP_LOGIC>
+          <SEQ>30</SEQ>
+        </trnTDMCleanUp>
+      </DocumentElement>
+    </diffgr:diffgram>
+  </TranslationData>
+  <DataRowsHeight>52</DataRowsHeight>
+</Translation>

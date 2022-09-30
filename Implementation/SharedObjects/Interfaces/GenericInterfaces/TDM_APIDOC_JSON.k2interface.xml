@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GenericInterface xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="LOCAL" displayName="Local File System" enabled="false" version="1.4">
+  <Name>TDM_APIDOC_JSON</Name>
+  <Properties>
+    <Property name="WorkingDir">
+      <Value>C:\k2view\TDM_APIDOC</Value>
+    </Property>
+    <Property name="FilesFilter">
+      <Value />
+    </Property>
+    <Property name="Affinity">
+      <Value />
+    </Property>
+  </Properties>
+</GenericInterface>

@@ -1,0 +1,553 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Take the tmp table name",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Tmp table name",
+                            "actorType": {
+                                "parentType": "StringFormat",
+                                "inputs": [
+                                    {
+                                        "name": "format",
+                                        "const": "${tableName}_tmp"
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "ReCreate the original table and get the updated data",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Get  table records from tmp",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "Select *\r\nFrom ${@refKeySpace}.${@tableName}"
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "source_env_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_task_execution_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_rec_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "rec_data": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "ReCreate original table",
+                            "actorType": {
+                                "parentType": "DbCassandraCreateTable",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            {
+                                                "name": "source_env_name",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": false,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "tdm_task_execution_id",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": true,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "tdm_rec_id",
+                                                "type": "text",
+                                                "partition_key": true,
+                                                "clustering_key": true,
+                                                "mandatory": false
+                                            },
+                                            {
+                                                "name": "rec_data",
+                                                "type": "text",
+                                                "partition_key": false,
+                                                "clustering_key": false,
+                                                "mandatory": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "10,000 in chunk tmp",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "ArrayGrouperTmp",
+                            "actorType": {
+                                "parentType": "ArrayGrouper",
+                                "inputs": [
+                                    {
+                                        "name": "size",
+                                        "const": 10000
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "source_env_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "tdm_task_execution_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "tdm_rec_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "rec_data": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Get chunks of data tmp",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "ConstStringsTmp",
+                            "actorType": {
+                                "parentType": "ConstStrings",
+                                "inputs": [
+                                    {
+                                        "name": "strings",
+                                        "const": null
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "strings",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "source_env_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_task_execution_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tdm_rec_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "rec_data": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Update the original table with the new shape",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": true,
+                    "actors": [
+                        {
+                            "name": "Insert Updated Data",
+                            "actorType": {
+                                "parentType": "DbLoad",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "CASSANDRA_LD"
+                                    },
+                                    {
+                                        "name": "schema",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "table",
+                                        "const": null
+                                    },
+                                    {
+                                        "name": "fields",
+                                        "const": [
+                                            "source_env_name",
+                                            "tdm_task_execution_id",
+                                            "tdm_rec_id",
+                                            "rec_data",
+                                            "",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "name": "ignoreNulls",
+                                        "const": true
+                                    },
+                                    {
+                                        "name": "source_env_name",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tdm_task_execution_id",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tdm_rec_id",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "rec_data",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "close Inner loop for tmp",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": false,
+                    "actors": []
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Drop the tmp table ",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "Drop tmp table",
+                            "actorType": {
+                                "parentType": "DbCommand",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "DB_CASSANDRA"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "DROP TABLE IF EXISTS ${@refKeySpace}.${@tableName}"
+                                    },
+                                    {
+                                        "name": "refKeySpace",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "tableName",
+                                        "schema": {},
+                                        "mandatory": false
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "Tmp table name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Get  table records from tmp",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Tmp table name",
+                "name": "string"
+            },
+            "rightPort": {
+                "actor": "Drop tmp table",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get  table records from tmp",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ArrayGrouperTmp",
+                "name": "input"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "ArrayGrouperTmp",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "ConstStringsTmp",
+                "name": "strings"
+            },
+            "iterate": "Iterate"
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsTmp",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "source_env_name"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "source_env_name"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsTmp",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "tdm_task_execution_id"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "tdm_task_execution_id"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsTmp",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "tdm_rec_id"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "tdm_rec_id"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "ConstStringsTmp",
+                "name": "strings"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "rec_data"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "rec_data"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "Tmp table name",
+                "name": "tableName"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Get  table records from tmp",
+                "name": "refKeySpace"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "ReCreate original table",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "ReCreate original table",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "schema"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "tableName"
+            },
+            "rightPort": {
+                "actor": "Insert Updated Data",
+                "name": "table"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "refKeySpace"
+            },
+            "rightPort": {
+                "actor": "Drop tmp table",
+                "name": "refKeySpace"
+            }
+        }
+    ]
+}

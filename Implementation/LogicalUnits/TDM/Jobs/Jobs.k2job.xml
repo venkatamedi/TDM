@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<JobsGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Jobs</Name>
+  <Jobs>
+    <Job methodName="fnCheckMigrateAndUpdateTDMDB" jobName="checkMigrateAndUpdateTDMDB" active="true">
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>00:00:15</ExecuteEvery>
+      <InputParams />
+    </Job>
+    <Job methodName="TDMDB_CleanUp" jobName="TDMDB_CleanUp" active="true">
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>7.00:00:00</ExecuteEvery>
+      <InputParams />
+    </Job>
+    <Job methodName="tdmCopyRefTablesForTDM" jobName="tdmCopyRefTablesForTDM" active="true">
+      <ExecutionMode>Manually</ExecutionMode>
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>00:00:00</ExecuteEvery>
+      <InputParams>
+        <Input name="sourceEnv" dataType="String">
+          <Value><![CDATA[]]></Value>
+        </Input>
+        <Input name="ttl" dataType="String">
+          <Value><![CDATA[]]></Value>
+        </Input>
+        <Input name="versionID" dataType="Boolean">
+          <Value><![CDATA[]]></Value>
+        </Input>
+        <Input name="taskExecID" dataType="String">
+          <Value><![CDATA[]]></Value>
+        </Input>
+        <Input name="taskRefTableID" dataType="String">
+          <Value><![CDATA[]]></Value>
+        </Input>
+        <Input name="luName" dataType="String">
+          <Value><![CDATA[]]></Value>
+        </Input>
+      </InputParams>
+    </Job>
+    <Job methodName="fnValidateAndRebuildRefTables" jobName="fnValidateAndRebuildRefTables" active="false">
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>1.00:00:00</ExecuteEvery>
+      <InputParams />
+    </Job>
+    <Job methodName="tdmExecuteTask" jobName="tdmExecuteTask" active="true">
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>00:00:10</ExecuteEvery>
+      <InputParams />
+    </Job>
+    <Job methodName="tdmTaskScheduler" jobName="tdmTaskScheduler" active="true">
+      <ScheduleType>TimeInterval</ScheduleType>
+      <ExecuteEvery>00:00:10</ExecuteEvery>
+      <InputParams />
+    </Job>
+  </Jobs>
+  <InterfaceListeners />
+</JobsGroup>

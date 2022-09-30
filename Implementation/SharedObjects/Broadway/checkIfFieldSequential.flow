@@ -1,0 +1,359 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "JavaScript1",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "flowArgs.fieldName = \"\";\r\nflowArgs.sequenceName = \"\";\r\n",
+                                            "script": "flowArgs.fieldName = \"\";\nflowArgs.sequenceName = \"\";"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "getTableSequenceMapping1",
+                            "actorType": {
+                                "parentType": "getTableSequenceMapping",
+                                "inputs": [],
+                                "outputs": [
+                                    {
+                                        "name": "tableSeqList",
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "LU_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "TARGET_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_TABLE_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "FABRIC_FIELD_NAME": {
+                                                        "type": "string"
+                                                    },
+                                                    "SEQUENCE_NAME": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 2",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "NotNull1",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "NotNull",
+                                "inputs": [
+                                    {
+                                        "name": "value",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "EqualsIgnoreCase1",
+                            "actorType": {
+                                "parentType": "EqualsIgnoreCase",
+                                "inputs": [
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 4",
+                    "dependsOnList": [],
+                    "isLast": 1,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "Equals2",
+                            "condition": "result",
+                            "actorType": {
+                                "parentType": "Equals",
+                                "inputs": [
+                                    {
+                                        "name": "a",
+                                        "schema": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    {
+                                        "name": "b",
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "const": true
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "JavaScript2",
+                            "minHeight": 257,
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": {
+                                            "userCode": "flowArgs.fieldName = seqFieldName;\r\n\r\nflowArgs.sequenceName = sequenceName;\r\n",
+                                            "script": "flowArgs.fieldName = seqFieldName;\nflowArgs.sequenceName = sequenceName;"
+                                        }
+                                    },
+                                    {
+                                        "name": "seqFieldName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "sequenceName",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stages": [
+                {
+                    "name": "Stage 3",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "isTransactional": false,
+                    "actors": [
+                        {
+                            "name": "JavaScript3",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "flowArgs.fieldName"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "JavaScript4",
+                            "actorType": {
+                                "parentType": "JavaScript",
+                                "inputs": [
+                                    {
+                                        "name": "script",
+                                        "const": "flowArgs.sequenceName"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "leftPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "tableSeqList"
+            },
+            "rightPort": {
+                "actor": "NotNull1",
+                "name": "value"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "LU_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "tableSeqList"
+            },
+            "rightPort": {
+                "actor": "JavaScript2",
+                "name": "seqFieldName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "TARGET_FIELD_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "tableSeqList"
+            },
+            "rightPort": {
+                "actor": "EqualsIgnoreCase1",
+                "name": "a"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "FABRIC_FIELD_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "tableSeqList"
+            },
+            "rightPort": {
+                "actor": "JavaScript2",
+                "name": "sequenceName"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "SEQUENCE_NAME"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "EqualsIgnoreCase1",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Equals2",
+                "name": "a"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "LU_NAME"
+            },
+            "rightPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "LU_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "MAIN_TABLE_NAME"
+            },
+            "rightPort": {
+                "actor": "getTableSequenceMapping1",
+                "name": "FABRIC_TABLE_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "flowArgs",
+                "name": "MAIN_FIELD_NAME"
+            },
+            "rightPort": {
+                "actor": "EqualsIgnoreCase1",
+                "name": "b"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript3",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "SEQ_FIELD_NAME"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "JavaScript4",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "flowArgs",
+                "name": "SEQUENCE_NAME"
+            }
+        }
+    ]
+}
