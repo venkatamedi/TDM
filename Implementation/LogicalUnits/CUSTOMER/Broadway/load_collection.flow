@@ -62,11 +62,18 @@
                                             "items": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "CUSTOMER_ID": {"type": "Any"},
-													"COLLECTION_ID": {"type": "Any"},
-													"LAST_UPDATE": {"type": "Any"},
-													"COLLECTION_STATUS": {"type": "Any"}
-													
+                                                    "CUSTOMER_ID": {
+                                                        "type": "Any"
+                                                    },
+                                                    "COLLECTION_ID": {
+                                                        "type": "Any"
+                                                    },
+                                                    "LAST_UPDATE": {
+                                                        "type": "Any"
+                                                    },
+                                                    "COLLECTION_STATUS": {
+                                                        "type": "Any"
+                                                    }
                                                 }
                                             }
                                         }
@@ -92,13 +99,11 @@
         {
             "stages": [
                 {
-					
                     "name": "Transformation",
                     "dependsOnList": [],
                     "isLast": 0,
-					"remark": "Transformation of special fields. Fields that need to be changed/replaced before loading to target table. \nFor example, replace sequence or masking the field's value",	
+                    "remark": "Transformation of special fields. Fields that need to be changed/replaced before loading to target table. \nFor example, replace sequence or masking the field's value",
                     "actors": [
-						
                         {
                             "name": "Transformation Error Handler",
                             "onError": "result",
@@ -125,59 +130,42 @@
                                 "outputs": []
                             }
                         },
-						{
+                        {
                             "name": "Get Sequence for collection_id",
                             "actorType": {
                                 "parentType": "COLLECTION_ID_SEQ_Actor",
                                 "inputs": [
                                     {
                                         "name": "tableName",
-                                        "schema": {
-                                            "type": "string"
-                                        },
                                         "const": "collection"
                                     },
                                     {
                                         "name": "columName",
-                                        "schema": {
-                                            "type": "string"
-                                        },
                                         "const": "collection_id"
                                     }
                                 ],
                                 "outputs": []
-							}
-                         }, 
-						{
+                            }
+                        },
+                        {
                             "name": "Get Sequence for customer_id",
                             "actorType": {
                                 "parentType": "CUSTOMER_ID_SEQ_Actor",
                                 "inputs": [
                                     {
                                         "name": "tableName",
-                                        "schema": {
-                                            "type": "string"
-                                        },
                                         "const": "collection"
                                     },
                                     {
                                         "name": "columName",
-                                        "schema": {
-                                            "type": "string"
-                                        },
                                         "const": "customer_id"
                                     }
                                 ],
                                 "outputs": []
-							}
-                         } 
-						
-
-						
+                            }
+                        }
                     ]
-
                 }
-				
             ]
         },
         {
@@ -223,7 +211,6 @@
                                 "outputs": []
                             }
                         },
-						
                         {
                             "name": "Load collection Table",
                             "actorType": {
@@ -231,9 +218,9 @@
                                 "inputs": [
                                     {
                                         "name": "interface",
-                                        "const": "CRM_DB"
+                                        "const": "COLLECTION_DB"
                                     },
-									{
+                                    {
                                         "name": "schema",
                                         "const": "public"
                                     },
@@ -244,14 +231,41 @@
                                     {
                                         "name": "fields",
                                         "const": [
-                                            
+                                            "customer_id",
+                                            "collection_id",
+                                            "last_update",
+                                            "collection_status"
                                         ]
                                     },
-									{
+                                    {
                                         "name": "keys",
                                         "const": [
-                                            
+                                            "collection_id"
                                         ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "postgres"
+                                    },
+                                    {
+                                        "name": "customer_id",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "collection_id",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "last_update",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "collection_status",
+                                        "schema": {},
+                                        "mandatory": false
                                     }
                                 ],
                                 "outputs": []
@@ -337,7 +351,7 @@
             },
             "iterate": "Iterate"
         },
-		{
+        {
             "leftPort": {
                 "actor": "Get Table Data",
                 "name": "result"
@@ -353,16 +367,6 @@
         },
         {
             "leftPort": {
-                "actor": "Get Sequence for collection_id",
-                "name": "NewSeqValue"
-            },
-            "rightPort": {
-                "actor": "Load collection Table",
-                "name": "collection_id"
-            }
-        },
-		{
-            "leftPort": {
                 "actor": "Get Table Data",
                 "name": "result"
             },
@@ -377,6 +381,16 @@
         },
         {
             "leftPort": {
+                "actor": "Get Sequence for collection_id",
+                "name": "NewSeqValue"
+            },
+            "rightPort": {
+                "actor": "Load collection Table",
+                "name": "collection_id"
+            }
+        },
+        {
+            "leftPort": {
                 "actor": "Get Sequence for customer_id",
                 "name": "NewSeqValue"
             },
@@ -385,11 +399,9 @@
                 "name": "customer_id"
             }
         },
-		
-		
         {
             "leftPort": {
-               "actor": "Read Stats",
+                "actor": "Read Stats",
                 "name": "flow"
             },
             "rightPort": {
@@ -400,11 +412,11 @@
         {
             "leftPort": {
                 "actor": "flowArgs",
-                "name": "luName"
+                "name": "syncMode"
             },
             "rightPort": {
                 "actor": "Initiate TDM Load",
-                "name": "luName"
+                "name": "syncMode"
             }
         },
         {
@@ -419,12 +431,12 @@
         },
         {
             "leftPort": {
-                "actor": "flowArgs",							 
-                "name": "syncMode"
+                "actor": "flowArgs",
+                "name": "luName"
             },
             "rightPort": {
                 "actor": "Initiate TDM Load",
-                "name": "syncMode"
+                "name": "luName"
             }
         }
     ]

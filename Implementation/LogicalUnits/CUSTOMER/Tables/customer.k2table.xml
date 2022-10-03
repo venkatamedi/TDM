@@ -14,7 +14,7 @@
   </IndexesList>
   <EnrichmentList />
   <LazyDataUpdate syncMethod="Inherited" performEvery="1.00:00:00">
-    <TruncateBeforeSync>false</TruncateBeforeSync>
+    <TruncateBeforeSync>true</TruncateBeforeSync>
   </LazyDataUpdate>
   <TriggersList />
 </TableObject>

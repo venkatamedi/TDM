@@ -238,6 +238,20 @@
             </Property>
           </Properties>
         </GenericInterface>
+        <GenericInterface type="LOCAL" displayName="Local File System" enabled="true" version="1.4">
+          <Name>TDM_APIDOC_JSON</Name>
+          <Properties>
+            <Property name="WorkingDir">
+              <Value>C:\K2View\Fabric_6.5.8\Server\webserver\static\TDM</Value>
+            </Property>
+            <Property name="FilesFilter">
+              <Value />
+            </Property>
+            <Property name="Affinity">
+              <Value />
+            </Property>
+          </Properties>
+        </GenericInterface>
       </GenericInterfacesList>
     </Environment>
     <Environment enabled="true" name="TAR">
@@ -473,6 +487,20 @@
           <Properties>
             <Property name="section">
               <Value>default</Value>
+            </Property>
+          </Properties>
+        </GenericInterface>
+        <GenericInterface type="LOCAL" displayName="Local File System" enabled="true" version="1.4">
+          <Name>TDM_APIDOC_JSON</Name>
+          <Properties>
+            <Property name="WorkingDir">
+              <Value>C:\K2View\Fabric_6.5.8\Server\webserver\static\TDM</Value>
+            </Property>
+            <Property name="FilesFilter">
+              <Value />
+            </Property>
+            <Property name="Affinity">
+              <Value />
             </Property>
           </Properties>
         </GenericInterface>

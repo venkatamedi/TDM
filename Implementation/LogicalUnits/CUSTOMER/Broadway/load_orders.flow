@@ -62,12 +62,21 @@
                                             "items": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "CONTRACT_ID": {"type": "Any"},
-													"ORDER_ID": {"type": "Any"},
-													"ORDER_TYPE": {"type": "Any"},
-													"ORDER_DATE": {"type": "Any"},
-													"ORDER_STATUS": {"type": "Any"}
-													
+                                                    "CONTRACT_ID": {
+                                                        "type": "Any"
+                                                    },
+                                                    "ORDER_ID": {
+                                                        "type": "Any"
+                                                    },
+                                                    "ORDER_TYPE": {
+                                                        "type": "Any"
+                                                    },
+                                                    "ORDER_DATE": {
+                                                        "type": "Any"
+                                                    },
+                                                    "ORDER_STATUS": {
+                                                        "type": "Any"
+                                                    }
                                                 }
                                             }
                                         }
@@ -93,17 +102,73 @@
         {
             "stages": [
                 {
-					
                     "name": "Transformation",
                     "dependsOnList": [],
                     "isLast": 0,
-					"remark": "Transformation of special fields. Fields that need to be changed/replaced before loading to target table. \nFor example, replace sequence or masking the field's value",	
+                    "remark": "Transformation of special fields. Fields that need to be changed/replaced before loading to target table. \nFor example, replace sequence or masking the field's value",
                     "actors": [
-						
+                        {
+                            "name": "Transformation Error Handler",
+                            "onError": "result",
+                            "actorType": {
+                                "parentType": "ErrorHandler",
+                                "inputs": [
+                                    {
+                                        "name": "config",
+                                        "const": [
+                                            {
+                                                "exceptionKey": "java.lang.Exception",
+                                                "conditions": {
+                                                    "message": ""
+                                                },
+                                                "actions": {
+                                                    "suppress": false,
+                                                    "log": false,
+                                                    "flowName": "PopulateTableErrorsWithFailed"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Sequence for order_id",
+                            "actorType": {
+                                "parentType": "ORDER_ID_SEQ_Actor",
+                                "inputs": [
+                                    {
+                                        "name": "tableName",
+                                        "const": "orders"
+                                    },
+                                    {
+                                        "name": "columName",
+                                        "const": "order_id"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        },
+                        {
+                            "name": "Get Sequence for customer_id",
+                            "actorType": {
+                                "parentType": "CUSTOMER_ID_SEQ_Actor",
+                                "inputs": [
+                                    {
+                                        "name": "tableName",
+                                        "const": "orders"
+                                    },
+                                    {
+                                        "name": "columName",
+                                        "const": "customer_id"
+                                    }
+                                ],
+                                "outputs": []
+                            }
+                        }
                     ]
-
                 }
-				
             ]
         },
         {
@@ -149,7 +214,6 @@
                                 "outputs": []
                             }
                         },
-						
                         {
                             "name": "Load orders Table",
                             "actorType": {
@@ -157,9 +221,9 @@
                                 "inputs": [
                                     {
                                         "name": "interface",
-                                        "const": "CRM_DB"
+                                        "const": "ORDERING_DB"
                                     },
-									{
+                                    {
                                         "name": "schema",
                                         "const": "public"
                                     },
@@ -170,14 +234,47 @@
                                     {
                                         "name": "fields",
                                         "const": [
-                                            
+                                            "contract_id",
+                                            "order_id",
+                                            "order_type",
+                                            "order_date",
+                                            "order_status"
                                         ]
                                     },
-									{
+                                    {
                                         "name": "keys",
                                         "const": [
-                                            
+                                            "order_id"
                                         ]
+                                    },
+                                    {
+                                        "name": "dialect",
+                                        "const": "postgres"
+                                    },
+                                    {
+                                        "name": "contract_id",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "order_id",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "order_type",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "order_date",
+                                        "schema": {},
+                                        "mandatory": false
+                                    },
+                                    {
+                                        "name": "order_status",
+                                        "schema": {},
+                                        "mandatory": false
                                     }
                                 ],
                                 "outputs": []
@@ -263,11 +360,57 @@
             },
             "iterate": "Iterate"
         },
-		
-		
         {
             "leftPort": {
-               "actor": "Read Stats",
+                "actor": "Get Table Data",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Sequence for order_id",
+                "name": "OriginalSeqValue"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "ORDER_ID"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Get Table Data",
+                "name": "result"
+            },
+            "rightPort": {
+                "actor": "Get Sequence for customer_id",
+                "name": "OriginalSeqValue"
+            },
+            "iterate": "Iterate",
+            "path": [
+                "CUSTOMER_ID"
+            ]
+        },
+        {
+            "leftPort": {
+                "actor": "Get Sequence for order_id",
+                "name": "NewSeqValue"
+            },
+            "rightPort": {
+                "actor": "Load orders Table",
+                "name": "order_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Get Sequence for customer_id",
+                "name": "NewSeqValue"
+            },
+            "rightPort": {
+                "actor": "Load orders Table",
+                "name": "customer_id"
+            }
+        },
+        {
+            "leftPort": {
+                "actor": "Read Stats",
                 "name": "flow"
             },
             "rightPort": {
@@ -278,11 +421,11 @@
         {
             "leftPort": {
                 "actor": "flowArgs",
-                "name": "luName"
+                "name": "syncMode"
             },
             "rightPort": {
                 "actor": "Initiate TDM Load",
-                "name": "luName"
+                "name": "syncMode"
             }
         },
         {
@@ -297,12 +440,12 @@
         },
         {
             "leftPort": {
-                "actor": "flowArgs",							 
-                "name": "syncMode"
+                "actor": "flowArgs",
+                "name": "luName"
             },
             "rightPort": {
                 "actor": "Initiate TDM Load",
-                "name": "syncMode"
+                "name": "luName"
             }
         }
     ]

@@ -1,0 +1,40 @@
+{
+    "levels": [
+        {
+            "stages": [
+                {
+                    "name": "Stage 1",
+                    "dependsOnList": [],
+                    "isLast": 0,
+                    "actors": [
+                        {
+                            "name": "DbFetchField1",
+                            "actorType": {
+                                "parentType": "DbFetchField",
+                                "inputs": [
+                                    {
+                                        "name": "interface",
+                                        "const": "CRM_DB"
+                                    },
+                                    {
+                                        "name": "sql",
+                                        "const": "Select Max(address_id) + 1 As init_address_id\r\nFrom address"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "result",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "connections": []
+}
